@@ -1,0 +1,18 @@
+[
+    {
+        "id": 1,
+        "name": "football"
+    },
+    {
+        "id": 2,
+        "name": "basketball"
+    },
+    {
+        "id": 3,
+        "name": "voleyball"
+    },
+    {
+        "id": 4,
+        "name": "golf"
+    }
+]

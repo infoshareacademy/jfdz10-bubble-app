@@ -1,0 +1,53 @@
+[
+    {
+        "id": 1,
+        "avatar": "./images/ronaldo.jpg",
+        "name": "Ronaldo",
+        "eMail": "ronaldo@gmail.com",
+        "dateOfJoining": "5 February 1985",
+        "localization": "Gdynia",
+        "favouriteSports": [1,2],
+        "favouritePlayers": [3,5]
+    },
+    {
+        "id": 2,
+        "avatar": "./images/messi.jpg",
+        "name": "Messi",
+        "eMail": "messi@gmail.com",
+        "dateOfJoining": "24 June 1987",
+        "localization": "Gdynia",
+        "favouriteSports": [1],
+        "favouritePlayers": [1,3]  
+    },
+    {
+        "id": 3,
+        "avatar": "./images/zidane.jpg",
+        "name": "Zidane",
+        "eMail": "zidane@gmail.com",
+        "dateOfJoining": "23 June 1972",
+        "localization": "Sopot",
+        "favouriteSports": [1,3,4],
+        "favouritePlayers": [1,4]  
+    },
+    {
+        "id": 4,
+        "avatar": "./images/nedved.jpg",
+        "name": "Nedved",
+        "eMail": "nedved@gmail.com",
+        "dateOfJoining": "30 August 1972",
+        "localization": "Gdansk",
+        "favouriteSports": [1,3],
+        "favouritePlayers": [2,3]  
+    },
+    {
+        "id": 5,
+        "avatar": "./images/figo.jpg",
+        "name": "Figo",
+        "eMail": "figo@gmail.com",
+        "dateOfJoining": "4 November 1972",
+        "localization": "Gdansk",
+        "favouriteSports": [],
+        "favouritePlayers": []  
+    }
+]
+ 
