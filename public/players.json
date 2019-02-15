@@ -1,0 +1,53 @@
+[
+    {
+        "id": 1,
+        "avatar": "https://www.hindustantimes.com/rf/image_size_960x540/HT/p2/2018/10/29/Pictures/italy-soccer-serie-a_d5df7c86-db81-11e8-b6b1-54a396001ae0.jpg",
+        "name": "Ronaldo",
+        "eMail": "ronaldo@gmail.com",
+        "dateOfJoining": "5 February 1985",
+        "localization": "Gdynia",
+        "favouriteSportsIDs": [1,2],
+        "favouritePlayersIDs": [3,5,6]
+    },
+    {
+        "id": 2,
+        "avatar": "https://as00.epimg.net/en/imagenes/2018/03/04/football/1520180124_449729_noticia_normal.jpg",
+        "name": "Messi",
+        "eMail": "messi@gmail.com",
+        "dateOfJoining": "24 June 1987",
+        "localization": "Gdynia",
+        "favouriteSportsIDs": [1],
+        "favouritePlayersIDs": [1,3,6]  
+    },
+    {
+        "id": 3,
+        "avatar": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4BIydyta2YqTGEnEcAgBNeHy345XgcmB9NDY9tFFQDpbjYASHtw",
+        "name": "Zidane",
+        "eMail": "zidane@gmail.com",
+        "dateOfJoining": "23 June 1972",
+        "localization": "Sopot",
+        "favouriteSportsIDs": [1,3,4],
+        "favouritePlayersIDs": [1,4]  
+    },
+    {
+        "id": 4,
+        "avatar": "http://static.fanpage.it/calciofanpage/wp-content/uploads/2011/04/nedved1.jpg",
+        "name": "Nedved",
+        "eMail": "nedved@gmail.com",
+        "dateOfJoining": "30 August 1972",
+        "localization": "Gdansk",
+        "favouriteSportsIDs": [1,3],
+        "favouritePlayersIDs": [2,3]  
+    },
+    {
+        "id": 5,
+        "avatar": "https://i.ytimg.com/vi/LL8BeMjGzZ8/maxresdefault.jpg",
+        "name": "Figo",
+        "eMail": "figo@gmail.com",
+        "dateOfJoining": "4 November 1972",
+        "localization": "Gdansk",
+        "favouriteSportsIDs": [],
+        "favouritePlayersIDs": []  
+    }
+]
+ 

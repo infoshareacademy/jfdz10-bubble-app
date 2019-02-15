@@ -1,0 +1,48 @@
+[
+    {
+        "id": 1,
+        "sportID": 1,
+        "hostID": 1,
+        "date": {
+            "day": "March 23 2019",
+            "hour": "15:00"
+        },
+        "localization": {
+            "city": "Gdynia",
+            "street": "Luzycka 1"
+        },
+        "comment": "If your name is Messi, don't come.",
+
+        "playerIDs": [3,4,5]
+    },
+    {
+        "id": 2,
+        "sportID": 2,
+        "hostID": 2,
+        "date": {
+            "day": "March 26 2019",
+            "hour": "16:00"
+        },
+        "localization": {
+            "city": "Gdynia",
+            "street": "Solidarnosci 2"
+        },
+        "comment": "Basketball only for the shorties.",
+        "playerIDs": [2,4]
+    },
+    {
+        "id": 3,
+        "sportID": 4,
+        "hostID": 3,
+        "date": {
+            "day": "March 29 2019",
+            "hour": "17:00"
+        },
+        "localization": {
+            "city": "Gdansk",
+            "street": "Golfiarzy 5"
+        },
+        "comment": "So I got that going for me, which is nice.",
+        "playerIDs": [3,5]
+    }
+]

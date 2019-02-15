@@ -1,0 +1,10 @@
+{
+    "id": 6,
+    "avatar": "https://pbs.twimg.com/media/BWgjejCCEAAuz4a.jpg",
+    "name": "Goku",
+    "eMail": "goku@gmail.com",
+    "dateOfJoining": "30 November 1990",
+    "localization": "Gdańsk",
+    "favouriteSportsIDs": [1],
+    "favouritePlayersIDs": [1,2]
+}
