@@ -8,8 +8,6 @@ class App extends Component {
     return (
       <div className="App">
         <Navigation />
-        <Route exact path="/logout" component={() => <h1>Goku</h1>} />
-        <Route exact path = "/profile" component={() => <h1>Vegeta</h1>} />
       </div>
     );
   }
