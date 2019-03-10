@@ -17,6 +17,7 @@ const fetchSports = async () => {
 
 
 
+
 class Players extends Component {
 
     state = {
@@ -32,11 +33,10 @@ class Players extends Component {
             }))
     }
 
-    addPlayerToFavorites = (player) => {
-        this.setState({ players: this.state.players.push(player) })
+    addPlayerToFavorites = () => {
+        
     }
     
-
     render() {
 
         return (
