@@ -1,6 +1,6 @@
 import React, { Component } from  'react'
 import { Route,NavLink } from 'react-router-dom'
-import { Input, Menu } from 'semantic-ui-react'
+import { Menu } from 'semantic-ui-react'
 
 // import Players from '../Players'
 // import Matches from '../Matches'
@@ -39,30 +39,36 @@ class Navigation extends Component {
   
       return (
         <Menu secondary>
-          <Menu.Item name='home' active={activeItem === 'home'} onClick={this.handleItemClick} />
+        
+        <Menu.Item
+            name='profile'
+            active={activeItem === 'profile'}
+            onClick={this.handleItemClick}
+          />
+          <Menu.Item 
+            name='matches' 
+            active={activeItem === 'matches'} 
+            onClick={this.handleItemClick} />
           <Menu.Item
-            name='messages'
-            active={activeItem === 'messages'}
+            name='players'
+            active={activeItem === 'players'}
             onClick={this.handleItemClick}
           />
           <Menu.Item
-            name='friends'
-            active={activeItem === 'friends'}
+            name='add match'
+            active={activeItem === 'add match'}
             onClick={this.handleItemClick}
           />
-          <Menu.Menu position='right'>
-            <Menu.Item>
-              <Input icon='search' placeholder='Search...' />
-            </Menu.Item>
             <Menu.Item
               name='logout'
               active={activeItem === 'logout'}
               onClick={this.handleItemClick}
             />
-          </Menu.Menu>
+
+        <Route exact path = "/profile" component={() => <h1>This is your profile.</h1>} />
         </Menu>
       )
     }
   }
-  
+
 export default Navigation
