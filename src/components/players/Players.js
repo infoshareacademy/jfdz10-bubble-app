@@ -2,12 +2,6 @@ import React, { Component } from "react";
 import { Header, Image, Table, Button, Icon } from 'semantic-ui-react'
 
 
-
-
-// const fetchPlayers = () =>
-//     fetch(process.env.PUBLIC_URL + "/players.json")
-//         .then(response => response.json());
-
 const fetchPlayers = async () => {
     const response = await fetch(process.env.PUBLIC_URL + "/players.json");
     const players = await response.json();
@@ -19,6 +13,7 @@ const fetchSports = async () => {
     const sports = await response.json();
     return sports;
 }
+
 
 
 
@@ -35,9 +30,12 @@ class Players extends Component {
                 players: players,
                 sports: sports
             }))
-        // .then(() => console.log(this.state.sports, 'dupa'))
-
     }
+
+    addPlayerToFavorites = (player) => {
+        this.setState({ players: this.state.players.push(player) })
+    }
+    
 
     render() {
 
