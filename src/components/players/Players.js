@@ -1,30 +1,46 @@
 import React, { Component } from "react";
 import { Header, Image, Table, Button, Icon } from 'semantic-ui-react'
 
-// import Player from './Player'
 
 
 
-const fetchPlayers = () =>
-    fetch(process.env.PUBLIC_URL + "/players.json").then(response =>
-        response.json()
-    );
+// const fetchPlayers = () =>
+//     fetch(process.env.PUBLIC_URL + "/players.json")
+//         .then(response => response.json());
+
+const fetchPlayers = async () => {
+    const response = await fetch(process.env.PUBLIC_URL + "/players.json");
+    const players = await response.json();
+    return players;
+}
+
+const fetchSports = async () => {
+    const response = await fetch(process.env.PUBLIC_URL + "/sports.json");
+    const sports = await response.json();
+    return sports;
+}
 
 
 
 class Players extends Component {
 
     state = {
-        players: []
+        players: [],
+        sports: [],
     };
 
     componentDidMount() {
-        fetchPlayers().then(players => this.setState({ players }));
+        Promise.all([fetchPlayers(), fetchSports()])
+            .then(([players, sports]) => this.setState({
+                players: players,
+                sports: sports
+            }))
+        // .then(() => console.log(this.state.sports, 'dupa'))
+
     }
 
-
     render() {
-        
+
         return (
 
             <Table basic='very' celled collapsing>
@@ -54,7 +70,14 @@ class Players extends Component {
 
                                 <Table.Cell>{player.localization}</Table.Cell>
 
-                                <Table.Cell>{player.favouriteSportsIDs}</Table.Cell>
+                               
+
+                                <Table.Cell>{
+                                    this.state.sports
+                                        .filter(sport => player.favouriteSportsIDs.includes(sport.id))
+                                        .map(sport => `${sport.name}; `)                                    
+                                }</Table.Cell>
+
 
                                 <Table.Cell>
                                     <Button icon>
