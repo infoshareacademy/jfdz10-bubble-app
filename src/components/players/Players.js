@@ -14,7 +14,15 @@ const fetchSports = async () => {
     return sports;
 }
 
+// const getPlayerID = (playerID) => {
+//     return
+// }
 
+const fetchUser = async () => {
+    const response = await fetch(process.env.PUBLIC_URL + "/user.json");
+    const user = await response.json();
+    return user;
+}
 
 
 
@@ -23,20 +31,44 @@ class Players extends Component {
     state = {
         players: [],
         sports: [],
+        user: {},
     };
 
     componentDidMount() {
-        Promise.all([fetchPlayers(), fetchSports()])
-            .then(([players, sports]) => this.setState({
+        Promise.all([fetchPlayers(), fetchSports(), fetchUser()])
+            .then(([players, sports, user]) => this.setState({
                 players: players,
-                sports: sports
+                sports: sports,
+                user: user,
             }))
     }
 
-    addPlayerToFavorites = () => {
-        
+    getUserFavPlayers = () => {
+        return this.state.user.favouritePlayersIDs;
     }
+
+
+
+    saveUserFavPlayersInLocStorage = (addedPlayer) => {
+        console.log('dzialam')
+        let favouritePlayers = this.getUserFavPlayers();
+        console.log('list before', favouritePlayers)
+
+        let favPlayersNoDups = []
+
+        favouritePlayers.push(addedPlayer)
+        favPlayersNoDups = favouritePlayers.filter((item, pos, self) => self.indexOf(item) === pos)
     
+        localStorage.setItem('favPlayersNoDups', JSON.stringify());
+        console.log('added player', addedPlayer)
+        console.log('pushed list', favPlayersNoDups)
+    }
+
+
+    // addPlayerToFavorites = () => {
+
+    // }
+
     render() {
 
         return (
@@ -54,7 +86,7 @@ class Players extends Component {
                 <Table.Body>
                     {this.state.players.map(
                         player => (
-                            <Table.Row>
+                            <Table.Row key={player.id}>
 
                                 <Table.Cell>
                                     <Header as='h4' image>
@@ -68,18 +100,18 @@ class Players extends Component {
 
                                 <Table.Cell>{player.localization}</Table.Cell>
 
-                               
+
 
                                 <Table.Cell>{
                                     this.state.sports
                                         .filter(sport => player.favouriteSportsIDs.includes(sport.id))
-                                        .map(sport => `${sport.name.charAt(0).toUpperCase() + sport.name.slice(1)}; `)                                    
+                                        .map(sport => `${sport.name.charAt(0).toUpperCase() + sport.name.slice(1)}; `)
                                 }</Table.Cell>
 
 
                                 <Table.Cell>
                                     <Button icon>
-                                        <Icon name='favorite' />
+                                        <Icon name='favorite' onClick={() => this.saveUserFavPlayersInLocStorage(player.id)} />
                                     </Button>
                                 </Table.Cell>
 
