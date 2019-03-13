@@ -52,7 +52,6 @@ class Players extends Component {
         return usersFromLocStorage || favoritePlayersAsIs;       
     }
 
-
     saveUserFavPlayersInLocStorage = (addedPlayer) => {        
         let favouritePlayers = this.compareFavPlayers();
         let favPlayersNoDups = [];
@@ -69,7 +68,7 @@ class Players extends Component {
         return (
 
             <Table basic='very' celled>
-                <Table.Header>
+                <Table.Header className="player-row">
                     <Table.Row>
                         <Table.HeaderCell>Player</Table.HeaderCell>
                         <Table.HeaderCell>Location</Table.HeaderCell>
@@ -81,11 +80,11 @@ class Players extends Component {
                 <Table.Body>
                     {this.state.players.map(
                         player => (
-                            <Table.Row key={player.id} className={this.compareFavPlayers().includes(player.id) ? "favorite-player" : ""}>
+                            <Table.Row key={player.id} className={this.compareFavPlayers().includes(player.id) ? "favorite-player player-row" : "player-row"}>
 
                                 <Table.Cell>
                                     <Header as='h4' image>
-                                        <Image src={player.avatar} rounded size='mini' />
+                                        {/* <Image src={player.avatar} rounded size='mini' /> */}
                                         <Header.Content>
                                             {player.name}
                                             <Header.Subheader>{player.eMail}</Header.Subheader>
