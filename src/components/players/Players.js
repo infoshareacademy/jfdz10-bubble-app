@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { Header, Image, Table, Button, Icon } from 'semantic-ui-react'
 
+import './Players.css'
+
 
 const fetchPlayers = async () => {
     const response = await fetch(process.env.PUBLIC_URL + "/players.json");
@@ -47,44 +49,40 @@ class Players extends Component {
     compareFavPlayers = () => {
         let favoritePlayersAsIs = this.getUserFavPlayers();
         let usersFromLocStorage = JSON.parse(localStorage.getItem('favPlayersNoDups'));
-        return (JSON.stringify(favoritePlayersAsIs) === JSON.stringify(usersFromLocStorage)) ? favoritePlayersAsIs : usersFromLocStorage;
-       
+        return usersFromLocStorage || favoritePlayersAsIs;       
     }
 
 
-    saveUserFavPlayersInLocStorage = (addedPlayer) => {
+    saveUserFavPlayersInLocStorage = (addedPlayer) => {        
         let favouritePlayers = this.compareFavPlayers();
         let favPlayersNoDups = [];
+
 
         favouritePlayers.push(addedPlayer)
         favPlayersNoDups = favouritePlayers.filter((item, pos, self) => self.indexOf(item) === pos)
     
         localStorage.setItem('favPlayersNoDups', JSON.stringify(favPlayersNoDups));
     }
-
-
-    // addPlayerToFavorites = () => {
-
-    // }
+    
 
     render() {
 
         return (
 
-            <Table basic='very' celled collapsing>
+            <Table basic='very' celled>
                 <Table.Header>
                     <Table.Row>
                         <Table.HeaderCell>Player</Table.HeaderCell>
                         <Table.HeaderCell>Location</Table.HeaderCell>
                         <Table.HeaderCell>Sports</Table.HeaderCell>
-                        <Table.HeaderCell>Add to Favorites</Table.HeaderCell>
+                        <Table.HeaderCell></Table.HeaderCell>
                     </Table.Row>
                 </Table.Header>
 
                 <Table.Body>
                     {this.state.players.map(
                         player => (
-                            <Table.Row key={player.id}>
+                            <Table.Row key={player.id} className={this.compareFavPlayers().includes(player.id) ? "favorite-player" : ""}>
 
                                 <Table.Cell>
                                     <Header as='h4' image>
@@ -109,7 +107,7 @@ class Players extends Component {
 
                                 <Table.Cell>
                                     <Button icon>
-                                        <Icon name='favorite' onClick={() => this.saveUserFavPlayersInLocStorage(player.id)} />
+                                        <Icon name='favorite' onClick={() => this.saveUserFavPlayersInLocStorage(player.id)} />  Add to Favorites
                                     </Button>
                                 </Table.Cell>
 
