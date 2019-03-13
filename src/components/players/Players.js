@@ -57,8 +57,7 @@ class Players extends Component {
         let favouritePlayers = this.compareFavPlayers();
         let favPlayersNoDups = [];
 
-
-        favouritePlayers.push(addedPlayer)
+        favouritePlayers.includes(addedPlayer) ? favouritePlayers.splice((favouritePlayers.indexOf(addedPlayer)), 1) : favouritePlayers.push(addedPlayer);   
         favPlayersNoDups = favouritePlayers.filter((item, pos, self) => self.indexOf(item) === pos)
     
         localStorage.setItem('favPlayersNoDups', JSON.stringify(favPlayersNoDups));
@@ -106,8 +105,8 @@ class Players extends Component {
 
 
                                 <Table.Cell>
-                                    <Button icon>
-                                        <Icon name='favorite' onClick={() => this.saveUserFavPlayersInLocStorage(player.id)} />  Add to Favorites
+                                    <Button icon onClick={() => this.saveUserFavPlayersInLocStorage(player.id)}>
+                                        <Icon name='favorite'  />  Add to Favorites
                                     </Button>
                                 </Table.Cell>
 
