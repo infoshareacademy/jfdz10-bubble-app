@@ -14,9 +14,6 @@ const fetchSports = async () => {
     return sports;
 }
 
-// const getPlayerID = (playerID) => {
-//     return
-// }
 
 const fetchUser = async () => {
     const response = await fetch(process.env.PUBLIC_URL + "/user.json");
@@ -47,21 +44,22 @@ class Players extends Component {
         return this.state.user.favouritePlayersIDs;
     }
 
+    compareFavPlayers = () => {
+        let favoritePlayersAsIs = this.getUserFavPlayers();
+        let usersFromLocStorage = JSON.parse(localStorage.getItem('favPlayersNoDups'));
+        return (JSON.stringify(favoritePlayersAsIs) === JSON.stringify(usersFromLocStorage)) ? favoritePlayersAsIs : usersFromLocStorage;
+       
+    }
 
 
     saveUserFavPlayersInLocStorage = (addedPlayer) => {
-        console.log('dzialam')
-        let favouritePlayers = this.getUserFavPlayers();
-        console.log('list before', favouritePlayers)
-
-        let favPlayersNoDups = []
+        let favouritePlayers = this.compareFavPlayers();
+        let favPlayersNoDups = [];
 
         favouritePlayers.push(addedPlayer)
         favPlayersNoDups = favouritePlayers.filter((item, pos, self) => self.indexOf(item) === pos)
     
-        localStorage.setItem('favPlayersNoDups', JSON.stringify());
-        console.log('added player', addedPlayer)
-        console.log('pushed list', favPlayersNoDups)
+        localStorage.setItem('favPlayersNoDups', JSON.stringify(favPlayersNoDups));
     }
 
 
