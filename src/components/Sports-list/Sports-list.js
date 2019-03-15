@@ -5,6 +5,6 @@ import { ReactComponent } from '*.svg';
 
 class SportInfo extends ReactComponent {
     render() {
-
+        
     }
 }
