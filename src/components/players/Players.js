@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Header, Image, Table, Button, Icon } from 'semantic-ui-react'
+import { Header, Table, Button, Icon } from 'semantic-ui-react'
 
 import './Players.css'
 
@@ -23,6 +23,23 @@ const fetchUser = async () => {
     return user;
 }
 
+const compareFavPlayers = (favoritePlayers) => {
+    let favoritePlayersAsIs = favoritePlayers;
+    let usersFromLocStorage = JSON.parse(localStorage.getItem('favPlayersNoDups'));
+    return usersFromLocStorage || favoritePlayersAsIs;       
+}
+
+const saveUserFavPlayersInLocStorage = (component, addedPlayer) => {        
+    let favouritePlayers = compareFavPlayers();
+    let favPlayersNoDups = [];
+
+    favouritePlayers.includes(addedPlayer) ? favouritePlayers.splice((favouritePlayers.indexOf(addedPlayer)), 1) : favouritePlayers.push(addedPlayer);   
+    favPlayersNoDups = favouritePlayers.filter((item, pos, self) => self.indexOf(item) === pos)
+
+    localStorage.setItem('favPlayersNoDups', JSON.stringify(favPlayersNoDups));
+
+    component.setState({favoritePlayers: favPlayersNoDups})
+}
 
 
 class Players extends Component {
@@ -31,36 +48,21 @@ class Players extends Component {
         players: [],
         sports: [],
         user: {},
+        favoritePlayers: [],
     };
 
     componentDidMount() {
-        Promise.all([fetchPlayers(), fetchSports(), fetchUser()])
-            .then(([players, sports, user]) => this.setState({
+        Promise.all([fetchPlayers(), fetchSports(), fetchUser(), compareFavPlayers(this.state.user.favouriteSportsIDs)] )
+            .then(([players, sports, user, favoritePlayers]) => this.setState({
                 players: players,
                 sports: sports,
                 user: user,
+                favoritePlayers: favoritePlayers,
             }))
     }
-
-    getUserFavPlayers = () => {
-        return this.state.user.favouritePlayersIDs;
-    }
-
-    compareFavPlayers = () => {
-        let favoritePlayersAsIs = this.getUserFavPlayers();
-        let usersFromLocStorage = JSON.parse(localStorage.getItem('favPlayersNoDups'));
-        return usersFromLocStorage || favoritePlayersAsIs;       
-    }
-
-    saveUserFavPlayersInLocStorage = (addedPlayer) => {        
-        let favouritePlayers = this.compareFavPlayers();
-        let favPlayersNoDups = [];
-
-        favouritePlayers.includes(addedPlayer) ? favouritePlayers.splice((favouritePlayers.indexOf(addedPlayer)), 1) : favouritePlayers.push(addedPlayer);   
-        favPlayersNoDups = favouritePlayers.filter((item, pos, self) => self.indexOf(item) === pos)
     
-        localStorage.setItem('favPlayersNoDups', JSON.stringify(favPlayersNoDups));
-    }
+
+    
     
 
     render() {
@@ -80,7 +82,7 @@ class Players extends Component {
                 <Table.Body>
                     {this.state.players.map(
                         player => (
-                            <Table.Row key={player.id} className={this.compareFavPlayers().includes(player.id) ? "favorite-player player-row" : "player-row"}>
+                            <Table.Row key={player.id} className={this.state.favoritePlayers.includes(player.id) ? "favorite-player player-row" : "player-row"}>
 
                                 <Table.Cell>
                                     <Header as='h4' image>
@@ -104,7 +106,7 @@ class Players extends Component {
 
 
                                 <Table.Cell>
-                                    <Button icon onClick={() => this.saveUserFavPlayersInLocStorage(player.id)}>
+                                    <Button icon onClick={() => saveUserFavPlayersInLocStorage(this, player.id)}>
                                         <Icon name='favorite'  />  Add to Favorites
                                     </Button>
                                 </Table.Cell>
