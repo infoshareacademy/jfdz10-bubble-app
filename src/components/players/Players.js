@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { Header, Table, Button, Icon } from 'semantic-ui-react'
 
+import PlayersForm from './PlayersForm'
+
 import './Players.css'
 
 
@@ -26,19 +28,19 @@ const fetchUser = async () => {
 const compareFavPlayers = (favoritePlayers) => {
     let favoritePlayersAsIs = favoritePlayers;
     let usersFromLocStorage = JSON.parse(localStorage.getItem('favPlayersNoDups'));
-    return usersFromLocStorage || favoritePlayersAsIs;       
+    return usersFromLocStorage || favoritePlayersAsIs;
 }
 
-const saveUserFavPlayersInLocStorage = (component, addedPlayer) => {        
+const saveUserFavPlayersInLocStorage = (component, addedPlayer) => {
     let favouritePlayers = compareFavPlayers();
     let favPlayersNoDups = [];
 
-    favouritePlayers.includes(addedPlayer) ? favouritePlayers.splice((favouritePlayers.indexOf(addedPlayer)), 1) : favouritePlayers.push(addedPlayer);   
+    favouritePlayers.includes(addedPlayer) ? favouritePlayers.splice((favouritePlayers.indexOf(addedPlayer)), 1) : favouritePlayers.push(addedPlayer);
     favPlayersNoDups = favouritePlayers.filter((item, pos, self) => self.indexOf(item) === pos)
 
     localStorage.setItem('favPlayersNoDups', JSON.stringify(favPlayersNoDups));
 
-    component.setState({favoritePlayers: favPlayersNoDups})
+    component.setState({ favoritePlayers: favPlayersNoDups })
 }
 
 
@@ -52,7 +54,7 @@ class Players extends Component {
     };
 
     componentDidMount() {
-        Promise.all([fetchPlayers(), fetchSports(), fetchUser(), compareFavPlayers(this.state.user.favouriteSportsIDs)] )
+        Promise.all([fetchPlayers(), fetchSports(), fetchUser(), compareFavPlayers(this.state.user.favouriteSportsIDs)])
             .then(([players, sports, user, favoritePlayers]) => this.setState({
                 players: players,
                 sports: sports,
@@ -60,24 +62,31 @@ class Players extends Component {
                 favoritePlayers: favoritePlayers,
             }))
     }
-    
 
-    
-    
+
+
+
 
     render() {
-
+    
         return (
-
+            <div>
+            <PlayersForm sports={this.state.sports.map(
+                sport =>( {
+                key: sport.name, 
+                text: sport.name,
+                value: sport.name,
+                })
+                )} />
             <Table basic='very' celled>
-                <Table.Header className="player-row">
+                {/* <Table.Header className="player-row">
                     <Table.Row>
                         <Table.HeaderCell>Player</Table.HeaderCell>
                         <Table.HeaderCell>Location</Table.HeaderCell>
                         <Table.HeaderCell>Sports</Table.HeaderCell>
                         <Table.HeaderCell></Table.HeaderCell>
                     </Table.Row>
-                </Table.Header>
+                </Table.Header> */}
 
                 <Table.Body>
                     {this.state.players.map(
@@ -107,7 +116,7 @@ class Players extends Component {
 
                                 <Table.Cell>
                                     <Button icon onClick={() => saveUserFavPlayersInLocStorage(this, player.id)}>
-                                        <Icon name='favorite'  />  Add to Favorites
+                                        <Icon name='favorite' />  Add to Favorites
                                     </Button>
                                 </Table.Cell>
 
@@ -117,6 +126,7 @@ class Players extends Component {
 
                 </Table.Body>
             </Table>
+            </div>
         )
     }
 }

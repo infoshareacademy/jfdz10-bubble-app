@@ -6,8 +6,8 @@ import {Route, NavLink, Router} from 'react-router-dom'
 // import Profile from '../Profile'
 // import AddMatch from '../AddMatch'
 
-import Logout from './Logout'
-import Profile from './Profile'
+// import Logout from './Logout'
+// import Profile from './Profile'
 
 class Navigation extends Component {
     render() {
