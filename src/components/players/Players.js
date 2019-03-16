@@ -62,12 +62,11 @@ class Players extends Component {
     }
     
 
-    
-    
 
     render() {
 
         return (
+            
 
             <Table basic='very' celled>
                 <Table.Header className="player-row">
