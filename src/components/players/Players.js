@@ -49,8 +49,6 @@ class Players extends Component {
                 user: user,
                 favoritePlayers: favPlayers,
             }))
-            
-
     }
 
     compareFavPlayers = () => {
@@ -92,7 +90,7 @@ class Players extends Component {
                 <Table.Body>
                     {this.state.players.map(
                         player => (
-                            <Table.Row key={player.id} className={this.state.favoritePlayers.includes(player.id) ? "favorite-player player-row" : "player-row"}>
+                            <Table.Row key={player.id} className={this.compareFavPlayers().includes(player.id) ? "favorite-player player-row" : "player-row"}>
 
                                 <Table.Cell>
                                     <Header as='h4' image>
