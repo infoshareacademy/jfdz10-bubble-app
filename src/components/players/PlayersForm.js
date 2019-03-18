@@ -1,6 +1,6 @@
-import React, { Component } from "react";
+import React, { Component, Fragment }  from "react";
 
-import { Form, Input, Button, Select, Segment } from 'semantic-ui-react'
+import { Form, Input, Button, Select, Segment, Icon, Grid, Header, Image } from 'semantic-ui-react'
 
 class PlayersForm extends Component {
 
@@ -8,6 +8,12 @@ class PlayersForm extends Component {
     render() {
 
         return (
+            <Fragment>
+                <div class="top-header">
+                    <Header as='h5' icon textAlign='center'>
+                        <Icon size="small" name='search' circular inverted color={'RGB 0 173 230'}/>
+                    </Header>
+                </div>
             <Segment inverted>
                 <Form>
                     <Form.Group widths='equal'>
@@ -36,12 +42,14 @@ class PlayersForm extends Component {
 
                     <Form.Field fluid
                         onClick={this.props.searchForPlayer}
+
                         id='form-button-control-public'
                         control={Button}
                         content='Search'
                     />
                 </Form>
             </Segment>
+            </Fragment>
         )
 
     }

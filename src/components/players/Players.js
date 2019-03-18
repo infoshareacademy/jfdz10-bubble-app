@@ -45,7 +45,8 @@ class Players extends Component {
             player: '',
             location: '',
             sport: '',
-        }
+        },
+        filterVisible: true,
     };
 
     componentDidMount() {
@@ -89,6 +90,11 @@ class Players extends Component {
                 sport: sport,
             }
         })
+        this.toggleFilter()
+    }
+
+    toggleFilter = () => {
+        this.state.filterVisible ? this.setState({filterVisible: false}) : this.setState({filterVisible: true})
     }
 
 
@@ -96,6 +102,7 @@ class Players extends Component {
 
         return (
             <div>
+                
                 <PlayersForm
                     searchForPlayer={this.setNewFilter}
                     sports={this.state.sports.map(
@@ -123,8 +130,8 @@ class Players extends Component {
                                     this.state.sports
                                         .filter(sport => player.favouriteSportsIDs.includes(sport.id))
                                         .map(sport => sport.name)
-                                        .concat('')                                      
-                                        ).includes(this.state.filter.sport))
+                                        .concat('')
+                                ).includes(this.state.filter.sport))
                             .map(
                                 player => (
                                     <Table.Row key={player.id} className={this.compareFavPlayers().includes(player.id) ? "favorite-player player-row" : "player-row"}>
@@ -150,7 +157,8 @@ class Players extends Component {
 
 
                                         <Table.Cell>
-                                            <Button icon onClick={() => this.saveUserFavPlayersInLocStorage(this, player.id)}>
+                                            <Button icon 
+                                            onClick={() => this.saveUserFavPlayersInLocStorage(this, player.id)}>
                                                 <Icon name='favorite' />  Add to Favorites
                                     </Button>
                                         </Table.Cell>
