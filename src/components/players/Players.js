@@ -78,9 +78,12 @@ class Players extends Component {
     }
 
     setNewFilter = () => {
-        const sport = document.querySelector('#sports-select').childNodes[1].innerText
+        let sport = document.querySelector('#sports-select').childNodes[1].innerText !== 'Sport' ? document.querySelector('#sports-select').childNodes[1].innerText : ''
+        
         const location = document.querySelector('#form-input-control-location').value
         const player = document.querySelector('#form-input-control-player').value
+
+        console.log(document.querySelector('#sports-select'))
 
         this.setState({
             filter: {
@@ -100,7 +103,7 @@ class Players extends Component {
                     searchForPlayer={this.setNewFilter}
                     sports={this.state.sports.map(
                         sport => ({
-                            key: sport.name,
+                            key: sport.id,
                             text: sport.name,
                             value: sport.name,
                         })
@@ -109,39 +112,50 @@ class Players extends Component {
 
 
                     <Table.Body>
-                        {this.state.players.map(
-                            player => (
-                                <Table.Row key={player.id} className={this.compareFavPlayers().includes(player.id) ? "favorite-player player-row" : "player-row"}>
+                        {this.state.players
+                            .filter(
+                                player => (
+                                    (player.localization.toLowerCase().includes(this.state.filter.location.toLowerCase())) 
+                                    &&
+                                    (player.name.toLowerCase().includes(this.state.filter.player.toLowerCase()))
+                                    // &&
+                                    // this.state.sports
+                                    //             .filter(sport => player.favouriteSportsIDs.includes(sport.id))
+                                    //             .map(sport => `${sport.name.charAt(0).toUpperCase() + sport.name.slice(1)}; `).includes(this.state.filter.sport.toLowerCase())
+                            ))
+                            .map(
+                                player => (
+                                    <Table.Row key={player.id} className={this.compareFavPlayers().includes(player.id) ? "favorite-player player-row" : "player-row"}>
 
-                                    <Table.Cell>
-                                        <Header as='h4' image>
-                                            <Header.Content>
-                                                {player.name}
-                                                <Header.Subheader>{player.eMail}</Header.Subheader>
-                                            </Header.Content>
-                                        </Header>
-                                    </Table.Cell>
+                                        <Table.Cell>
+                                            <Header as='h4' image>
+                                                <Header.Content>
+                                                    {player.name}
+                                                    <Header.Subheader>{player.eMail}</Header.Subheader>
+                                                </Header.Content>
+                                            </Header>
+                                        </Table.Cell>
 
-                                    <Table.Cell>{player.localization}</Table.Cell>
-
-
-
-                                    <Table.Cell>{
-                                        this.state.sports
-                                            .filter(sport => player.favouriteSportsIDs.includes(sport.id))
-                                            .map(sport => `${sport.name.charAt(0).toUpperCase() + sport.name.slice(1)}; `)
-                                    }</Table.Cell>
+                                        <Table.Cell>{player.localization}</Table.Cell>
 
 
-                                    <Table.Cell>
-                                        <Button icon onClick={() => this.saveUserFavPlayersInLocStorage(this, player.id)}>
-                                            <Icon name='favorite' />  Add to Favorites
+
+                                        <Table.Cell>{
+                                            this.state.sports
+                                                .filter(sport => player.favouriteSportsIDs.includes(sport.id))
+                                                .map(sport => `${sport.name.charAt(0).toUpperCase() + sport.name.slice(1)}; `)
+                                        }</Table.Cell>
+
+
+                                        <Table.Cell>
+                                            <Button icon onClick={() => this.saveUserFavPlayersInLocStorage(this, player.id)}>
+                                                <Icon name='favorite' />  Add to Favorites
                                     </Button>
-                                    </Table.Cell>
+                                        </Table.Cell>
 
-                                </Table.Row>
-                            )
-                        )}
+                                    </Table.Row>
+                                )
+                            )}
 
                     </Table.Body>
                 </Table>
