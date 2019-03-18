@@ -1,6 +1,6 @@
 import React, { Component, Fragment }  from "react";
 
-import { Form, Input, Button, Select, Segment, Icon, Grid, Header, Image } from 'semantic-ui-react'
+import { Form, Input, Button, Select, Segment } from 'semantic-ui-react'
 
 class PlayersForm extends Component {
 
@@ -9,11 +9,11 @@ class PlayersForm extends Component {
 
         return (
             <Fragment>
-                <div class="top-header">
+                {/* <div class="top-header">
                     <Header as='h5' icon textAlign='center'>
                         <Icon size="small" name='search' circular inverted color='#B03060'/>
                     </Header>
-                </div>
+                </div> */}
             <Segment inverted>
                 <Form>
                     <Form.Group widths='equal'>

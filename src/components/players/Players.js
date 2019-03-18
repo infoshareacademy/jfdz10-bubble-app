@@ -62,10 +62,11 @@ class Players extends Component {
     compareFavPlayers = () => {
         let favoritePlayersAsIs = this.state.user.favouritePlayersIDs;
         let usersFromLocStorage = JSON.parse(localStorage.getItem('favPlayersNoDups'));
+        
         return usersFromLocStorage || favoritePlayersAsIs;
     }
 
-    saveUserFavPlayersInLocStorage = (addedPlayer) => {
+    saveUserFavPlayersInLocStorage = (component, addedPlayer) => {
         let favouritePlayers = this.compareFavPlayers();
         let favPlayersNoDups = [];
 
