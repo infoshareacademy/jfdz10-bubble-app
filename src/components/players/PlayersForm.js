@@ -11,7 +11,7 @@ class PlayersForm extends Component {
             <Fragment>
                 <div class="top-header">
                     <Header as='h5' icon textAlign='center'>
-                        <Icon size="small" name='search' circular inverted color={'RGB 0 173 230'}/>
+                        <Icon size="small" name='search' circular inverted color='#B03060'/>
                     </Header>
                 </div>
             <Segment inverted>
