@@ -15,21 +15,22 @@ class PlayersForm extends Component {
                             id='form-input-control-player'
                             control={Input}
                             placeholder='Player'
-                                                      
+
                         />
                         <Form.Field
                             id='form-input-control-location'
                             control={Input}
                             placeholder='Location'
-                                
+
                         />
                         <Form.Field
+                            id='sports-select'
                             control={Select}
                             options={this.props.sports}
                             placeholder='Sport'
                             search
-                            searchInput={{ id: 'form-select-control-sport' }}
-                                 
+                            searchInput={{ id: 'form-select-control-sports' }}
+
                         />
                     </Form.Group>
 

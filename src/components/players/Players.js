@@ -78,7 +78,7 @@ class Players extends Component {
     }
 
     setNewFilter = () => {
-        const sport = document.querySelector('#form-input-control-sport').value
+        const sport = document.querySelector('#sports-select').childNodes[1].innerText
         const location = document.querySelector('#form-input-control-location').value
         const player = document.querySelector('#form-input-control-player').value
 
@@ -106,14 +106,7 @@ class Players extends Component {
                         })
                     )} />
                 <Table basic='very' celled>
-                    {/* <Table.Header className="player-row">
-                    <Table.Row>
-                        <Table.HeaderCell>Player</Table.HeaderCell>
-                        <Table.HeaderCell>Location</Table.HeaderCell>
-                        <Table.HeaderCell>Sports</Table.HeaderCell>
-                        <Table.HeaderCell></Table.HeaderCell>
-                    </Table.Row>
-                </Table.Header> */}
+
 
                     <Table.Body>
                         {this.state.players.map(
@@ -122,7 +115,6 @@ class Players extends Component {
 
                                     <Table.Cell>
                                         <Header as='h4' image>
-                                            {/* <Image src={player.avatar} rounded size='mini' /> */}
                                             <Header.Content>
                                                 {player.name}
                                                 <Header.Subheader>{player.eMail}</Header.Subheader>
