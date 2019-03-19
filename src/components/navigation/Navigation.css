@@ -1,0 +1,34 @@
+.ListContainer {
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    background: rgb(0, 192, 255);
+    margin: 0;
+    padding: 0;
+    align-items: center;
+}
+
+.ListItem {
+    text-align: center;
+    width: 25%;
+    padding-top: 25px;
+    padding-bottom: 25px;
+    margin-bottom:2px;
+    border-right: 1px solid white
+}
+
+.ListItem a {
+    cursor: pointer;
+}
+
+.ListContainer :last-child {
+    border-right: none;
+
+}
+
+.ListItem :first-child{
+    color: white;
+    padding: 10px;
+    padding-top: 20px;
+    padding-bottom: 20px
+}
