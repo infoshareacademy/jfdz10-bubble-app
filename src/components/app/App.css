@@ -30,3 +30,17 @@
     transform: rotate(360deg);
   }
 }
+
+.App {
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-rows: 15% 85%;
+}
+
+.Navigation {
+  grid-row: 1;
+}
+
+.dashboard {
+  grid-row: 2;
+}
