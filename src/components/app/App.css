@@ -31,16 +31,16 @@
   }
 }
 
-.App-window {
+.App {
   display: grid;
   grid-template-columns: 100%;
   grid-template-rows: 15% 85%;
 }
 
-.App-nav {
+.Navigation {
   grid-row: 1;
 }
 
-.App-dashboard {
+.dashboard {
   grid-row: 2;
 }

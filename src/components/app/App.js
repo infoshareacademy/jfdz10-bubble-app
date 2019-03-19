@@ -3,6 +3,7 @@ import { Route } from 'react-router-dom'
 
 import Navigation from '../navigation/Navigation'
 import Players from '../players/Players'
+import Dashboard from '../dashboard/Dashboard'
 
 class App extends Component {
   render() {
@@ -10,7 +11,7 @@ class App extends Component {
       <div className="App">
         <Navigation />
         <div className="ShownComponent">
-          <Route exact path="/" component={() => <h1>Here we'll have our dashboard</h1>}></Route>
+          <Route exact path="/" component={Dashboard}></Route>
           <Route exact path="/addMatch" component={() => <h1>Here you can add a new match.</h1>} />
           <Route exact path="/matches" component={() => <h1>Here you can see planned matches.</h1>} />
           <Route exact path = "/players" component={Players} />
