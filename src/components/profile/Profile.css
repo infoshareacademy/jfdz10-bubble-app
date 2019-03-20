@@ -1,0 +1,22 @@
+.ProfileHeader {
+    font-weight: 500;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    padding: 15px;
+}
+.Profile {
+    margin-top: -15px;
+}
+
+.ProfileDetails {
+    list-style: none;
+    border-bottom: 1px solid rgb(0, 192, 255);
+}
+.Avatar {
+    width: 200px;
+    height: 200px;
+}
+.Profile {
+    background: pink;
+}
