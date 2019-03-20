@@ -9,7 +9,7 @@ class PlayersForm extends Component {
 
         return (
             <Fragment>
-                <div onClick={this.props.toggleFilter} class="top-header">
+                <div onClick={this.props.toggleFilter} className="top-header">
                     <Header as='h5' icon textAlign='center'>
                         <Icon size="small" name='search' circular inverted color='#B03060'/>
                     </Header>

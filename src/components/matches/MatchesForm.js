@@ -17,12 +17,7 @@ class MatchesForm extends Component {
             <Segment inverted style={(this.props.filterStatus) ? {display: "block"} : {display: "none"}}>
                 <Form className="matches-search-form-visible" >
                     <Form.Group widths='equal'>
-                        <Form.Field
-                            id='form-input-control-match'
-                            control={Input}
-                            placeholder='Match'
-
-                        />
+                        
                         <Form.Field
                             id='form-input-control-location'
                             control={Input}

@@ -84,10 +84,10 @@ class Matches extends Component {
 
                     <Table.Body className="matches">
                         <Table.Header>
-                            <Table.Row>
+                            <Table.Row key="matches-header">
                                 <Table.HeaderCell>
-                                    <Table.Cell >NAME</Table.Cell>
                                     <Table.Cell >LOCATION</Table.Cell>
+                                    <Table.Cell >SPORT</Table.Cell>
                                     <Table.Cell >DATE</Table.Cell>
                                     <Table.Cell >PLAYERS</Table.Cell>
                                 </Table.HeaderCell>

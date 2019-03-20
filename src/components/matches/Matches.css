@@ -3,6 +3,7 @@
 
 .matches {
     font-family: 'Quicksand';
+    transition: all 1s;
 }
 
 .ui.celled.table td {
