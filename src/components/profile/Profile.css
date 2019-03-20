@@ -6,7 +6,7 @@
     padding: 15px;
 }
 .Profile {
-    margin-top: -15px;
+    max-width: 420px;
 }
 
 .ProfileDetails {
@@ -16,7 +16,32 @@
 .Avatar {
     width: 200px;
     height: 200px;
+    cursor: pointer;
 }
-.Profile {
-    background: pink;
+.ItemDescription {
+    color: grey;
+    font-weight: 500
+}
+
+.ProfileDetailsListItem {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.DetailsListContainer {
+    list-style: none;
+}
+
+.DetailsList {
+    margin: 0;
+    padding: 0;
+}
+
+.ItemDescription {
+    margin-left: 10px;
+    width: 75px;
+}
+
+.FavouriteSports {
+    border-bottom: 1px solid rgb(0, 192, 255);
 }
