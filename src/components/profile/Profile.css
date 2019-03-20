@@ -1,0 +1,47 @@
+.ProfileHeader {
+    font-weight: 500;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    padding: 15px;
+}
+.Profile {
+    max-width: 420px;
+}
+
+.ProfileDetails {
+    list-style: none;
+    border-bottom: 1px solid rgb(0, 192, 255);
+}
+.Avatar {
+    width: 200px;
+    height: 200px;
+    cursor: pointer;
+}
+.ItemDescription {
+    color: grey;
+    font-weight: 500
+}
+
+.ProfileDetailsListItem {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.DetailsListContainer {
+    list-style: none;
+}
+
+.DetailsList {
+    margin: 0;
+    padding: 0;
+}
+
+.ItemDescription {
+    margin-left: 10px;
+    width: 75px;
+}
+
+.FavouriteSports {
+    border-bottom: 1px solid rgb(0, 192, 255);
+}
