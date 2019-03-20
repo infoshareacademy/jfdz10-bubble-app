@@ -1,21 +1,21 @@
 import React, { Component, Fragment }  from "react";
 
-import { Form, Input, Button, Select, Segment } from 'semantic-ui-react'
+import { Form, Input, Button, Select, Segment, Header, Icon } from 'semantic-ui-react'
 
 class PlayersForm extends Component {
 
-
+        
     render() {
 
         return (
             <Fragment>
-                {/* <div class="top-header">
+                <div onClick={this.props.toggleFilter} class="top-header">
                     <Header as='h5' icon textAlign='center'>
                         <Icon size="small" name='search' circular inverted color='#B03060'/>
                     </Header>
-                </div> */}
-            <Segment inverted>
-                <Form>
+                </div>
+            <Segment inverted style={(this.props.filterStatus) ? {display: "block"} : {display: "none"}}>
+                <Form className="players-search-form-visible" >
                     <Form.Group widths='equal'>
                         <Form.Field
                             id='form-input-control-player'
