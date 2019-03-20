@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import { Header, Table} from 'semantic-ui-react'
+import { Table, Icon } from 'semantic-ui-react'
 
 import MatchesForm from './MatchesForm'
 
-// import './Players.css'
+import './Matches.css'
 
 
 const fetchMatches = async () => {
@@ -24,8 +24,8 @@ const fetchSports = async () => {
 class Matches extends Component {
 
     state = {
-        matches: [],  
-        sports: [],      
+        matches: [],
+        sports: [],
         filter: {
             match: '',
             location: '',
@@ -42,7 +42,7 @@ class Matches extends Component {
             }))
     }
 
-   
+
 
     setNewFilter = () => {
         const sport = document.querySelector('#sports-select').childNodes[1].innerText !== 'Sport' ? document.querySelector('#sports-select').childNodes[1].innerText : ''
@@ -81,47 +81,56 @@ class Matches extends Component {
                         })
                     )}
                 />
-                <Table celled padded>
+                <Table celled striped>
 
 
-                    <Table.Body>
+                    <Table.Body className="matches">
+                        <Table.Header>
+                            <Table.Row>
+                                <Table.HeaderCell>
+                                    <Table.Cell >NAME</Table.Cell>
+                                    <Table.Cell >LOCATION</Table.Cell>
+                                    <Table.Cell >DATE</Table.Cell>
+                                    <Table.Cell >PLAYERS</Table.Cell>
+                                </Table.HeaderCell>
+                            </Table.Row>
+                        </Table.Header>
                         {
                             this.state.matches
-                            .filter(
-                                match => (
-                                    match.localization.city.toLowerCase().includes(this.state.filter.location.toLowerCase())
-                                ))
-                            
-                            .map(
-                                match => (
-                                    <Table.Row key={match.id}>
+                                .filter(
+                                    match => (
+                                        match.localization.city.toLowerCase().includes(this.state.filter.location.toLowerCase())
+                                    ))
 
-                                        <Table.Cell>
-                                            <Header as='h4' image>
-                                                <Header.Content>
-                                                    {match.hostid}
-                                                </Header.Content>
-                                            </Header>
-                                        </Table.Cell>
+                                .map(
+                                    match => (
+                                        <Table.Row key={match.id}>
 
-                                        <Table.Cell>{match.localization.city}</Table.Cell>
+                                            <Table.Cell>
+                                                <Table.Cell>{match.localization.city}
+                                                </Table.Cell>
 
+                                                <Table.Cell>{
+                                                    this.state.sports
+                                                        .filter(sport => match.sportID === sport.id)
+                                                        .map(sport => `${sport.name.charAt(0).toUpperCase() + sport.name.slice(1)}`)
+                                                }</Table.Cell>
 
+                                                <Table.Cell>
+                                                    {match.date.day}
+                                                </Table.Cell>
 
-                                        <Table.Cell>{
-                                            this.state.sports
-                                                .filter(sport => match.sportID === sport.id)
-                                                .map(sport => `${sport.name.charAt(0).toUpperCase() + sport.name.slice(1)}`)
-                                        }</Table.Cell>
+                                                <Table.Cell>
+                                                {match.playerIDs.map(
+                                                    player => (
+                                                        <Icon name="user" size="small"></Icon>
+                                                    ))}
+                                                </Table.Cell>
+                                            </Table.Cell>
 
-
-                                        <Table.Cell>
-                                            {match.date.day}
-                                        </Table.Cell>
-
-                                    </Table.Row>
-                                )
-                            )}
+                                        </Table.Row>
+                                    )
+                                )}
 
                     </Table.Body>
                 </Table>
