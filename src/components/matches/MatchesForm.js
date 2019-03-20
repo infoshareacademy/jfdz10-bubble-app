@@ -9,12 +9,12 @@ class MatchesForm extends Component {
 
         return (
             <Fragment>
-                <div onClick={this.props.toggleFilter} className="top-header">
-                    <Header as='h5' icon textAlign='center'>
-                        <Icon size="small" name='search' circular inverted color='blue'/>
+                <div  onClick={this.props.toggleFilter} className="top-header">
+                    <Header  as='h5' icon textAlign='center' >
+                        <Icon size="small" name='search' circular inverted />
                     </Header>
                 </div>
-            <Segment inverted style={(this.props.filterStatus) ? {display: "block"} : {display: "none"}} color='blue'>
+            <Segment inverted style={(this.props.filterStatus) ? {display: "block"} : {display: "none"}}>
                 <Form className="matches-search-form-visible" >
                     <Form.Group widths='equal'>
                         <Form.Field

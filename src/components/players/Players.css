@@ -1,5 +1,13 @@
-.favorite-player {
+
+@import url('https://fonts.googleapis.com/css?family=Quicksand');
+
+.players {
+    font-family: 'Quicksand';
+}
+
+.favorite-player, .favorite-player .ui.header {
     background-color: rgba(0, 192, 255);
+    color: white;
 }
 
 .player-row {
@@ -9,3 +17,4 @@
 .top-header {
     margin-top: 10px;
 }
+

@@ -1,0 +1,61 @@
+.dashboard {
+    display: flex;
+    justify-content: center;
+    height: 85vh;
+    width: 100vw;
+  }
+  
+  .dashboard-background {
+    background-image: url('../assets/dashboard-background.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 85vh;
+    width: 100vw;
+  }
+  
+  .general-container {
+    width: 70%;
+    height: 46%;
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .left-top-container {
+    width: 40%;
+    height: 40%;
+    margin: 5%;
+    background-image: url('../assets/symbolImages/messagesSymbol.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+  
+  .right-top-container {
+    width: 40%;
+    height: 40%;
+    margin: 5%;
+    background-image: url('../assets/symbolImages/nextMatchSymbol.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+  
+  .left-bottom-container {
+    width: 40%;
+    height: 40%;
+    margin: 5%;
+    background-image: url('../assets/symbolImages/friendsSymbol.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+  
+  .right-bottom-container {
+    width: 40%;
+    height: 40%;
+    margin: 5%;
+    background-image: url('../assets/symbolImages/rankSymbol.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+  }

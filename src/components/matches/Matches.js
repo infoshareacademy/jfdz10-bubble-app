@@ -19,8 +19,6 @@ const fetchSports = async () => {
 }
 
 
-
-
 class Matches extends Component {
 
     state = {

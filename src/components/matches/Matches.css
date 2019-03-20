@@ -23,12 +23,12 @@ font-weight: normal;
 }
 
 .ui.celled.table thead {
-    background-color: RGB(0, 173, 230);
-    
+    background-color: RGB(0, 192, 255);    
 }
 
 .ui.celled.table thead td {
     font-weight: bold;
+    color: white;
 }
 
 .ui.celled.table thead td:first-child {
@@ -37,4 +37,11 @@ font-weight: normal;
 
 .top-header {
     margin-top: 10px;
+    margin: 2px 0 0 0;
+}
+
+.table, .ui.inverted.blue.segment, .ui .celled .striped .table, 
+.ui.center.aligned.header, .ui.centered.header,.ui.icon.header .circular.icon 
+{
+    margin: 0 auto;
 }
