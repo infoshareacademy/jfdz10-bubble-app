@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Header, Table, Button, Icon } from 'semantic-ui-react'
 
 import PlayersForm from './PlayersForm'
+import Player from '../player/Player'
 
 import './Players.css'
 
@@ -47,6 +48,7 @@ class Players extends Component {
             sport: '',
         },
         filterVisible: false,
+        clickedPlayer: {}
     };
 
     componentDidMount() {
@@ -98,10 +100,36 @@ class Players extends Component {
         this.state.filterVisible ? this.setState({ filterVisible: false }) : this.setState({ filterVisible: true })
     }
 
+    saveClickedPlayerInfo = (player) => {
+        this.setState({
+            clickedPlayer: this.state.players.find(chosenPlayer => chosenPlayer.id === player.id)
+        })
+    }
+
+    handlePlayerClick = (e) => {
+        const player = document.querySelector('.player')
+        const playerList = document.querySelector('.players')
+
+        if (player.style.display === 'none') {
+            this.saveClickedPlayerInfo(e)
+            player.style.display = 'flex'
+            playerList.style.display = 'none'
+        } else {
+            player.style.display = 'none'
+            playerList.style.display = 'block'
+        }
+    }
 
     render() {
 
         return (
+        <div className="componentWrapper">
+            <Player 
+                togglePlayerView = {this.handlePlayerClick}
+                player = {this.state.clickedPlayer}
+                players= {this.state.players}
+                sports = {this.state.sports}
+            />
             <div className="players">
 
                 <PlayersForm
@@ -142,8 +170,8 @@ class Players extends Component {
 
                                         <Table.Cell>
                                             <Header as='h4' image>
-                                                <Header.Content>
-                                                    {player.name}
+                                                <Header.Content className='player-name' onClick={() => this.handlePlayerClick(player)} >
+                                                    {player.name.toUpperCase()}
                                                     <Header.Subheader>{player.eMail}</Header.Subheader>
                                                 </Header.Content>
                                             </Header>
@@ -174,6 +202,7 @@ class Players extends Component {
                     </Table.Body>
                 </Table>
             </div>
+        </div>
         )
     }
 }

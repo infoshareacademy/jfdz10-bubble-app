@@ -42,7 +42,7 @@ class Profile extends Component {
                     <header>
                         <ul className="ProfileHeader">
                             <li>Profile Details</li>
-                            <li><button>Edit</button></li>
+                            <li><button className='EditButton'>Edit</button></li>
                         </ul>    
                     </header>
                     <div>
@@ -76,7 +76,7 @@ class Profile extends Component {
                     <header>
                         <ul className="ProfileHeader">
                             <li>Favourite Sports</li>
-                            <li><button>Edit</button></li>
+                            <li><button className="EditButton">Edit</button></li>
                         </ul>
                     </header>
                     <ol className="FavouriteSportsList">
@@ -91,7 +91,7 @@ class Profile extends Component {
                     <header>
                         <ul className="ProfileHeader">
                             <li>Favourite Players</li>
-                            <li><button>Edit</button></li>
+                            <li><button className="EditButton">Edit</button></li>
                         </ul>
                     </header>
                     <ol className="FavouriteSportsList">
