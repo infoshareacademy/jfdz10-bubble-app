@@ -1,7 +1,11 @@
 .favorite-player {
-    background-color: rgba(0, 255, 255, 0.315);
+    background-color: rgba(0, 192, 255);
 }
 
 .player-row {
     text-align: center
+}
+
+.top-header {
+    margin-top: 10px;
 }
