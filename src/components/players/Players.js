@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Header, Table, Button, Icon } from 'semantic-ui-react'
 
 import PlayersForm from './PlayersForm'
+import Player from '../player/Player'
 
 import './Players.css'
 
@@ -102,6 +103,8 @@ class Players extends Component {
     render() {
 
         return (
+            <div className="componentWrapper">
+            <Player />
             <div className="players">
 
                 <PlayersForm
@@ -142,7 +145,13 @@ class Players extends Component {
 
                                         <Table.Cell>
                                             <Header as='h4' image>
-                                                <Header.Content>
+                                                <Header.Content onClick={() => {
+                                                    const playerCard = document.querySelector('.player')
+                                                    const playerList = document.querySelector('.players')
+
+                                                    playerList.style.display = 'none'
+                                                    playerCard.style.display = 'flex'
+                                                }}>
                                                     {player.name}
                                                     <Header.Subheader>{player.eMail}</Header.Subheader>
                                                 </Header.Content>
@@ -173,6 +182,7 @@ class Players extends Component {
 
                     </Table.Body>
                 </Table>
+            </div>
             </div>
         )
     }

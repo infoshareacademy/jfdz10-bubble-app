@@ -19,7 +19,7 @@ class App extends Component {
           <Route exact path="/addMatch" component={() => <h1>Here you can add a new match.</h1>} />
           <Route exact path="/matches" component={Matches} />
           <Route exact path = "/players" component={Players} />
-          <Route exact path = "/profile" component={Player} />
+          <Route exact path = "/profile" component={Profile} />
         </div>
       </div>
     );
