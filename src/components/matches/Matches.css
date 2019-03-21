@@ -7,10 +7,10 @@
 }
 
 .ui.celled.table td {
- border: none;
- width: 25vw;
- font-weight: normal;
- padding: 0em;
+    border: none;
+    width: 25vw;
+    font-weight: normal;
+    padding: 0em;
     padding-left: 0.2em;
 }
 
@@ -37,8 +37,7 @@ font-weight: normal;
 }
 
 .top-header {
-    margin-top: 10px;
-    margin: 2px 0 0 0;
+    margin: 10px 0 0 0;
 }
 
 .table, .ui.inverted.blue.segment, .ui .celled .striped .table, 
