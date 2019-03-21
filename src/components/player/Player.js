@@ -26,6 +26,7 @@ class Player extends Component {
             <div className='player' style={{display: 'none'}}>
                 {console.log(this.state.players)}
                 Hello
+                <button className='toggle-view-button' onClick={() => {this.props.togglePlayerView()}}>X</button>
             </div>
         )
     }

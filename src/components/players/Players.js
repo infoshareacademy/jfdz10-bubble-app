@@ -108,7 +108,7 @@ class Players extends Component {
             playerList.style.display = 'none'
         } else {
             player.style.display = 'none'
-            playerList.style.display = 'flex'
+            playerList.style.display = 'block'
         }
     }
 
@@ -116,7 +116,7 @@ class Players extends Component {
 
         return (
             <div className="componentWrapper">
-            <Player />
+            <Player togglePlayerView = {this.togglePlayerView}/>
             <div className="players">
 
                 <PlayersForm
