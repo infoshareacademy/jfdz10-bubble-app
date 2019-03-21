@@ -25,7 +25,6 @@ class Matches extends Component {
         matches: [],
         sports: [],
         filter: {
-            match: '',
             location: '',
             sport: '',
         },
@@ -43,13 +42,11 @@ class Matches extends Component {
 
 
     setNewFilter = () => {
-        const sport = document.querySelector('#sports-select').childNodes[1].innerText !== 'Sport' ? document.querySelector('#sports-select').childNodes[1].innerText : ''
-        const location = document.querySelector('#form-input-control-location').value
-        const match = document.querySelector('#form-input-control-match').value
-
+        const sport = document.querySelector('#matches-sports-select').childNodes[1].innerText !== 'Sport' ? document.querySelector('#matches-sports-select').childNodes[1].innerText : ''
+        const location = document.querySelector('#form-input-control-location-matches').value
+        
         this.setState({
             filter: {
-                match: match,
                 location: location,
                 sport: sport,
             }
@@ -99,7 +96,13 @@ class Matches extends Component {
                                     match => (
                                         match.localization.city.toLowerCase().includes(this.state.filter.location.toLowerCase())
                                     ))
-
+                                .filter(
+                                    match => (
+                                        this.state.sports
+                                            .filter(sport => match.sportID === sport.id)
+                                            .map(sport => sport.name)
+                                            .concat('')
+                                    ).includes(this.state.filter.sport))
                                 .map(
                                     match => (
                                         <Table.Row key={match.id}>
@@ -119,10 +122,10 @@ class Matches extends Component {
                                                 </Table.Cell>
 
                                                 <Table.Cell>
-                                                {match.playerIDs.map(
-                                                    player => (
-                                                        <Icon name="user" size="small"></Icon>
-                                                    ))}
+                                                    {match.playerIDs.map(
+                                                        player => (
+                                                            <Icon name="user" size="small"></Icon>
+                                                        ))}
                                                 </Table.Cell>
                                             </Table.Cell>
 

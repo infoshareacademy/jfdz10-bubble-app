@@ -19,18 +19,18 @@ class MatchesForm extends Component {
                     <Form.Group widths='equal'>
                         
                         <Form.Field
-                            id='form-input-control-location'
+                            id='form-input-control-location-matches'
                             control={Input}
                             placeholder='Location'
 
                         />
                         <Form.Field
-                            id='sports-select'
+                            id='matches-sports-select'
                             control={Select}
                             options={this.props.sports}
                             placeholder='Sport'
                             search
-                            searchInput={{ id: 'form-select-control-sports' }}
+                            searchInput={{ id: 'form-select-control-sports-matches' }}
 
                         />
                     </Form.Group>
