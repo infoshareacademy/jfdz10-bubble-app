@@ -48,6 +48,7 @@ class Players extends Component {
             sport: '',
         },
         filterVisible: false,
+        clickedPlayer: {}
     };
 
     componentDidMount() {
@@ -99,7 +100,7 @@ class Players extends Component {
         this.state.filterVisible ? this.setState({ filterVisible: false }) : this.setState({ filterVisible: true })
     }
 
-    togglePlayerView = () => {
+    handlePlayerClick = () => {
         const player = document.querySelector('.player')
         const playerList = document.querySelector('.players')
 
@@ -116,7 +117,10 @@ class Players extends Component {
 
         return (
             <div className="componentWrapper">
-            <Player togglePlayerView = {this.togglePlayerView}/>
+            <Player 
+                togglePlayerView = {this.handlePlayerClick}
+                players = {this.state.players}
+            />
             <div className="players">
 
                 <PlayersForm
@@ -157,7 +161,7 @@ class Players extends Component {
 
                                         <Table.Cell>
                                             <Header as='h4' image>
-                                                <Header.Content className='player-name' onClick={() => this.togglePlayerView()}>
+                                                <Header.Content className='player-name' onClick={() => this.handlePlayerClick()} >
                                                     {player.name.toUpperCase()}
                                                     <Header.Subheader>{player.eMail}</Header.Subheader>
                                                 </Header.Content>
