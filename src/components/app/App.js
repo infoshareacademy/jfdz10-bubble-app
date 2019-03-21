@@ -6,6 +6,7 @@ import Navigation from '../navigation/Navigation'
 import Players from '../players/Players'
 import Profile from '../profile/Profile'
 import Dashboard from '../dashboard/Dashboard'
+import Player from '../player/Player'
 
 class App extends Component {
   render() {
