@@ -100,11 +100,18 @@ class Players extends Component {
         this.state.filterVisible ? this.setState({ filterVisible: false }) : this.setState({ filterVisible: true })
     }
 
-    handlePlayerClick = () => {
+    saveClickedPlayerInfo = (player) => {
+        this.setState({
+            clickedPlayer: this.state.players.find(chosenPlayer => chosenPlayer.id === player.id)
+        })
+    }
+
+    handlePlayerClick = (e) => {
         const player = document.querySelector('.player')
         const playerList = document.querySelector('.players')
 
         if (player.style.display === 'none') {
+            this.saveClickedPlayerInfo(e)
             player.style.display = 'flex'
             playerList.style.display = 'none'
         } else {
@@ -112,7 +119,6 @@ class Players extends Component {
             playerList.style.display = 'block'
         }
     }
-
     render() {
 
         return (
@@ -161,7 +167,7 @@ class Players extends Component {
 
                                         <Table.Cell>
                                             <Header as='h4' image>
-                                                <Header.Content className='player-name' onClick={() => this.handlePlayerClick()} >
+                                                <Header.Content className='player-name' onClick={() => this.handlePlayerClick(player)} >
                                                     {player.name.toUpperCase()}
                                                     <Header.Subheader>{player.eMail}</Header.Subheader>
                                                 </Header.Content>
