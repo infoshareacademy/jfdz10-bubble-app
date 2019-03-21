@@ -1,0 +1,12 @@
+@import url('https://fonts.googleapis.com/css?family=Quicksand');
+
+.add-a-match-header {
+    font-family: 'Quicksand';
+    text-align: center;
+
+}
+
+.add-a-match-form {
+    background-color: RGB(0, 173, 230);
+    padding: 20px;
+}
