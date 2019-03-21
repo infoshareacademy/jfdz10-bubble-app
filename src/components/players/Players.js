@@ -102,7 +102,7 @@ class Players extends Component {
     render() {
 
         return (
-            <div>
+            <div className="players">
 
                 <PlayersForm
                     toggleFilter={this.toggleFilter}
@@ -163,7 +163,7 @@ class Players extends Component {
                                         <Table.Cell>
                                             <Button icon
                                                 onClick={() => this.saveUserFavPlayersInLocStorage(this, player.id)}>
-                                                <Icon name='favorite' />  Add to Favorites
+                                                <Icon name='favorite' color={this.compareFavPlayers().includes(player.id) ? "yellow" : ""}  />  {this.compareFavPlayers().includes(player.id) ? "Remove From" : "Add To"} Favorites
                                     </Button>
                                         </Table.Cell>
 

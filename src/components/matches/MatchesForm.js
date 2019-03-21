@@ -2,27 +2,22 @@ import React, { Component, Fragment }  from "react";
 
 import { Form, Input, Button, Select, Segment, Header, Icon } from 'semantic-ui-react'
 
-class PlayersForm extends Component {
+class MatchesForm extends Component {
 
         
     render() {
 
         return (
             <Fragment>
-                <div onClick={this.props.toggleFilter} className="top-header">
-                    <Header as='h5' icon textAlign='center'>
-                        <Icon size="small" name='search' circular inverted color='#B03060'/>
+                <div  onClick={this.props.toggleFilter} className="top-header">
+                    <Header  as='h5' icon textAlign='center' >
+                        <Icon size="small" name='search' circular inverted />
                     </Header>
                 </div>
             <Segment inverted style={(this.props.filterStatus) ? {display: "block"} : {display: "none"}}>
-                <Form className="players-search-form-visible" >
+                <Form className="matches-search-form-visible" >
                     <Form.Group widths='equal'>
-                        <Form.Field
-                            id='form-input-control-player'
-                            control={Input}
-                            placeholder='Player'
-
-                        />
+                        
                         <Form.Field
                             id='form-input-control-location'
                             control={Input}
@@ -41,7 +36,7 @@ class PlayersForm extends Component {
                     </Form.Group>
 
                     <Form.Field fluid
-                        onClick={this.props.searchForPlayer}
+                        onClick={this.props.searchForMatch}
 
                         id='form-button-control-public'
                         control={Button}
@@ -55,4 +50,4 @@ class PlayersForm extends Component {
     }
 }
 
-export default PlayersForm
+export default MatchesForm
