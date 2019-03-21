@@ -15,7 +15,6 @@ class Player extends Component {
                     <header>
                         <ul className="ProfileHeader">
                             <li>Profile Details</li>
-                            <li><button className='EditButton'>Edit</button></li>
                         </ul>    
                     </header>
                     <div>
@@ -27,19 +26,19 @@ class Player extends Component {
                                 </dl>
                                 <dl className='ProfileDetailsListItem'>
                                     <dt className="ItemDescription">Username:</dt>
-                                    <dd className="Item">{this.state.user.name}</dd>
+                                    <dd className="Item">{this.props.player.name}</dd>
                                 </dl>
                                 <dl className='ProfileDetailsListItem'>
                                     <dt className="ItemDescription">Email:</dt>
-                                    <dd className="Item">{this.state.user.eMail}</dd>
+                                    <dd className="Item">{this.props.player.eMail}</dd>
                                 </dl>
                                 <dl className='ProfileDetailsListItem'>
                                     <dt className="ItemDescription">Joined:</dt>
-                                    <dd className="Item">{this.state.user.dateOfJoining}</dd>
+                                    <dd className="Item">{this.props.player.dateOfJoining}</dd>
                                 </dl>
                                 <dl className='ProfileDetailsListItem'>
                                     <dt className="ItemDescription">Localization:</dt>
-                                    <dd className="Item">{this.state.user.localization}</dd>
+                                    <dd className="Item">{this.props.player.localization}</dd>
                                 </dl>
                             </li>
                         </ul>
@@ -49,12 +48,11 @@ class Player extends Component {
                     <header>
                         <ul className="ProfileHeader">
                             <li>Favourite Sports</li>
-                            <li><button className="EditButton">Edit</button></li>
                         </ul>
                     </header>
                     <ol className="FavouriteSportsList">
-                        {this.state.sports
-                            .filter(sport => sport.id === this.state.user.favouriteSportsIDs.find(id => id === sport.id))
+                        {this.props.sports
+                            .filter(sport => sport.id === this.props.player.favouriteSportsIDs.find(id => id === sport.id))
                             .map(sport => (
                                 <li className="FavouriteSportsListItem" key={sport.id}>{sport.name.charAt(0).toUpperCase() + sport.name.slice(1)}</li>
                             ))}
@@ -69,7 +67,7 @@ class Player extends Component {
                     </header>
                     <ol className="FavouriteSportsList">
                         {this.props.players
-                            .filter(player => player.id === this.state.user.favouritePlayersIDs.find(id => id === player.id))
+                            .filter(player => player.id === this.props.player.favouritePlayersIDs.find(id => id === player.id))
                             .map(player => (
                                 <li className="FavouriteSportsListItem" key={player.id}>{player.name}</li>
                             ))}
