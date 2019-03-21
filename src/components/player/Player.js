@@ -36,7 +36,7 @@ class Player extends Component {
                                     <dd className="Item">{this.props.player.dateOfJoining}</dd>
                                 </dl>
                                 <dl className='ProfileDetailsListItem'>
-                                    <dt className="ItemDescription">Localization:</dt>
+                                    <dt className="ItemDescription">Location:</dt>
                                     <dd className="Item">{this.props.player.localization}</dd>
                                 </dl>
                             </li>
