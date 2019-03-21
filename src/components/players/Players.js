@@ -119,13 +119,16 @@ class Players extends Component {
             playerList.style.display = 'block'
         }
     }
+
     render() {
 
         return (
             <div className="componentWrapper">
             <Player 
                 togglePlayerView = {this.handlePlayerClick}
-                players = {this.state.players}
+                player = {this.state.clickedPlayer}
+                players= {this.state.players}
+                sports = {this.state.sports}
             />
             <div className="players">
 
