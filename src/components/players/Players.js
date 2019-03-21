@@ -99,6 +99,18 @@ class Players extends Component {
         this.state.filterVisible ? this.setState({ filterVisible: false }) : this.setState({ filterVisible: true })
     }
 
+    togglePlayerView = () => {
+        const player = document.querySelector('.player')
+        const playerList = document.querySelector('.players')
+
+        if (player.style.display === 'none') {
+            player.style.display = 'flex'
+            playerList.style.display = 'none'
+        } else {
+            player.style.display = 'none'
+            playerList.style.display = 'flex'
+        }
+    }
 
     render() {
 
@@ -145,14 +157,8 @@ class Players extends Component {
 
                                         <Table.Cell>
                                             <Header as='h4' image>
-                                                <Header.Content onClick={() => {
-                                                    const playerCard = document.querySelector('.player')
-                                                    const playerList = document.querySelector('.players')
-
-                                                    playerList.style.display = 'none'
-                                                    playerCard.style.display = 'flex'
-                                                }}>
-                                                    {player.name}
+                                                <Header.Content className='player-name' onClick={() => this.togglePlayerView()}>
+                                                    {player.name.toUpperCase()}
                                                     <Header.Subheader>{player.eMail}</Header.Subheader>
                                                 </Header.Content>
                                             </Header>
