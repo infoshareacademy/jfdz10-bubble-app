@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import Matches from '../matches/Matches'
 import { Route } from 'react-router-dom'
 
+import Matches from '../matches/Matches'
 import Navigation from '../navigation/Navigation'
 import Players from '../players/Players'
 import Profile from '../profile/Profile'
