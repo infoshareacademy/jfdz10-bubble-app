@@ -123,7 +123,7 @@ class Players extends Component {
     render() {
 
         return (
-            <div className="componentWrapper">
+        <div className="componentWrapper">
             <Player 
                 togglePlayerView = {this.handlePlayerClick}
                 player = {this.state.clickedPlayer}
@@ -202,7 +202,7 @@ class Players extends Component {
                     </Table.Body>
                 </Table>
             </div>
-            </div>
+        </div>
         )
     }
 }

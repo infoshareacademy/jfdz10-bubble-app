@@ -1,5 +1,5 @@
 .player {
-    display: none
+    display: none;
 }
 
 .ProfileHeader {
@@ -17,10 +17,16 @@
     list-style: none;
     border-bottom: 1px solid rgb(0, 192, 255);
 }
-.Avatar {
+.AvatarContainer {
     width: 200px;
     height: 200px;
-    cursor: pointer;
+}
+
+.Avatar {
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-size: cover
 }
 .ItemDescription {
     color: grey;
