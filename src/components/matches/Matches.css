@@ -1,0 +1,47 @@
+
+@import url('https://fonts.googleapis.com/css?family=Quicksand');
+
+.matches {
+    font-family: 'Quicksand';
+    transition: all 1s;
+}
+
+.ui.celled.table td {
+    border: none;
+    width: 25vw;
+    font-weight: normal;
+    padding: 0em;
+    padding-left: 0.2em;
+}
+
+.ui.celled.table td:first-child {    
+font-weight: normal;
+}
+
+.ui.celled.table td:last-child {
+    width: 20vw;
+    
+}
+
+.ui.celled.table thead {
+    background-color: RGB(0, 192, 255);    
+}
+
+.ui.celled.table thead td {
+    font-weight: bold;
+    color: white;
+}
+
+.ui.celled.table thead td:first-child {
+    font-weight: bold;
+}
+
+.top-header {
+    margin: 10px 0 0 0;
+}
+
+.table, .ui.inverted.blue.segment, .ui .celled .striped .table, 
+.ui.center.aligned.header, .ui.centered.header,.ui.icon.header .circular.icon 
+{
+    margin: 0 auto;
+}
