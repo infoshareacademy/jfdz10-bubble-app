@@ -184,7 +184,7 @@ class AddMatch extends Component {
                         {
                             this.state.formSuccess
                             &&
-                            <div class="success-message"><p>semantic jest uposledzony</p></div>
+                            <div class="success-message"><p>The match has been registered!</p></div>
                         }
 
                 </Form>
