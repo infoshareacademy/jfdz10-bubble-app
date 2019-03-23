@@ -3,33 +3,39 @@ import { Grid, Segment } from "semantic-ui-react";
 import { List } from "semantic-ui-react";
 
 class SportDetails extends Component {
-
   //AddPlayerToEvent = () => { }
+  this.props.match.params.id  
 
   render() {
-
     return (
-      <div className='sport-details' style={{ display: 'flex' }}>
-
+      <div className="sport-details" style={{ display: "flex" }}>
         <Grid stackable columns={2}>
           <Grid.Column>
-            <button className='toggle-view-button' onClick={() => { this.props.toggleMatchView() }}>X</button>
+            <button
+              className="toggle-view-button"
+              onClick={() => {
+                this.props.toggleMatchView();
+              }}
+            >
+              X
+            </button>
             <Segment>
               <List>
                 <List.Item>
-                  <List.Header>Sport</List.Header>{}
+                  <List.Header>Sport</List.Header>
+                  {}
                 </List.Item>
                 <List.Item>
                   <List.Header>Adress</List.Header>
-                  {<li >{this.props.matches.localization}</li>}
+                  {<li>{this.props.matches.localization}</li>}
                 </List.Item>
                 <List.Item>
                   <List.Header>Date of event</List.Header>
-                  {<li >{this.props.date}</li>}
+                  {<li>{this.props.date}</li>}
                 </List.Item>
                 <List.Item>
                   <List.Header>Time of event</List.Header>
-                  {<li >{this.props.date}</li>}
+                  {<li>{this.props.date}</li>}
                 </List.Item>
               </List>
             </Segment>
@@ -44,7 +50,11 @@ class SportDetails extends Component {
                 <List.Item>
                   <List.Header>Contestants:</List.Header>
                   <ul>
-                    {<li key={this.props.players.name}>{this.props.players.name}</li>}
+                    {
+                      <li key={this.props.players.name}>
+                        {this.props.players.name}
+                      </li>
+                    }
                   </ul>
                 </List.Item>
               </List>
@@ -53,7 +63,11 @@ class SportDetails extends Component {
           <Grid.Column>
             <Segment>
               <List.Header>Info:</List.Header>
-              {<p key={this.props.matches.comment}>{this.props.matches.comment}</p>}
+              {
+                <p key={this.props.matches.comment}>
+                  {this.props.matches.comment}
+                </p>
+              }
             </Segment>
           </Grid.Column>
           <Grid.Column>
