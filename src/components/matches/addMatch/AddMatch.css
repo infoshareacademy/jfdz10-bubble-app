@@ -10,3 +10,8 @@
     background-color: RGB(0, 173, 230);
     padding: 20px;
 }
+
+.success-message {
+    background: rgb(157, 226, 157);
+    border: 2px solid green;
+}

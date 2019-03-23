@@ -95,10 +95,9 @@ class AddMatch extends Component {
 
     }
 
-    "12-03-2019"
 
     render() {
-
+        console.log(this.state.formSuccess)
         return (
             <Fragment >
                 <div>
@@ -121,16 +120,7 @@ class AddMatch extends Component {
                         null
                     }
 
-                    {/* {this.state.formSuccess
-                        ?
-                        <Message
-                            success
-                            header="Match registered!"
-                            content="Great! You have successfully registered a match! Sit down, relax, and wait for others to join your game."
-                        />
-                        :
-                        null
-                    } */}
+                    
 
 
                     <Form.Group widths='equal'>
@@ -186,10 +176,17 @@ class AddMatch extends Component {
                             || !this.state.sport
                             || !this.state.date
                             || !this.state.time
+                            || this.state.formSuccess
                         }
                         control={Button}>Add!</Form.Field>
 
-                    
+
+                        {
+                            this.state.formSuccess
+                            &&
+                            <div class="success-message"><p>semantic jest uposledzony</p></div>
+                        }
+
                 </Form>
 
             </Fragment>
