@@ -77,13 +77,13 @@ class Matches extends Component {
 
     saveClickedMatchInfo = (match) => {
         this.setState({
-            clickedMatch: this.state.matches.find(chosenMatch => chosenMatch.date === match.date)
+            clickedMatch: this.state.matches.find(chosenMatch => chosenMatch.date.day === match.date.day)
         })
     }
 
     handleMatchClick = (e) => {
         const match = document.querySelector('.sport-details')
-        const matchList = document.querySelector('.matches')
+        const matchList = document.querySelector('.match-row')
 
         if (match.style.display === 'none') {
             this.saveClickedMatchInfo(e)
@@ -150,7 +150,7 @@ class Matches extends Component {
                                         ).includes(this.state.filter.sport))
                                     .map(
                                         match => (
-                                            <Table.Row key={match.id}>
+                                            <Table.Row className='match-row' key={match.id}>
 
                                                 <Table.Cell>
                                                     <Table.Cell>{match.localization.city}

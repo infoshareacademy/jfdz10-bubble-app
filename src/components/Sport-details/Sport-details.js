@@ -9,9 +9,11 @@ class SportDetails extends Component {
   render() {
 
     return (
-      <div className='sport-details' style={{ display: 'none' }}>
+      <div className='sport-details' style={{ display: 'flex' }}>
+
         <Grid stackable columns={2}>
           <Grid.Column>
+            <button className='toggle-view-button' onClick={() => { this.props.toggleMatchView() }}>X</button>
             <Segment>
               <List>
                 <List.Item>
@@ -19,15 +21,15 @@ class SportDetails extends Component {
                 </List.Item>
                 <List.Item>
                   <List.Header>Adress</List.Header>
-                  {this.props.clickedMatch.map((match) => <li key={match.localization.street}>{this.props.localization.city}</li>)}
+                  {<li >{this.props.matches.localization}</li>}
                 </List.Item>
                 <List.Item>
                   <List.Header>Date of event</List.Header>
-                  {this.props.matches.map((match) => <li key={match.date.day}>{this.props.date.day}</li>)}
+                  {<li >{this.props.date}</li>}
                 </List.Item>
                 <List.Item>
                   <List.Header>Time of event</List.Header>
-                  {this.props.matches.map((match) => <li key={match.date.hour}>{this.props.date.hour}</li>)}
+                  {<li >{this.props.date}</li>}
                 </List.Item>
               </List>
             </Segment>
@@ -42,7 +44,7 @@ class SportDetails extends Component {
                 <List.Item>
                   <List.Header>Contestants:</List.Header>
                   <ul>
-                    {this.state.players.map((player) => <li key={player.name}>{player.name}</li>)}
+                    {<li key={this.props.players.name}>{this.props.players.name}</li>}
                   </ul>
                 </List.Item>
               </List>
@@ -51,7 +53,7 @@ class SportDetails extends Component {
           <Grid.Column>
             <Segment>
               <List.Header>Info:</List.Header>
-              {this.state.matches.map((match) => <p key={match.comment}>{match.comment}</p>)}
+              {<p key={this.props.matches.comment}>{this.props.matches.comment}</p>}
             </Segment>
           </Grid.Column>
           <Grid.Column>

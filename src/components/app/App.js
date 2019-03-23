@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { Route } from 'react-router-dom'
-import SportDetails from '../Sport-details/Sport-details';
 import Navigation from '../navigation/Navigation'
 import Players from '../players/Players'
 import Profile from '../profile/Profile'
@@ -13,7 +12,6 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <SportDetails />
         <Navigation />
         <div className="ShownComponent">
           <Route exact path="/" component={Dashboard}></Route>
