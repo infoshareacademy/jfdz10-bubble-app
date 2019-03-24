@@ -7,6 +7,7 @@ class Navigation extends Component {
         return (
         <div className="Navigation">
             <ul className="ListContainer">
+                <li className="ListItem"><NavLink to="/">Home</NavLink></li>
                 <li className="ListItem"><NavLink to="/addMatch">AddMatch</NavLink></li>
                 <li className="ListItem"><NavLink to="/players">Players</NavLink></li>
                 <li className="ListItem"><NavLink to="/matches">Matches</NavLink></li>
