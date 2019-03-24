@@ -101,7 +101,7 @@ class AddMatch extends Component {
         return (
             <Fragment >
                 <div>
-                    <h1 className="add-a-match-header">If you would like to set up a match just fill out the below form!</h1>
+                    <h3 className="add-a-match-header">If you would like to set up a match just fill out the below form!</h3>
                 </div>
 
                 <Form
