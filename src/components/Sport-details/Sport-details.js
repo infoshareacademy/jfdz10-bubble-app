@@ -5,15 +5,18 @@ import { List } from "semantic-ui-react";
 class SportDetails extends Component {
 
   render() {
-
     return (
-      <div className='sport-details' style={{ display: 'none' }}>
-        <div>
-
-        </div>
+      <div className="sport-details" style={{ display: "flex" }}>
         <Grid stackable columns={2}>
           <Grid.Column>
-            <button className='toggle-view-button' onClick={() => { this.props.toggleMatchView() }}>X</button>
+            <button
+              className="toggle-view-button"
+              onClick={() => {
+                this.props.toggleMatchView();
+              }}
+            >
+              X
+            </button>
             <Segment>
               <List>
                 <List.Item>
