@@ -31,7 +31,7 @@ class SportDetails extends Component {
                   )} */}
                 </List.Item>
                 <List.Item>
-                  <List.Header>Adress</List.Header>
+                  <List.Header>Address</List.Header>
                   <li>
                     {this.props.match.localization
                       ? this.props.match.localization.city
