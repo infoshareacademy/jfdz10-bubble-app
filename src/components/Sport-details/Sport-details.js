@@ -4,32 +4,42 @@ import { List } from "semantic-ui-react";
 
 class SportDetails extends Component {
 
-  //AddPlayerToEvent = () => { }
-
   render() {
 
     return (
-      <div className='sport-details' style={{ display: 'flex' }}>
+      <div className='sport-details' style={{ display: 'none' }}>
+        <div>
 
+        </div>
         <Grid stackable columns={2}>
           <Grid.Column>
             <button className='toggle-view-button' onClick={() => { this.props.toggleMatchView() }}>X</button>
             <Segment>
               <List>
                 <List.Item>
-                  <List.Header>Sport</List.Header>{}
+                  <List.Header>Sport</List.Header>
+                  {/* {
+                    this.props.matches
+                      .filter(
+                        match => (
+                          this.props.sports
+                            .filter(sport => match.sportID === sport.id)
+                            .map(sport => sport.name)
+                            .concat(''))
+                          .includes(this.props.filter.sport))
+                  } */}
                 </List.Item>
                 <List.Item>
                   <List.Header>Adress</List.Header>
-                  {<li >{this.props.matches.localization}</li>}
+                  <li>{this.props.matches.localization ? this.props.matches.localization.city : null}</li>
                 </List.Item>
                 <List.Item>
                   <List.Header>Date of event</List.Header>
-                  {<li >{this.props.date}</li>}
+                  <li>{this.props.matches.date ? this.props.matches.date.day : null}</li>
                 </List.Item>
                 <List.Item>
                   <List.Header>Time of event</List.Header>
-                  {<li >{this.props.date}</li>}
+                  <li>{this.props.matches.date ? this.props.matches.date.hour : null}</li>
                 </List.Item>
               </List>
             </Segment>
@@ -44,7 +54,7 @@ class SportDetails extends Component {
                 <List.Item>
                   <List.Header>Contestants:</List.Header>
                   <ul>
-                    {<li key={this.props.players.name}>{this.props.players.name}</li>}
+                    <li key={this.props.matches.playerIDs}>{this.props.matches.playerIDs}</li>
                   </ul>
                 </List.Item>
               </List>
@@ -52,8 +62,8 @@ class SportDetails extends Component {
           </Grid.Column>
           <Grid.Column>
             <Segment>
-              <List.Header>Info:</List.Header>
-              {<p key={this.props.matches.comment}>{this.props.matches.comment}</p>}
+              <List.Header>Host comment:</List.Header>
+              <p key={this.props.matches.comment}>{this.props.matches.comment}</p>
             </Segment>
           </Grid.Column>
           <Grid.Column>
