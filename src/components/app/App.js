@@ -6,7 +6,7 @@ import Profile from "../profile/Profile";
 import Dashboard from "../dashboard/Dashboard";
 import Matches from "../matches/Matches";
 import AddMatch from "../matches/addMatch/AddMatch";
-
+import SportDetails from "../Sport-details/Sport-details";
 class App extends Component {
   render() {
     return (

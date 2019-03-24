@@ -3,10 +3,14 @@ import { Grid, Segment } from "semantic-ui-react";
 import { List } from "semantic-ui-react";
 
 class SportDetails extends Component {
-
+  state = {
+    matches: this.props.matches,
+    sports: this.props.sports,
+    match: this.props.match
+  };
   render() {
     return (
-      <div className="sport-details" style={{ display: "flex" }}>
+      <div className="sport-details" style={{ display: "none" }}>
         <Grid stackable columns={2}>
           <Grid.Column>
             <button
@@ -21,28 +25,33 @@ class SportDetails extends Component {
               <List>
                 <List.Item>
                   <List.Header>Sport</List.Header>
-                  {/* {
-                    this.props.matches
-                      .filter(
-                        match => (
-                          this.props.sports
-                            .filter(sport => match.sportID === sport.id)
-                            .map(sport => sport.name)
-                            .concat(''))
-                          .includes(this.props.filter.sport))
-                  } */}
+                  {/* {this.props.matches.filter(match =>
+                    this.props.sports
+                      .filter(sport => match.sportID === sport.id)
+                      .map(sport => sport.name)
+                      .concat("")
+                      .includes(this.props.filter.sport)
+                  )} */}
                 </List.Item>
                 <List.Item>
                   <List.Header>Adress</List.Header>
-                  <li>{this.props.matches.localization ? this.props.matches.localization.city : null}</li>
+                  <li>
+                    {this.props.match.localization
+                      ? this.props.match.localization.city
+                      : null}
+                  </li>
                 </List.Item>
                 <List.Item>
                   <List.Header>Date of event</List.Header>
-                  <li>{this.props.matches.date ? this.props.matches.date.day : null}</li>
+                  <li>
+                    {this.props.match.date ? this.props.match.date.day : null}
+                  </li>
                 </List.Item>
                 <List.Item>
                   <List.Header>Time of event</List.Header>
-                  <li>{this.props.matches.date ? this.props.matches.date.hour : null}</li>
+                  <li>
+                    {this.props.match.date ? this.props.match.date.hour : null}
+                  </li>
                 </List.Item>
               </List>
             </Segment>
@@ -57,7 +66,9 @@ class SportDetails extends Component {
                 <List.Item>
                   <List.Header>Contestants:</List.Header>
                   <ul>
-                    <li key={this.props.matches.playerIDs}>{this.props.matches.playerIDs}</li>
+                    <li key={this.props.matches.playerIDs}>
+                      {this.props.matches.playerIDs}
+                    </li>
                   </ul>
                 </List.Item>
               </List>
@@ -66,7 +77,7 @@ class SportDetails extends Component {
           <Grid.Column>
             <Segment>
               <List.Header>Host comment:</List.Header>
-              <p key={this.props.matches.comment}>{this.props.matches.comment}</p>
+              <p key={this.props.match.comment}>{this.props.match.comment}</p>
             </Segment>
           </Grid.Column>
           <Grid.Column>
