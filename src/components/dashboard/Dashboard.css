@@ -29,8 +29,9 @@
     height: 40%;
     margin: 5%;
     background-image: url('../assets/symbolImages/messagesSymbol.png');
-    background-size: cover;
+    background-size: contain;
     background-repeat: no-repeat;
+    background-position: center;
   }
   
   .right-top-container {
@@ -38,8 +39,9 @@
     height: 40%;
     margin: 5%;
     background-image: url('../assets/symbolImages/nextMatchSymbol.png');
-    background-size: cover;
+    background-size: contain;
     background-repeat: no-repeat;
+    background-position: center;
   }
   
   .left-bottom-container {
@@ -47,8 +49,9 @@
     height: 40%;
     margin: 5%;
     background-image: url('../assets/symbolImages/friendsSymbol.png');
-    background-size: cover;
+    background-size: contain;
     background-repeat: no-repeat;
+    background-position: center;
   }
   
   .right-bottom-container {
@@ -56,6 +59,7 @@
     height: 40%;
     margin: 5%;
     background-image: url('../assets/symbolImages/rankSymbol.png');
-    background-size: cover;
+    background-size: contain;
     background-repeat: no-repeat;
+    background-position: center;
   }
