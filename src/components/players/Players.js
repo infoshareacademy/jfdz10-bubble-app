@@ -45,7 +45,7 @@ class Players extends Component {
         filter: {
             player: '',
             location: '',
-            sport: '',
+            sports: [],
         },
         filterVisible: false,
         clickedPlayer: {}
@@ -81,16 +81,13 @@ class Players extends Component {
         return favPlayersNoDups;
     }
 
-    setNewFilter = () => {
-        const sport = document.querySelector('#sports-select').childNodes[1].innerText !== 'Sport' ? document.querySelector('#sports-select').childNodes[1].innerText : ''
-        const location = document.querySelector('#form-input-control-location').value
-        const player = document.querySelector('#form-input-control-player').value
-
+    setNewFilter = (playerReceived, locationReceived, sportReceived) => {
+        
         this.setState({
-            filter: {
-                player: player,
-                location: location,
-                sport: sport,
+            filter: {   
+                player: playerReceived,
+                location: locationReceived,
+                sports: sportReceived,
             }
         })
         this.toggleFilter()
@@ -120,6 +117,17 @@ class Players extends Component {
         }
     }
 
+
+    // filterSports = () => {
+    //     return .filter(
+    //         player => (
+    //             this.state.sports
+    //                 .filter(sport => player.favouriteSportsIDs.includes(sport.id))
+    //                 .map(sport => sport.name)                                    
+    //         ).some(sport => (this.state.filter.sports).includes(sport))  || this.state.filter.sports[0] === undefined)
+    // }
+
+
     render() {
 
         return (
@@ -140,7 +148,7 @@ class Players extends Component {
                         sport => ({
                             key: sport.id,
                             text: sport.name,
-                            value: sport.name,
+                            value: sport.id,
                         })
                     )}
                 />
@@ -160,10 +168,8 @@ class Players extends Component {
                             .filter(
                                 player => (
                                     this.state.sports
-                                        .filter(sport => player.favouriteSportsIDs.includes(sport.id))
-                                        .map(sport => sport.name)
-                                        .concat('')
-                                ).includes(this.state.filter.sport))
+                                        .filter(sport => player.favouriteSportsIDs.includes(sport.id))                               
+                                ).some(sport => (this.state.filter.sports).includes(sport.id))  || this.state.filter.sports[0] === undefined)
                             .map(
                                 player => (
                                     <Table.Row key={player.id} className={this.compareFavPlayers().includes(player.id) ? "favorite-player player-row" : "player-row"}>
@@ -191,7 +197,7 @@ class Players extends Component {
                                         <Table.Cell>
                                             <Button icon
                                                 onClick={() => this.saveUserFavPlayersInLocStorage(this, player.id)}>
-                                                <Icon name='favorite' color={this.compareFavPlayers().includes(player.id) ? "yellow" : ""}  />  {this.compareFavPlayers().includes(player.id) ? "Remove From" : "Add To"} Favorites
+                                                <Icon name='favorite' color={this.compareFavPlayers().includes(player.id) ? "yellow" : "grey"}  />  {this.compareFavPlayers().includes(player.id) ? "Remove From" : "Add To"} Favorites
                                     </Button>
                                         </Table.Cell>
 

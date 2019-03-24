@@ -27,6 +27,7 @@ class MatchesForm extends Component {
 
                             />
                             <Form.Field
+                                multiple selection
                                 id='matches-sports-select'
                                 control={Select}
                                 options={this.props.sports}
