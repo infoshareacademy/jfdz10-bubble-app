@@ -8,13 +8,19 @@
     align-items: center;
 }
 
+.ListItemImage {
+    width: 0.8em;
+    height: 0.8em;
+    
+}
 .ListItem {
     text-align: center;
     width: 20%;
-    padding-top: 25px;
-    padding-bottom: 25px;
+    padding-top: 45px;
+    padding-bottom: 5px;
     margin-bottom:2px;
-    border-right: 1px solid white
+    border-right: 1px solid white;
+    font-size: 0.9em
 }
 
 .ListItem a {
