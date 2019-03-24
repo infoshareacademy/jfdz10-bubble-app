@@ -3,11 +3,6 @@ import { Grid, Segment } from "semantic-ui-react";
 import { List } from "semantic-ui-react";
 
 class SportDetails extends Component {
-  state = {
-    matches: this.props.matches,
-    sports: this.props.sports,
-    match: this.props.match
-  };
   render() {
     return (
       <div className="sport-details" style={{ display: "none" }}>
@@ -25,6 +20,8 @@ class SportDetails extends Component {
               <List>
                 <List.Item>
                   <List.Header>Sport</List.Header>
+                  {/* {this.props.match}
+                  {console.log(this.props.match)} */}
                   {/* {this.props.matches.filter(match =>
                     this.props.sports
                       .filter(sport => match.sportID === sport.id)
