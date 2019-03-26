@@ -7,10 +7,26 @@ class Navigation extends Component {
         return (
         <div className="Navigation">
             <ul className="ListContainer">
-                <li className="ListItem"><NavLink to="/addMatch">AddMatch</NavLink></li>
-                <li className="ListItem"><NavLink to="/players">Players</NavLink></li>
-                <li className="ListItem"><NavLink to="/matches">Matches</NavLink></li>
-                <li className="ListItem"><NavLink to="/profile">Profile</NavLink></li>
+                <li className="ListItem"><NavLink to="/">
+                    <image className='NavImage'></image>
+                    <label className='NavLabel'>Home</label>
+                </NavLink></li>
+                <li className="ListItem"><NavLink to="/addMatch">
+                    <image className='NavImage'></image>
+                    <label className='NavLabel'>AddMatch</label>
+                </NavLink></li>
+                <li className="ListItem"><NavLink to="/players">
+                    <image className='NavImage'></image>
+                    <label className='NavLabel'>Players</label>
+                </NavLink></li>
+                <li className="ListItem"><NavLink to="/matches">
+                    <image className='NavImage'></image>
+                    <label className='NavLabel'>Matches</label>
+                </NavLink></li>
+                <li className="ListItem"><NavLink to="/profile">
+                    <image className='NavImage'></image>
+                    <label className='NavLabel'>Profile</label>
+                </NavLink></li>
             </ul>
         </div>
         )

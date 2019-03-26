@@ -9,15 +9,32 @@
 }
 
 .ListItem {
+    display: flex;
     text-align: center;
-    width: 25%;
-    padding-top: 25px;
-    padding-bottom: 25px;
-    margin-bottom:2px;
-    border-right: 1px solid white
+    width: 20%;
+    height: 60px;
+    border-right: 1px solid white;
+    justify-content: center;
+    align-content: space-between;
+    padding-top: 5px;
+}
+
+.NavImage {
+    display: block;
+    margin: 0 auto;
+    width: 60%;
+    height: 60%;
+    background-color: red;
+    /* background-image: url("https://image-cdn.hypb.st/https%3A%2F%2Fhypebeast.com%2Fimage%2F2019%2F03%2Fcristiano-ronaldo-champions-league-celebration-charge-ban-1.jpg?q=90&w=1400&cbr=1&fit=max"); */
+}
+
+.NavLabel {
+    width: 100%;
+    color: white;
 }
 
 .ListItem a {
+    width: 100%;
     cursor: pointer;
 }
 
@@ -26,9 +43,3 @@
 
 }
 
-.ListItem :first-child{
-    color: white;
-    padding: 10px;
-    padding-top: 20px;
-    padding-bottom: 20px
-}
