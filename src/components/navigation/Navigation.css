@@ -6,6 +6,7 @@
     margin: 0;
     padding: 0;
     align-items: center;
+    border-bottom: 3px solid #00ADE6
 }
 
 .ListItem {
@@ -20,6 +21,7 @@
 }
 
 .NavImage {
+    max-width: 40px;
     display: block;
     margin: 0 auto;
     width: 60%;
@@ -29,13 +31,19 @@
 }
 
 .NavLabel {
-    width: 100%;
+    width: 95%;
     color: white;
+    font-size: 0.9em;
+    font-weight: 500;
 }
 
 .ListItem a {
     width: 100%;
     cursor: pointer;
+}
+
+.ListItem a:active {
+    background-color: white;
 }
 
 .ListContainer :last-child {
