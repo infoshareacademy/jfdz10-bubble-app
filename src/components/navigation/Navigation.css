@@ -6,29 +6,71 @@
     margin: 0;
     padding: 0;
     align-items: center;
+    border-bottom: 3px solid #00ADE6
 }
 
 .ListItem {
+    display: flex;
     text-align: center;
-    width: 25%;
-    padding-top: 25px;
-    padding-bottom: 25px;
-    margin-bottom:2px;
-    border-right: 1px solid white
+    width: 20%;
+    height: 60px;
+    border-right: 1px solid white;
+    justify-content: center;
+    align-content: space-between;
+}
+
+.NavImage {
+    max-width: 40px;
+    display: block;
+    margin: 0 auto;
+    width: 60%;
+    height: 60%;
+    background-size: cover;
+}
+
+/* ************* TUTAJ WSTAWIC PRAWIDLOWE RYSUNKI DO NAWIGACJI ***************** */
+.Home {
+    background-image: url('http://clipart-library.com/images/XpcoreiEz.png');
+}
+
+.AddMatch {
+    background-image: url('http://clipart-library.com/img1/1258852.png')
+}
+
+.Players {
+    background-image: url('http://clipart-library.com/img/2012493.png')
+}
+
+.Matches {
+    background-image: url('http://clipart-library.com/image_gallery/52084.png')
+}
+
+.NavProfile {
+    background-image: url('http://clipart-library.com/img/1905734.png')
+}
+/* ******************************************************************************** */
+
+.NavLabel {
+    width: 95%;
+    color: white;
+    font-size: 0.9em;
+    font-weight: 500;
 }
 
 .ListItem a {
+    padding-top:3px;
+    width: 100%;
     cursor: pointer;
 }
 
 .ListContainer :last-child {
     border-right: none;
-
 }
 
-.ListItem :first-child{
-    color: white;
-    padding: 10px;
-    padding-top: 20px;
-    padding-bottom: 20px
+.active {
+    background: white;
+}
+
+.active .NavLabel {
+    color:#00ADE6
 }
