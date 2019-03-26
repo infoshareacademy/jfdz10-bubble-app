@@ -17,7 +17,6 @@
     border-right: 1px solid white;
     justify-content: center;
     align-content: space-between;
-    padding-top: 5px;
 }
 
 .NavImage {
@@ -63,12 +62,10 @@
     cursor: pointer;
 }
 
-.ListItem a:active {
-    background-color: white;
-}
-
 .ListContainer :last-child {
     border-right: none;
-
 }
 
+.ActiveNav {
+    background: white;
+}
