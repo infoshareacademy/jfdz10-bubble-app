@@ -13,7 +13,7 @@ class Player extends Component {
                     <header>
                         <ul className="ProfileHeader">
                             <li>Profile Details</li>
-                            <button className='toggle-view-button' onClick={() => {this.props.togglePlayerView()}}>X</button>
+                            <button className='toggle-view-button' onClick={() => {this.props.togglePlayerView()}}>Back</button>
                         </ul>    
                     </header>
                     <div>
