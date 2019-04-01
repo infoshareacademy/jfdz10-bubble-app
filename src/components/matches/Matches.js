@@ -1,8 +1,7 @@
 import React, { Component } from "react";
-import { Table, Icon } from 'semantic-ui-react'
+import { Table } from 'semantic-ui-react'
 
 import MatchesForm from './MatchesForm'
-import EmptyFilter from '../assets/EmptyFilter/EmptyFilter'
 import MatchesTable from './MatchesTable'
 
 import './Matches.css'
