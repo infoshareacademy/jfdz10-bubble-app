@@ -1,0 +1,6 @@
+.no-results-message {
+    color: grey;
+    margin: 5px;
+    border: 1px grey solid;
+    text-align: center;
+}

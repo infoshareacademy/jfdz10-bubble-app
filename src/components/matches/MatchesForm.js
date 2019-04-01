@@ -49,7 +49,6 @@ class MatchesForm extends Component {
                         </Form.Group>
 
                         <Form.Field fluid
-                            // onClick={() => this.props.searchForPlayer(this.state.player, this.state.location, this.state.sports)}
                             onClick={() => this.props.searchForMatch(this.state.location, this.state.sports)}
                             id='form-button-control-public'
                             control={Button}

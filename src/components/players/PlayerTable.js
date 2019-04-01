@@ -1,13 +1,16 @@
 import React from 'react'
+import EmptyFilter from '../assets/EmptyFilter/EmptyFilter'
 import { Header, Table, Button, Icon } from 'semantic-ui-react'
-
 
 
 const PlayerTable = (props) => {
 
+    
+
     return (
+        
         <Table.Body>
-            {props.filterPlayers(props.players)
+            { (props.filterPlayers(props.players).length > 0) ? (props.filterPlayers(props.players)
                 .map(
                     player => (
                         <Table.Row key={player.id} className={props.compareFavPlayers().includes(player.id) ? "favorite-player player-row" : "player-row"}>
@@ -42,7 +45,8 @@ const PlayerTable = (props) => {
 
                         </Table.Row>
                     )
-                )} 
+                )) : (<EmptyFilter />)
+            } 
 
         </Table.Body>
     )
