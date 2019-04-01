@@ -51,18 +51,7 @@ class Matches extends Component {
     }
 
 
-    // setNewFilter = () => {
-    //     const sport = document.querySelector('#matches-sports-select').childNodes[1].innerText !== 'Sport' ? document.querySelector('#matches-sports-select').childNodes[1].innerText : ''
-    //     const location = document.querySelector('#form-input-control-location-matches').value
-        
-    //     this.setState({
-    //         filter: {
-    //             location: location,
-    //             sport: sport,
-    //         }
-    //     })
-    //     this.toggleFilter()
-    // }
+
 
     toggleFilter = () => {
         this.state.filterVisible ? this.setState({ filterVisible: false }) : this.setState({ filterVisible: true })
