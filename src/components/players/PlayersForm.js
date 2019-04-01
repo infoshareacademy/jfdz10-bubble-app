@@ -57,7 +57,6 @@ class PlayersForm extends Component {
 
                         <Form.Field fluid
                             onClick={() => this.props.searchForPlayer(this.state.player, this.state.location, this.state.sports)}
-
                             id='form-button-control-public'
                             control={Button}
                             content='Search'

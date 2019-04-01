@@ -26,7 +26,7 @@ class Matches extends Component {
         sports: [],
         filter: {
             location: '',
-            sport: '',
+            sports: [],
         },
         filterVisible: false,
     };
@@ -39,20 +39,30 @@ class Matches extends Component {
             }))
     }
 
-
-
-    setNewFilter = () => {
-        const sport = document.querySelector('#matches-sports-select').childNodes[1].innerText !== 'Sport' ? document.querySelector('#matches-sports-select').childNodes[1].innerText : ''
-        const location = document.querySelector('#form-input-control-location-matches').value
+    setNewFilter = (locationReceived, sportReceived) => {
         
         this.setState({
-            filter: {
-                location: location,
-                sport: sport,
+            filter: {  
+                location: locationReceived,
+                sports: sportReceived,
             }
         })
         this.toggleFilter()
     }
+
+
+    // setNewFilter = () => {
+    //     const sport = document.querySelector('#matches-sports-select').childNodes[1].innerText !== 'Sport' ? document.querySelector('#matches-sports-select').childNodes[1].innerText : ''
+    //     const location = document.querySelector('#form-input-control-location-matches').value
+        
+    //     this.setState({
+    //         filter: {
+    //             location: location,
+    //             sport: sport,
+    //         }
+    //     })
+    //     this.toggleFilter()
+    // }
 
     toggleFilter = () => {
         this.state.filterVisible ? this.setState({ filterVisible: false }) : this.setState({ filterVisible: true })
@@ -72,7 +82,7 @@ class Matches extends Component {
                         sport => ({
                             key: sport.id,
                             text: sport.name,
-                            value: sport.name,
+                            value: sport.id,
                         })
                     )}
                 />
@@ -99,10 +109,8 @@ class Matches extends Component {
                                 .filter(
                                     match => (
                                         this.state.sports
-                                            .filter(sport => match.sportID === sport.id)
-                                            .map(sport => sport.name)
-                                            .concat('')
-                                    ).includes(this.state.filter.sport))
+                                            .filter(sport => match.sportID === sport.id)                  
+                                    ).some(sport => (this.state.filter.sports).includes(sport.id))  || this.state.filter.sports[0] === undefined)
                                 .map(
                                     match => (
                                         <Table.Row key={match.id}>
