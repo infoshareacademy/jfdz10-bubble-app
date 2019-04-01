@@ -190,7 +190,10 @@ class Players extends Component {
                                         <Table.Cell>{
                                             this.state.sports
                                                 .filter(sport => player.favouriteSportsIDs.includes(sport.id))
-                                                .map(sport => `${sport.name.charAt(0).toUpperCase() + sport.name.slice(1)}; `)
+                                                .map(sport => `${sport.name.charAt(0).toUpperCase() + sport.name.slice(1)}`)
+                                                .concat('')
+                                                .join(' ')
+                                                .slice(0, -1)
                                         }</Table.Cell>
 
 
