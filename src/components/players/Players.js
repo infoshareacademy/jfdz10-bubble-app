@@ -118,14 +118,21 @@ class Players extends Component {
     }
 
 
-    // filterSports = () => {
-    //     return .filter(
-    //         player => (
-    //             this.state.sports
-    //                 .filter(sport => player.favouriteSportsIDs.includes(sport.id))
-    //                 .map(sport => sport.name)                                    
-    //         ).some(sport => (this.state.filter.sports).includes(sport))  || this.state.filter.sports[0] === undefined)
-    // }
+    filterPlayers = (players) => {
+        return players.filter(
+            player => (
+                player.localization.toLowerCase().includes(this.state.filter.location.toLowerCase())
+            ))
+        .filter(
+            player => (
+                player.name.toLowerCase().includes(this.state.filter.player.toLowerCase())
+            ))
+        .filter(
+            player => (
+                this.state.sports
+                    .filter(sport => player.favouriteSportsIDs.includes(sport.id))                  
+            ).some(sport => (this.state.filter.sports).includes(sport.id))  || this.state.filter.sports[0] === undefined)
+    }
 
 
     render() {
@@ -156,20 +163,7 @@ class Players extends Component {
 
 
                     <Table.Body>
-                        {this.state.players
-                            .filter(
-                                player => (
-                                    player.localization.toLowerCase().includes(this.state.filter.location.toLowerCase())
-                                ))
-                            .filter(
-                                player => (
-                                    player.name.toLowerCase().includes(this.state.filter.player.toLowerCase())
-                                ))
-                            .filter(
-                                player => (
-                                    this.state.sports
-                                        .filter(sport => player.favouriteSportsIDs.includes(sport.id))                  
-                                ).some(sport => (this.state.filter.sports).includes(sport.id))  || this.state.filter.sports[0] === undefined)
+                        {this.filterPlayers(this.state.players)                       
                             .map(
                                 player => (
                                     <Table.Row key={player.id} className={this.compareFavPlayers().includes(player.id) ? "favorite-player player-row" : "player-row"}>
