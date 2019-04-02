@@ -3,6 +3,7 @@ import { Header, Table, Button, Icon } from 'semantic-ui-react'
 
 import PlayersForm from './PlayersForm'
 import Player from '../player/Player'
+import PlayerTable from './PlayerTable'
 
 import './Players.css'
 
@@ -45,7 +46,7 @@ class Players extends Component {
         filter: {
             player: '',
             location: '',
-            sport: '',
+            sports: [],
         },
         filterVisible: false,
         clickedPlayer: {}
@@ -81,16 +82,13 @@ class Players extends Component {
         return favPlayersNoDups;
     }
 
-    setNewFilter = () => {
-        const sport = document.querySelector('#sports-select').childNodes[1].innerText !== 'Sport' ? document.querySelector('#sports-select').childNodes[1].innerText : ''
-        const location = document.querySelector('#form-input-control-location').value
-        const player = document.querySelector('#form-input-control-player').value
-
+    setNewFilter = (playerReceived, locationReceived, sportReceived) => {
+        
         this.setState({
-            filter: {
-                player: player,
-                location: location,
-                sport: sport,
+            filter: {   
+                player: playerReceived,
+                location: locationReceived,
+                sports: sportReceived,
             }
         })
         this.toggleFilter()
@@ -120,6 +118,24 @@ class Players extends Component {
         }
     }
 
+
+    filterPlayers = (players) => {
+        return players.filter(
+            player => (
+                player.localization.toLowerCase().includes(this.state.filter.location.toLowerCase())
+            ))
+        .filter(
+            player => (
+                player.name.toLowerCase().includes(this.state.filter.player.toLowerCase())
+            ))
+        .filter(
+            player => (
+                this.state.sports
+                    .filter(sport => player.favouriteSportsIDs.includes(sport.id))                  
+            ).some(sport => (this.state.filter.sports).includes(sport.id))  || this.state.filter.sports[0] === undefined)
+    }
+
+
     render() {
 
         return (
@@ -140,69 +156,20 @@ class Players extends Component {
                         sport => ({
                             key: sport.id,
                             text: sport.name,
-                            value: sport.name,
+                            value: sport.id,
                         })
                     )}
                 />
                 <Table basic='very' celled>
 
+                        <PlayerTable 
+                            filterPlayers={this.filterPlayers}
+                            compareFavPlayers={this.compareFavPlayers}
+                            saveUserFavPlayersInLocStorage={this.saveUserFavPlayersInLocStorage}
+                            sports={this.state.sports}
+                            players={this.state.players}
+                        />
 
-                    <Table.Body>
-                        {this.state.players
-                            .filter(
-                                player => (
-                                    player.localization.toLowerCase().includes(this.state.filter.location.toLowerCase())
-                                ))
-                            .filter(
-                                player => (
-                                    player.name.toLowerCase().includes(this.state.filter.player.toLowerCase())
-                                ))
-                            .filter(
-                                player => (
-                                    this.state.sports
-                                        .filter(sport => player.favouriteSportsIDs.includes(sport.id))
-                                        .map(sport => sport.name)
-                                        .concat('')
-                                ).includes(this.state.filter.sport))
-                            .map(
-                                player => (
-                                    <Table.Row key={player.id} className={this.compareFavPlayers().includes(player.id) ? "favorite-player player-row" : "player-row"}>
-
-                                        <Table.Cell>
-                                            <Header as='h4' image>
-                                                <Header.Content className='player-name' onClick={() => this.handlePlayerClick(player)} >
-                                                    {player.name.toUpperCase()}
-                                                    <Header.Subheader>{player.eMail}</Header.Subheader>
-                                                </Header.Content>
-                                            </Header>
-                                        </Table.Cell>
-
-                                        <Table.Cell>{player.localization}</Table.Cell>
-
-
-
-                                        <Table.Cell>{
-                                            this.state.sports
-                                                .filter(sport => player.favouriteSportsIDs.includes(sport.id))
-                                                .map(sport => `${sport.name.charAt(0).toUpperCase() + sport.name.slice(1)}`)
-                                                .concat('')
-                                                .join(' ')
-                                                .slice(0, -1)
-                                        }</Table.Cell>
-
-
-                                        <Table.Cell>
-                                            <Button icon
-                                                onClick={() => this.saveUserFavPlayersInLocStorage(this, player.id)}>
-                                                <Icon name='favorite' color={this.compareFavPlayers().includes(player.id) ? "yellow" : ""}  />  {this.compareFavPlayers().includes(player.id) ? "Remove From" : "Add To"} Favorites
-                                    </Button>
-                                        </Table.Cell>
-
-                                    </Table.Row>
-                                )
-                            )}
-
-                    </Table.Body>
                 </Table>
             </div>
         </div>
