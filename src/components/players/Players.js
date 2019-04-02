@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Header, Table, Button, Icon } from 'semantic-ui-react'
+import { Table } from 'semantic-ui-react'
 
 import PlayersForm from './PlayersForm'
 import Player from '../player/Player'
@@ -47,9 +47,10 @@ class Players extends Component {
             player: '',
             location: '',
             sports: [],
+            isEmpty: false,
         },
         filterVisible: false,
-        clickedPlayer: {}
+        clickedPlayer: {},
     };
 
     componentDidMount() {
@@ -83,16 +84,18 @@ class Players extends Component {
     }
 
     setNewFilter = (playerReceived, locationReceived, sportReceived) => {
-        
+
         this.setState({
-            filter: {   
+            filter: {
                 player: playerReceived,
                 location: locationReceived,
                 sports: sportReceived,
             }
         })
-        this.toggleFilter()
+        this.toggleFilter();
     }
+
+      
 
     toggleFilter = () => {
         this.state.filterVisible ? this.setState({ filterVisible: false }) : this.setState({ filterVisible: true })
@@ -124,45 +127,45 @@ class Players extends Component {
             player => (
                 player.localization.toLowerCase().includes(this.state.filter.location.toLowerCase())
             ))
-        .filter(
-            player => (
-                player.name.toLowerCase().includes(this.state.filter.player.toLowerCase())
-            ))
-        .filter(
-            player => (
-                this.state.sports
-                    .filter(sport => player.favouriteSportsIDs.includes(sport.id))                  
-            ).some(sport => (this.state.filter.sports).includes(sport.id))  || this.state.filter.sports[0] === undefined)
+            .filter(
+                player => (
+                    player.name.toLowerCase().includes(this.state.filter.player.toLowerCase())
+                ))
+            .filter(
+                player => (
+                    this.state.sports
+                        .filter(sport => player.favouriteSportsIDs.includes(sport.id))
+                ).some(sport => (this.state.filter.sports).includes(sport.id)) || this.state.filter.sports[0] === undefined)
     }
 
 
     render() {
 
         return (
-        <div className="componentWrapper">
-            <Player 
-                togglePlayerView = {this.handlePlayerClick}
-                player = {this.state.clickedPlayer}
-                players= {this.state.players}
-                sports = {this.state.sports}
-            />
-            <div className="players">
-
-                <PlayersForm
-                    toggleFilter={this.toggleFilter}
-                    filterStatus={this.state.filterVisible}
-                    searchForPlayer={this.setNewFilter}
-                    sports={this.state.sports.map(
-                        sport => ({
-                            key: sport.id,
-                            text: sport.name,
-                            value: sport.id,
-                        })
-                    )}
+            <div className="componentWrapper">
+                <Player
+                    togglePlayerView={this.handlePlayerClick}
+                    player={this.state.clickedPlayer}
+                    players={this.state.players}
+                    sports={this.state.sports}
                 />
-                <Table basic='very' celled>
+                <div className="players">
 
-                        <PlayerTable 
+                    <PlayersForm
+                        toggleFilter={this.toggleFilter}
+                        filterStatus={this.state.filterVisible}
+                        searchForPlayer={this.setNewFilter}
+                        sports={this.state.sports.map(
+                            sport => ({
+                                key: sport.id,
+                                text: sport.name,
+                                value: sport.id,
+                            })
+                        )}
+                    />
+                    <Table basic='very' celled>
+
+                        <PlayerTable
                             filterPlayers={this.filterPlayers}
                             compareFavPlayers={this.compareFavPlayers}
                             saveUserFavPlayersInLocStorage={this.saveUserFavPlayersInLocStorage}
@@ -170,9 +173,9 @@ class Players extends Component {
                             players={this.state.players}
                         />
 
-                </Table>
+                    </Table>
+                </div>
             </div>
-        </div>
         )
     }
 }
