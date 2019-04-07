@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import { Table } from 'semantic-ui-react'
-
 import PlayersForm from './PlayersForm'
 import Player from '../player/Player'
 import PlayerTable from './PlayerTable'
+
+import firebase from 'firebase'
 
 import './Players.css'
 
@@ -51,16 +52,62 @@ class Players extends Component {
         },
         filterVisible: false,
         clickedPlayer: {},
+        refs: [],
     };
 
     componentDidMount() {
+        this.getSports()
+        // this.getPlayers()
+
         Promise.all([fetchPlayers(), fetchSports(), fetchUser(), fetchUsersFavorites()])
             .then(([players, sports, user, favPlayers]) => this.setState({
                 players: players,
-                sports: sports,
+                // sports: sports,
                 user: user,
                 favoritePlayers: favPlayers,
-            }))
+            })
+            )
+            
+            
+    }
+    
+    componentWillUnmount() {
+        this.state.refs.forEach(ref => ref.off());
+    }   
+
+    getSports = () => {
+        const sportsRef = firebase.database().ref('sports');
+
+        sportsRef.on('value',
+        
+            snapshot => {
+                console.log('sports', snapshot.val())
+                this.setState({
+                    sports: snapshot.val()
+                })
+            });
+
+        const newRefs = [sportsRef, ...this.state.refs];
+        this.setState({
+            refs: newRefs
+        })
+    }
+
+    getPlayers = () => {
+        const playersRef = firebase.database().ref('players');
+
+        playersRef.on('value',
+            snapshot => {
+                console.log('players', snapshot.val())
+                this.setState({
+                    players: snapshot.val()
+                })
+            });
+
+        const newRefs = [playersRef, ...this.state.refs];
+        this.setState({
+            refs: newRefs
+        })
     }
 
     compareFavPlayers = () => {

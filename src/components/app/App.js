@@ -8,6 +8,19 @@ import Profile from '../profile/Profile'
 import Dashboard from '../dashboard/Dashboard'
 import Matches from '../matches/Matches'
 import AddMatch from '../matches/addMatch/AddMatch'
+import firebase from 'firebase'
+
+const  config = {
+    apiKey: "AIzaSyBvqyvl7IxTyYNhTdiaLBffP1X6RtRVMxs",
+    authDomain: "bubble-app-e36c0.firebaseapp.com",
+    databaseURL: "https://bubble-app-e36c0.firebaseio.com",
+    projectId: "bubble-app-e36c0",
+    storageBucket: "bubble-app-e36c0.appspot.com",
+    messagingSenderId: "1008042038295"
+  };
+
+  firebase.initializeApp(config);
+
 
 
 class App extends Component {

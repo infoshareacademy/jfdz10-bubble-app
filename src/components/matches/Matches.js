@@ -5,6 +5,7 @@ import MatchesForm from './MatchesForm'
 import MatchesTable from './MatchesTable'
 
 import './Matches.css'
+import firebase from 'firebase'
 
 
 const fetchMatches = async () => {
@@ -30,14 +31,50 @@ class Matches extends Component {
             sports: [],
         },
         filterVisible: false,
+        refs: []
     };
 
-    componentDidMount() {
-        Promise.all([fetchMatches(), fetchSports()])
-            .then(([matches, sports]) => this.setState({
-                matches: matches,
-                sports: sports,
-            }))
+    componentDidMount() {        
+        this.getMatches()
+        this.getSports()
+    }
+    
+    componentWillUnmount() {
+        this.state.refs.forEach(ref => ref.off());
+    }
+
+    getMatches = () => {
+        const matchesRef = firebase.database().ref('matches');
+
+        matchesRef.on('value',
+            snapshot => {
+                this.setState({
+                    matches: snapshot.val()
+                })
+            });
+
+        const newRefs = [matchesRef, ...this.state.refs];
+
+        this.setState({
+            refs: newRefs
+        })
+    }
+
+    getSports = () => {
+        const sportsRef = firebase.database().ref('sports');
+
+        sportsRef.on('value',
+            snapshot => {
+                this.setState({
+                    sports: snapshot.val()
+                })
+            });
+
+        const newRefs = [sportsRef, ...this.state.refs];
+
+        this.setState({
+            refs: newRefs
+        })
     }
 
     setNewFilter = (locationReceived, sportReceived) => {
@@ -56,6 +93,7 @@ class Matches extends Component {
     }
 
     filterMatches = (matches) => {
+
         return matches.filter(
             match => (
                 match.localization.city.toLowerCase().includes(this.state.filter.location.toLowerCase())
@@ -69,6 +107,7 @@ class Matches extends Component {
 
 
     render() {
+        console.log(this.state.matches)
 
         return (
             <div>
@@ -88,14 +127,14 @@ class Matches extends Component {
                 <Table celled striped>
 
 
-                    
-                        <MatchesTable
-                            matches={this.state.matches}
-                            sports={this.state.sports}
-                            filterMatches={this.filterMatches}
-                        />
 
-                    
+                    <MatchesTable
+                        matches={this.state.matches}
+                        sports={this.state.sports}
+                        filterMatches={this.filterMatches}
+                    />
+
+
                 </Table>
             </div>
         )
