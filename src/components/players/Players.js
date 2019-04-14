@@ -1,24 +1,25 @@
 import React, { Component } from "react";
 import { Table } from 'semantic-ui-react'
-
 import PlayersForm from './PlayersForm'
 import Player from '../player/Player'
 import PlayerTable from './PlayerTable'
 
+import firebase from 'firebase'
+
 import './Players.css'
 
 
-const fetchPlayers = async () => {
-    const response = await fetch(process.env.PUBLIC_URL + "/players.json");
-    const players = await response.json();
-    return players;
-}
+// const fetchPlayers = async () => {
+//     const response = await fetch(process.env.PUBLIC_URL + "/players.json");
+//     const players = await response.json();
+//     return players;
+// }
 
-const fetchSports = async () => {
-    const response = await fetch(process.env.PUBLIC_URL + "/sports.json");
-    const sports = await response.json();
-    return sports;
-}
+// const fetchSports = async () => {
+//     const response = await fetch(process.env.PUBLIC_URL + "/sports.json");
+//     const sports = await response.json();
+//     return sports;
+// }
 
 
 const fetchUser = async () => {
@@ -51,17 +52,64 @@ class Players extends Component {
         },
         filterVisible: false,
         clickedPlayer: {},
+        refs: [],
     };
 
     componentDidMount() {
-        Promise.all([fetchPlayers(), fetchSports(), fetchUser(), fetchUsersFavorites()])
-            .then(([players, sports, user, favPlayers]) => this.setState({
-                players: players,
-                sports: sports,
+        this.getSports()
+        this.getPlayers()
+
+        Promise.all([ fetchUser(), fetchUsersFavorites()])
+            .then(([ user, favPlayers]) => this.setState({
+       
                 user: user,
                 favoritePlayers: favPlayers,
-            }))
+            })
+            )
+            
+            
     }
+    
+    componentWillUnmount() {
+        this.state.refs.forEach(ref => ref.off());
+    }   
+
+    
+
+    getSports = () => {
+        const sportsRef = firebase.database().ref('sports');
+
+        sportsRef.on('value',
+        
+            snapshot => {
+                this.setState({
+                    sports: snapshot.val()
+                })
+            });
+
+        const newRefs = [sportsRef, ...this.state.refs];
+        this.setState({
+            refs: newRefs
+        })
+    }
+
+    getPlayers = () => {
+        const playersRef = firebase.database().ref('players');
+
+        playersRef.on('value',
+            snapshot => {
+                this.setState({
+                    players: snapshot.val()
+                })
+            });
+
+        const newRefs = [playersRef, ...this.state.refs];
+        this.setState({
+            refs: newRefs
+        })
+    }
+
+   
 
     compareFavPlayers = () => {
         let favoritePlayersAsIs = this.state.user.favouritePlayersIDs;
@@ -134,7 +182,7 @@ class Players extends Component {
             .filter(
                 player => (
                     this.state.sports
-                        .filter(sport => player.favouriteSportsIDs.includes(sport.id))
+                        .filter(sport => player.favouriteSportsIDs.includes(sport.id) || [])
                 ).some(sport => (this.state.filter.sports).includes(sport.id)) || this.state.filter.sports[0] === undefined)
     }
 
