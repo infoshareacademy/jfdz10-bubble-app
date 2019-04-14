@@ -1,23 +1,25 @@
 import React, { Component } from "react";
-import { Header, Table, Button, Icon } from 'semantic-ui-react'
-
+import { Table } from 'semantic-ui-react'
 import PlayersForm from './PlayersForm'
 import Player from '../player/Player'
+import PlayerTable from './PlayerTable'
+
+import firebase from 'firebase'
 
 import './Players.css'
 
 
-const fetchPlayers = async () => {
-    const response = await fetch(process.env.PUBLIC_URL + "/players.json");
-    const players = await response.json();
-    return players;
-}
+// const fetchPlayers = async () => {
+//     const response = await fetch(process.env.PUBLIC_URL + "/players.json");
+//     const players = await response.json();
+//     return players;
+// }
 
-const fetchSports = async () => {
-    const response = await fetch(process.env.PUBLIC_URL + "/sports.json");
-    const sports = await response.json();
-    return sports;
-}
+// const fetchSports = async () => {
+//     const response = await fetch(process.env.PUBLIC_URL + "/sports.json");
+//     const sports = await response.json();
+//     return sports;
+// }
 
 
 const fetchUser = async () => {
@@ -45,21 +47,69 @@ class Players extends Component {
         filter: {
             player: '',
             location: '',
-            sport: '',
+            sports: [],
+            isEmpty: false,
         },
         filterVisible: false,
-        clickedPlayer: {}
+        clickedPlayer: {},
+        refs: [],
     };
 
     componentDidMount() {
-        Promise.all([fetchPlayers(), fetchSports(), fetchUser(), fetchUsersFavorites()])
-            .then(([players, sports, user, favPlayers]) => this.setState({
-                players: players,
-                sports: sports,
+        this.getSports()
+        this.getPlayers()
+
+        Promise.all([ fetchUser(), fetchUsersFavorites()])
+            .then(([ user, favPlayers]) => this.setState({
+       
                 user: user,
                 favoritePlayers: favPlayers,
-            }))
+            })
+            )
+            
+            
     }
+    
+    componentWillUnmount() {
+        this.state.refs.forEach(ref => ref.off());
+    }   
+
+    
+
+    getSports = () => {
+        const sportsRef = firebase.database().ref('sports');
+
+        sportsRef.on('value',
+        
+            snapshot => {
+                this.setState({
+                    sports: snapshot.val()
+                })
+            });
+
+        const newRefs = [sportsRef, ...this.state.refs];
+        this.setState({
+            refs: newRefs
+        })
+    }
+
+    getPlayers = () => {
+        const playersRef = firebase.database().ref('players');
+
+        playersRef.on('value',
+            snapshot => {
+                this.setState({
+                    players: snapshot.val()
+                })
+            });
+
+        const newRefs = [playersRef, ...this.state.refs];
+        this.setState({
+            refs: newRefs
+        })
+    }
+
+   
 
     compareFavPlayers = () => {
         let favoritePlayersAsIs = this.state.user.favouritePlayersIDs;
@@ -81,20 +131,19 @@ class Players extends Component {
         return favPlayersNoDups;
     }
 
-    setNewFilter = () => {
-        const sport = document.querySelector('#sports-select').childNodes[1].innerText !== 'Sport' ? document.querySelector('#sports-select').childNodes[1].innerText : ''
-        const location = document.querySelector('#form-input-control-location').value
-        const player = document.querySelector('#form-input-control-player').value
+    setNewFilter = (playerReceived, locationReceived, sportReceived) => {
 
         this.setState({
             filter: {
-                player: player,
-                location: location,
-                sport: sport,
+                player: playerReceived,
+                location: locationReceived,
+                sports: sportReceived,
             }
         })
-        this.toggleFilter()
+        this.toggleFilter();
     }
+
+      
 
     toggleFilter = () => {
         this.state.filterVisible ? this.setState({ filterVisible: false }) : this.setState({ filterVisible: true })
@@ -120,92 +169,61 @@ class Players extends Component {
         }
     }
 
+
+    filterPlayers = (players) => {
+        return players.filter(
+            player => (
+                player.localization.toLowerCase().includes(this.state.filter.location.toLowerCase())
+            ))
+            .filter(
+                player => (
+                    player.name.toLowerCase().includes(this.state.filter.player.toLowerCase())
+                ))
+            .filter(
+                player => (
+                    this.state.sports
+                        .filter(sport => player.favouriteSportsIDs.includes(sport.id) || [])
+                ).some(sport => (this.state.filter.sports).includes(sport.id)) || this.state.filter.sports[0] === undefined)
+    }
+
+
     render() {
 
         return (
-        <div className="componentWrapper">
-            <Player 
-                togglePlayerView = {this.handlePlayerClick}
-                player = {this.state.clickedPlayer}
-                players= {this.state.players}
-                sports = {this.state.sports}
-            />
-            <div className="players">
-
-                <PlayersForm
-                    toggleFilter={this.toggleFilter}
-                    filterStatus={this.state.filterVisible}
-                    searchForPlayer={this.setNewFilter}
-                    sports={this.state.sports.map(
-                        sport => ({
-                            key: sport.id,
-                            text: sport.name,
-                            value: sport.name,
-                        })
-                    )}
+            <div className="componentWrapper">
+                <Player
+                    togglePlayerView={this.handlePlayerClick}
+                    player={this.state.clickedPlayer}
+                    players={this.state.players}
+                    sports={this.state.sports}
                 />
-                <Table basic='very' celled>
+                <div className="players">
 
+                    <PlayersForm
+                        toggleFilter={this.toggleFilter}
+                        filterStatus={this.state.filterVisible}
+                        searchForPlayer={this.setNewFilter}
+                        sports={this.state.sports.map(
+                            sport => ({
+                                key: sport.id,
+                                text: sport.name,
+                                value: sport.id,
+                            })
+                        )}
+                    />
+                    <Table basic='very' celled>
 
-                    <Table.Body>
-                        {this.state.players
-                            .filter(
-                                player => (
-                                    player.localization.toLowerCase().includes(this.state.filter.location.toLowerCase())
-                                ))
-                            .filter(
-                                player => (
-                                    player.name.toLowerCase().includes(this.state.filter.player.toLowerCase())
-                                ))
-                            .filter(
-                                player => (
-                                    this.state.sports
-                                        .filter(sport => player.favouriteSportsIDs.includes(sport.id))
-                                        .map(sport => sport.name)
-                                        .concat('')
-                                ).includes(this.state.filter.sport))
-                            .map(
-                                player => (
-                                    <Table.Row key={player.id} className={this.compareFavPlayers().includes(player.id) ? "favorite-player player-row" : "player-row"}>
+                        <PlayerTable
+                            filterPlayers={this.filterPlayers}
+                            compareFavPlayers={this.compareFavPlayers}
+                            saveUserFavPlayersInLocStorage={this.saveUserFavPlayersInLocStorage}
+                            sports={this.state.sports}
+                            players={this.state.players}
+                        />
 
-                                        <Table.Cell>
-                                            <Header as='h4' image>
-                                                <Header.Content className='player-name' onClick={() => this.handlePlayerClick(player)} >
-                                                    {player.name.toUpperCase()}
-                                                    <Header.Subheader>{player.eMail}</Header.Subheader>
-                                                </Header.Content>
-                                            </Header>
-                                        </Table.Cell>
-
-                                        <Table.Cell>{player.localization}</Table.Cell>
-
-
-
-                                        <Table.Cell>{
-                                            this.state.sports
-                                                .filter(sport => player.favouriteSportsIDs.includes(sport.id))
-                                                .map(sport => `${sport.name.charAt(0).toUpperCase() + sport.name.slice(1)}`)
-                                                .concat('')
-                                                .join(' ')
-                                                .slice(0, -1)
-                                        }</Table.Cell>
-
-
-                                        <Table.Cell>
-                                            <Button icon
-                                                onClick={() => this.saveUserFavPlayersInLocStorage(this, player.id)}>
-                                                <Icon name='favorite' color={this.compareFavPlayers().includes(player.id) ? "yellow" : ""}  />  {this.compareFavPlayers().includes(player.id) ? "Remove From" : "Add To"} Favorites
-                                    </Button>
-                                        </Table.Cell>
-
-                                    </Table.Row>
-                                )
-                            )}
-
-                    </Table.Body>
-                </Table>
+                    </Table>
+                </div>
             </div>
-        </div>
         )
     }
 }

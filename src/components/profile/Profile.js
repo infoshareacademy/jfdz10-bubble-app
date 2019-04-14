@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import firebase from 'firebase'
 import './Profile.css'
 
 const fetchUser = async () => {
@@ -7,35 +8,70 @@ const fetchUser = async () => {
     return user
 }
 
-const fetchSports = async () => {
-    const response = await fetch(process.env.PUBLIC_URL + "/sports.json");
-    const sports = await response.json();
-    return sports;
-}
-
-const fetchPlayers = async () => {
-    const response = await fetch(process.env.PUBLIC_URL + "/players.json");
-    const players = await response.json();
-    return players;
-}
 class Profile extends Component {
     state = {
         user : {},
         sports: [],
-        players: []
+        players: [],
+        refs: []
     }
 
     componentDidMount() {
-        Promise.all([fetchUser(), fetchSports(), fetchPlayers()])
-        .then(([user, sports, players]) => this.setState({
-            user: user,
-            sports: sports,
-            players: players
+        this.getSports()
+        this.getPlayers()
+
+        Promise.all([fetchUser()])
+        .then(([user]) => this.setState({
+            user: user,            
             })
         )
     }
 
+     
+    componentWillUnmount() {
+        this.state.refs.forEach(ref => ref.off());
+    }
+
+    getSports = () => {
+        const sportsRef = firebase.database().ref('sports');
+
+        sportsRef.on('value',
+        
+            snapshot => {
+                this.setState({
+                    sports: snapshot.val()
+                })
+            });
+
+        const newRefs = [sportsRef, ...this.state.refs];
+        this.setState({
+            refs: newRefs
+        })
+    }
+
+    getPlayers = () => {
+        const playersRef = firebase.database().ref('players');
+
+        playersRef.on('value',
+            snapshot => {
+                this.setState({
+                    players: snapshot.val()
+                })
+            });
+
+        const newRefs = [playersRef, ...this.state.refs];
+        this.setState({
+            refs: newRefs
+        })
+    }
+
+
     render() { 
+        console.log(this.state.user)
+
+        let favSports = this.state.user.favouriteSportsIDs || []
+        let favPlayers = this.state.user.favouritePlayersIDs || []
+
         return (
             <div className='Profile'>
                 <div className='ProfileDetails'>
@@ -75,13 +111,13 @@ class Profile extends Component {
                 <div className="FavouriteSports">
                     <header>
                         <ul className="ProfileHeader">
-                            <li>Favourite Sports</li>
+                            <li>Favorite Sports</li>
                             <li><button className="EditButton">Edit</button></li>
                         </ul>
                     </header>
                     <ol className="FavouriteSportsList">
                         {this.state.sports
-                            .filter(sport => sport.id === this.state.user.favouriteSportsIDs.find(id => id === sport.id))
+                            .filter(sport =>  favSports.includes(sport.id)  )
                             .map(sport => (
                                 <li className="FavouriteSportsListItem" key={sport.id}>{sport.name.charAt(0).toUpperCase() + sport.name.slice(1)}</li>
                             ))}
@@ -90,13 +126,14 @@ class Profile extends Component {
                 <div className="FavouritePlayers">
                     <header>
                         <ul className="ProfileHeader">
-                            <li>Favourite Players</li>
+                            <li>Favorite Players</li>
                             <li><button className="EditButton">Edit</button></li>
                         </ul>
                     </header>
                     <ol className="FavouriteSportsList">
                         {this.state.players
-                            .filter(player => player.id === this.state.user.favouritePlayersIDs.find(id => id === player.id))
+                            // .filter(player => player.id === this.state.user.favouritePlayersIDs.find(id => id === player.id) || [])
+                            .filter(player => favPlayers.includes(player.id) || [])
                             .map(player => (
                                 <li className="FavouriteSportsListItem" key={player.id}>{player.name}</li>
                             ))}

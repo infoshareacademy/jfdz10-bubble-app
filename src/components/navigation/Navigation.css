@@ -6,6 +6,7 @@
     margin: 0;
     padding: 0;
     align-items: center;
+    border-bottom: 3px solid #00ADE6
 }
 
 .ListItemImage {
@@ -13,27 +14,67 @@
     height:25px;
     background-image: url("https://image-cdn.hypb.st/https%3A%2F%2Fhypebeast.com%2Fimage%2F2019%2F03%2Fcristiano-ronaldo-champions-league-celebration-charge-ban-1.jpg?q=90&w=1400&cbr=1&fit=max")}
 .ListItem {
+    display: flex;
     text-align: center;
     width: 20%;
-    padding-top: 45px;
-    padding-bottom: 5px;
-    margin-bottom:2px;
+    height: 60px;
     border-right: 1px solid white;
-    font-size: 0.9em
+    justify-content: center;
+    align-content: space-between;
+}
+
+.NavImage {
+    max-width: 40px;
+    display: block;
+    margin: 0 auto;
+    width: 60%;
+    height: 60%;
+    background-size: cover;
+}
+
+/* ************* TUTAJ WSTAWIC PRAWIDLOWE RYSUNKI DO NAWIGACJI ***************** */
+.Home {
+    background-image: url('http://clipart-library.com/images/XpcoreiEz.png');
+}
+
+.AddMatch {
+    background-image: url('http://clipart-library.com/img1/1258852.png')
+}
+
+.Players {
+    background-image: url('http://clipart-library.com/img/2012493.png')
+}
+
+.Matches {
+    background-image: url('http://clipart-library.com/image_gallery/52084.png')
+}
+
+.NavProfile {
+    background-image: url('http://clipart-library.com/img/1905734.png')
+}
+/* ******************************************************************************** */
+
+.NavLabel {
+    width: 95%;
+    color: white;
+    font-size: 0.9em;
+    font-weight: 500;
 }
 
 .ListItem a {
+    padding-top:3px;
+    width: 100%;
     cursor: pointer;
 }
 
 .ListContainer :last-child {
     border-right: none;
-
 }
 
-.ListItem :first-child{
-    color: white;
-    padding: 10px;
-    padding-top: 20px;
-    padding-bottom: 20px
+.active {
+    background: white;
+}
+
+.active .NavLabel {
+    color:#00ADE6
 }

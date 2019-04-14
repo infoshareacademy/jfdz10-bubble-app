@@ -2,16 +2,36 @@ import React, { Component } from  'react'
 import { NavLink } from 'react-router-dom'
 import './Navigation.css'
 
+
+
+
 class Navigation extends Component {
+
     render() {
+        
         return (
         <div className="Navigation">
             <ul className="ListContainer">
-                <li className="ListItem"><NavLink to="/"><image className='ListItemImage'></image><p className='ListItemLabel'>Home</p></NavLink></li>
-                <li className="ListItem"><NavLink to="/addMatch"><image className='ListItemImage'></image><p className='ListItemLabel'>AddMatch</p></NavLink></li>
-                <li className="ListItem"><NavLink to="/players"><image className='ListItemImage'></image><p className='ListItemLabel'>Players</p></NavLink></li>
-                <li className="ListItem"><NavLink to="/matches"><image className='ListItemImage'></image><p className='ListItemLabel'>Matches</p></NavLink></li>
-                <li className="ListItem"><NavLink to="/profile"><image className='ListItemImage'></image><p className='ListItemLabel'>Profile</p></NavLink></li>
+                <li class='lol' className="ListItem"><NavLink exact activeClassName='active' to="/">
+                    <image className='NavImage Home'></image>
+                    <label className='NavLabel'>Home</label>
+                </NavLink></li>
+                <li class='lol' className="ListItem"><NavLink activeClassName='active' to="/addMatch">
+                    <image className='NavImage AddMatch'></image>
+                    <label className='NavLabel'>AddMatch</label>
+                </NavLink></li>
+                <li className="ListItem"><NavLink activeClassName='active' to="/players">
+                    <image className='NavImage Players'></image>
+                    <label className='NavLabel'>Players</label>
+                </NavLink></li>
+                <li className="ListItem"><NavLink activeClassName='active' to="/matches">
+                    <image className='NavImage Matches'></image>
+                    <label className='NavLabel'>Matches</label>
+                </NavLink></li>
+                <li className="ListItem"><NavLink activeClassName='active' to="/profile">
+                    <image className='NavImage NavProfile'></image>
+                    <label className='NavLabel'>Profile</label>
+                </NavLink></li>
             </ul>
         </div>
         )
