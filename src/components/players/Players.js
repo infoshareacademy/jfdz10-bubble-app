@@ -182,7 +182,7 @@ class Players extends Component {
             .filter(
                 player => (
                     this.state.sports
-                        .filter(sport => player.favouriteSportsIDs.includes(sport.id) || [])
+                        .filter(sport => (player.favouriteSportsIDs || []).includes(sport.id))
                 ).some(sport => (this.state.filter.sports).includes(sport.id)) || this.state.filter.sports[0] === undefined)
     }
 

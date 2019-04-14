@@ -9,6 +9,10 @@
     border-bottom: 3px solid #00ADE6
 }
 
+.ListItemImage {
+    width: 25px;
+    height:25px;
+    background-image: url("https://image-cdn.hypb.st/https%3A%2F%2Fhypebeast.com%2Fimage%2F2019%2F03%2Fcristiano-ronaldo-champions-league-celebration-charge-ban-1.jpg?q=90&w=1400&cbr=1&fit=max")}
 .ListItem {
     display: flex;
     text-align: center;
