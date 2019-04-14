@@ -28,7 +28,7 @@ const PlayerTable = (props) => {
 
                             <Table.Cell>{
                                 props.sports
-                                    .filter(sport => player.favouriteSportsIDs.includes(sport.id))
+                                    .filter(sport => (player.favouriteSportsIDs || []).includes(sport.id))
                                     .map(sport => `${sport.name.charAt(0).toUpperCase() + sport.name.slice(1)}`)
                                     .concat('')
                                     .join(' ')
