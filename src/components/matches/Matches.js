@@ -107,7 +107,6 @@ class Matches extends Component {
 
 
     render() {
-        console.log(this.state.matches)
 
         return (
             <div>

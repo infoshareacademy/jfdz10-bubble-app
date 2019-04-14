@@ -9,17 +9,17 @@ import firebase from 'firebase'
 import './Players.css'
 
 
-const fetchPlayers = async () => {
-    const response = await fetch(process.env.PUBLIC_URL + "/players.json");
-    const players = await response.json();
-    return players;
-}
+// const fetchPlayers = async () => {
+//     const response = await fetch(process.env.PUBLIC_URL + "/players.json");
+//     const players = await response.json();
+//     return players;
+// }
 
-const fetchSports = async () => {
-    const response = await fetch(process.env.PUBLIC_URL + "/sports.json");
-    const sports = await response.json();
-    return sports;
-}
+// const fetchSports = async () => {
+//     const response = await fetch(process.env.PUBLIC_URL + "/sports.json");
+//     const sports = await response.json();
+//     return sports;
+// }
 
 
 const fetchUser = async () => {
@@ -57,12 +57,11 @@ class Players extends Component {
 
     componentDidMount() {
         this.getSports()
-        // this.getPlayers()
+        this.getPlayers()
 
-        Promise.all([fetchPlayers(), fetchSports(), fetchUser(), fetchUsersFavorites()])
-            .then(([players, sports, user, favPlayers]) => this.setState({
-                players: players,
-                // sports: sports,
+        Promise.all([ fetchUser(), fetchUsersFavorites()])
+            .then(([ user, favPlayers]) => this.setState({
+       
                 user: user,
                 favoritePlayers: favPlayers,
             })
@@ -75,13 +74,14 @@ class Players extends Component {
         this.state.refs.forEach(ref => ref.off());
     }   
 
+    
+
     getSports = () => {
         const sportsRef = firebase.database().ref('sports');
 
         sportsRef.on('value',
         
             snapshot => {
-                console.log('sports', snapshot.val())
                 this.setState({
                     sports: snapshot.val()
                 })
@@ -98,7 +98,6 @@ class Players extends Component {
 
         playersRef.on('value',
             snapshot => {
-                console.log('players', snapshot.val())
                 this.setState({
                     players: snapshot.val()
                 })
@@ -109,6 +108,8 @@ class Players extends Component {
             refs: newRefs
         })
     }
+
+   
 
     compareFavPlayers = () => {
         let favoritePlayersAsIs = this.state.user.favouritePlayersIDs;
@@ -181,7 +182,7 @@ class Players extends Component {
             .filter(
                 player => (
                     this.state.sports
-                        .filter(sport => player.favouriteSportsIDs.includes(sport.id))
+                        .filter(sport => player.favouriteSportsIDs.includes(sport.id) || [])
                 ).some(sport => (this.state.filter.sports).includes(sport.id)) || this.state.filter.sports[0] === undefined)
     }
 
