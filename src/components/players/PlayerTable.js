@@ -17,7 +17,7 @@ const PlayerTable = (props) => {
 
                             <Table.Cell>
                                 <Header as='h4' image>
-                                    <Header.Content className='player-name' onClick={() => props.compareFavPlayers(player)} >
+                                    <Header.Content className='player-name' onClick={() => props.togglePlayerView(player)}>
                                         {player.name.toUpperCase()}
                                         <Header.Subheader>{player.eMail}</Header.Subheader>
                                     </Header.Content>

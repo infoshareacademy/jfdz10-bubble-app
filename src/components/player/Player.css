@@ -1,7 +1,11 @@
 .player {
     display: none;
-    max-width: 420px;
+    max-width: 380px;
     margin: 0 auto;
+    position: fixed;
+    top: 50%;
+    left: 25%;
+    background: grey;
 }
 
 .ProfileHeader {

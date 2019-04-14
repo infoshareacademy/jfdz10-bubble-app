@@ -157,15 +157,12 @@ class Players extends Component {
 
     handlePlayerClick = (e) => {
         const player = document.querySelector('.player')
-        const playerList = document.querySelector('.players')
 
         if (player.style.display === 'none') {
             this.saveClickedPlayerInfo(e)
             player.style.display = 'flex'
-            playerList.style.display = 'none'
         } else {
             player.style.display = 'none'
-            playerList.style.display = 'block'
         }
     }
 
@@ -191,14 +188,8 @@ class Players extends Component {
 
         return (
             <div className="componentWrapper">
-                <Player
-                    togglePlayerView={this.handlePlayerClick}
-                    player={this.state.clickedPlayer}
-                    players={this.state.players}
-                    sports={this.state.sports}
-                />
+                
                 <div className="players">
-
                     <PlayersForm
                         toggleFilter={this.toggleFilter}
                         filterStatus={this.state.filterVisible}
@@ -211,6 +202,12 @@ class Players extends Component {
                             })
                         )}
                     />
+                    <Player
+                        togglePlayerView={this.handlePlayerClick}
+                        player={this.state.clickedPlayer}
+                        players={this.state.players}
+                        sports={this.state.sports}
+                    />
                     <Table basic='very' celled>
 
                         <PlayerTable
@@ -219,6 +216,7 @@ class Players extends Component {
                             saveUserFavPlayersInLocStorage={this.saveUserFavPlayersInLocStorage}
                             sports={this.state.sports}
                             players={this.state.players}
+                            togglePlayerView={this.handlePlayerClick}
                         />
 
                     </Table>
