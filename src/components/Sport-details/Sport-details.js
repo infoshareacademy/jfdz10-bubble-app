@@ -4,6 +4,15 @@ import { List } from "semantic-ui-react";
 
 class SportDetails extends Component {
   render() {
+    const playerIDs = this.props.match.playerIDs;
+    let matchPlayers;
+
+    if (playerIDs) {
+      matchPlayers = this.props.players.filter(player =>
+        playerIDs.includes(player.id)
+      );
+    }
+
     return (
       <div className="sport-details" style={{ display: "none" }}>
         <Grid stackable columns={2}>
@@ -21,8 +30,7 @@ class SportDetails extends Component {
                 <List.Item>
                   <List.Header>Sport</List.Header>
                   {/* {this.props.match}
-                  {console.log(this.props.match)} */}
-                  {/* {this.props.matches.filter(match =>
+                  {this.props.matches.filter(match =>
                     this.props.sports
                       .filter(sport => match.sportID === sport.id)
                       .map(sport => sport.name)
@@ -63,9 +71,10 @@ class SportDetails extends Component {
                 <List.Item>
                   <List.Header>Contestants:</List.Header>
                   <ul>
-                    <li key={this.props.matches.playerIDs}>
-                      {this.props.matches.playerIDs}
-                    </li>
+                    {matchPlayers &&
+                      matchPlayers.map(player => {
+                        return <li key={player.id}>{player.name}</li>;
+                      })}
                   </ul>
                 </List.Item>
               </List>

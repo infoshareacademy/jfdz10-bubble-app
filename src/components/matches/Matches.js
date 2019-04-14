@@ -108,7 +108,6 @@ class Matches extends Component {
   };
 
   render() {
-    console.log(this.state.clickedMatch);
     return (
       <div className="componentWrapper">
         <SportDetails
