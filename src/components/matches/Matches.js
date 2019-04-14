@@ -8,19 +8,6 @@ import './Matches.css'
 import firebase from 'firebase'
 
 
-const fetchMatches = async () => {
-    const response = await fetch(process.env.PUBLIC_URL + "/matches.json");
-    const matches = await response.json();
-    return matches;
-}
-
-const fetchSports = async () => {
-    const response = await fetch(process.env.PUBLIC_URL + "/sports.json");
-    const sports = await response.json();
-    return sports;
-}
-
-
 class Matches extends Component {
 
     state = {

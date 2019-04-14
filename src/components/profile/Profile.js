@@ -22,8 +22,7 @@ class Profile extends Component {
 
         Promise.all([fetchUser()])
         .then(([user]) => this.setState({
-            user: user,
-            
+            user: user,            
             })
         )
     }
@@ -68,6 +67,11 @@ class Profile extends Component {
 
 
     render() { 
+        console.log(this.state.user)
+
+        let favSports = this.state.user.favouriteSportsIDs || []
+        let favPlayers = this.state.user.favouritePlayersIDs || []
+
         return (
             <div className='Profile'>
                 <div className='ProfileDetails'>
@@ -113,8 +117,7 @@ class Profile extends Component {
                     </header>
                     <ol className="FavouriteSportsList">
                         {this.state.sports
-                            // .filter(sport => sport.id === this.state.user.favouriteSportsIDs.find(id => id === sport.id) )
-                            .filter(sport => this.state.user.favouriteSportsIDs.includes(sport.id) || [])
+                            .filter(sport =>  favSports.includes(sport.id)  )
                             .map(sport => (
                                 <li className="FavouriteSportsListItem" key={sport.id}>{sport.name.charAt(0).toUpperCase() + sport.name.slice(1)}</li>
                             ))}
@@ -130,7 +133,7 @@ class Profile extends Component {
                     <ol className="FavouriteSportsList">
                         {this.state.players
                             // .filter(player => player.id === this.state.user.favouritePlayersIDs.find(id => id === player.id) || [])
-                            .filter(player => this.state.user.favouritePlayersIDs.includes(player.id) || [])
+                            .filter(player => favPlayers.includes(player.id) || [])
                             .map(player => (
                                 <li className="FavouriteSportsListItem" key={player.id}>{player.name}</li>
                             ))}
