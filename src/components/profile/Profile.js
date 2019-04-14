@@ -132,7 +132,6 @@ class Profile extends Component {
                     </header>
                     <ol className="FavouriteSportsList">
                         {this.state.players
-                            // .filter(player => player.id === this.state.user.favouritePlayersIDs.find(id => id === player.id) || [])
                             .filter(player => favPlayers.includes(player.id) || [])
                             .map(player => (
                                 <li className="FavouriteSportsListItem" key={player.id}>{player.name}</li>
