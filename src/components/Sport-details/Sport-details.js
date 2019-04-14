@@ -4,13 +4,20 @@ import { List } from "semantic-ui-react";
 
 class SportDetails extends Component {
   render() {
+    console.log(this.props);
     const playerIDs = this.props.match.playerIDs;
+    const sportIDs = this.props.match.sportID;
     let matchPlayers;
+    let sport;
 
     if (playerIDs) {
       matchPlayers = this.props.players.filter(player =>
         playerIDs.includes(player.id)
       );
+    }
+
+    if (sportIDs) {
+      sport = this.props.sports.filter(sport => sportIDs.includes(sport.id));
     }
 
     return (
@@ -29,14 +36,10 @@ class SportDetails extends Component {
               <List>
                 <List.Item>
                   <List.Header>Sport</List.Header>
-                  {/* {this.props.match}
-                  {this.props.matches.filter(match =>
-                    this.props.sports
-                      .filter(sport => match.sportID === sport.id)
-                      .map(sport => sport.name)
-                      .concat("")
-                      .includes(this.props.filter.sport)
-                  )} */}
+                  {sport &&
+                    sport.map(sport => {
+                      return <p key={sport.id}>{sport.name}</p>;
+                    })}
                 </List.Item>
                 <List.Item>
                   <List.Header>Address</List.Header>
