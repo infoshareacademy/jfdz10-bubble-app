@@ -4,22 +4,25 @@ import { List } from "semantic-ui-react";
 
 class SportDetails extends Component {
   render() {
+
     console.log(this.props);
     const playerIDs = this.props.match.playerIDs;
-    const sportIDs = this.props.match.sportID;
+    const sportID = this.props.match.sportID;
     let matchPlayers;
-    let sport;
+    let sportName;
 
     if (playerIDs) {
       matchPlayers = this.props.players.filter(player =>
         playerIDs.includes(player.id)
       );
     }
-
-    if (sportIDs) {
-      sport = this.props.sports.filter(sport => sportIDs.includes(sport.id));
+    ////////////////Tutaj nie działa
+    if (sportID) {
+      sportName = this.props.sports.filter(sport =>
+        sportID.includes(sport.id)
+      );
     }
-
+    ///////////////////////
     return (
       <div className="sport-details" style={{ display: "none" }}>
         <Grid stackable columns={2}>
@@ -36,9 +39,9 @@ class SportDetails extends Component {
               <List>
                 <List.Item>
                   <List.Header>Sport</List.Header>
-                  {sport &&
-                    sport.map(sport => {
-                      return <p key={sport.id}>{sport.name}</p>;
+                  {sportName &&
+                    sportName.map(sport => {
+                      return <li key={sport.id}>{sport.name}</li>;
                     })}
                 </List.Item>
                 <List.Item>
@@ -72,7 +75,7 @@ class SportDetails extends Component {
                   {this.props.user.name}
                 </List.Item>
                 <List.Item>
-                  <List.Header>Contestants:</List.Header>
+                  <List.Header>Players:</List.Header>
                   <ul>
                     {matchPlayers &&
                       matchPlayers.map(player => {
