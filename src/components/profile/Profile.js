@@ -68,6 +68,7 @@ class Profile extends Component {
     handleSignOut() {
         firebase.auth().signOut()
             .then( alert('Succesfully signed out.'))
+            .catch(error => alert(error.message))
     }
 
     render() {

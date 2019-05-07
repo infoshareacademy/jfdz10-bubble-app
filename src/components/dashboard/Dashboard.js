@@ -42,9 +42,10 @@ class Dashboard extends Component {
                 .then(() => {
                     alert('Registration has succeded. Welcome to the game!')
                 })
+                .then(
+                    setTimeout(this.addNewUserToDatabase, 3000)
+                )
                 .catch((error) => {alert(error.message)})
-                
-            firebase.database()
             
         } else {
             firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
@@ -54,6 +55,19 @@ class Dashboard extends Component {
                 .catch((error) => {alert(error.message)})
         }
     };
+
+    addNewUserToDatabase = () => {
+        firebase.database().ref('players/' + this.state.user.uid).set(
+            {
+            avatar: '',
+            dateOfJoining: this.state.user.metadata.creationTime,
+            eMail: this.state.email,
+            id: this.state.user.uid,
+            localization: this.state.city,
+            name: this.state.name
+            } 
+        )
+    }
 
     componentDidMount() {
         const ref = firebase.auth().onAuthStateChanged(user =>
