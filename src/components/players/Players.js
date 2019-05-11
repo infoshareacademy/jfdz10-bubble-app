@@ -98,6 +98,7 @@ class Players extends Component {
 
         playersRef.on('value',
             snapshot => {
+                console.log(snapshot.val())
                 this.setState({
                     players: snapshot.val()
                 })
