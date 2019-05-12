@@ -51,23 +51,25 @@ class Profile extends Component {
 
     getPlayers = () => {
         const playersRef = firebase.database().ref('players');
+        playersRef.on('value', (snapshot) => {
+            const players = snapshot.val();
+            const playersArray = Object.keys(players).map(key => ({
+                id: key,
+                ...players[key]
+            }));
+      
+            this.setState({
+                players: playersArray
+            })
+        })};
 
-        playersRef.on('value',
-            snapshot => {
-                this.setState({
-                    players: snapshot.val()
-                })
-            });
-
-        const newRefs = [playersRef, ...this.state.refs];
-        this.setState({
-            refs: newRefs
-        })
+    handleSignOut() {
+        firebase.auth().signOut()
+            .then( alert('Succesfully signed out.'))
+            .catch(error => alert(error.message))
     }
 
-
-    render() { 
-        console.log(this.state.user)
+    render() {
 
         let favSports = this.state.user.favouriteSportsIDs || []
         let favPlayers = this.state.user.favouritePlayersIDs || []
@@ -78,7 +80,10 @@ class Profile extends Component {
                     <header>
                         <ul className="ProfileHeader">
                             <li>Profile Details</li>
-                            <li><button className='EditButton'>Edit</button></li>
+                            <li><button class="ui button" onClick={this.handleSignOut}>Sign Out</button></li>
+                            <li><button class="ui button">
+                        Edit
+                    </button></li>
                         </ul>    
                     </header>
                     <div>
@@ -112,7 +117,9 @@ class Profile extends Component {
                     <header>
                         <ul className="ProfileHeader">
                             <li>Favorite Sports</li>
-                            <li><button className="EditButton">Edit</button></li>
+                            <li><button class="ui button">
+                        Edit
+                    </button></li>
                         </ul>
                     </header>
                     <ol className="FavouriteSportsList">
@@ -127,7 +134,9 @@ class Profile extends Component {
                     <header>
                         <ul className="ProfileHeader">
                             <li>Favorite Players</li>
-                            <li><button className="EditButton">Edit</button></li>
+                            <li><button class="ui button">
+                        Edit
+                    </button></li>
                         </ul>
                     </header>
                     <ol className="FavouriteSportsList">
