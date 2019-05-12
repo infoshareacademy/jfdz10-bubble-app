@@ -20,6 +20,7 @@ const PlayerTable = (props) => {
                                     <Header.Content className='player-name' onClick={() => props.compareFavPlayers(player)} >
                                         {player.name.toUpperCase()}
                                         <Header.Subheader>{player.eMail}</Header.Subheader>
+                                        <Header.Subheader><button onClick={this.props.handlePlayerClick(player)}>More</button></Header.Subheader>
                                     </Header.Content>
                                 </Header>
                             </Table.Cell>
