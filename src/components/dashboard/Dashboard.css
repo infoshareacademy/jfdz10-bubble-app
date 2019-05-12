@@ -1,8 +1,16 @@
- .dashboard-background {
+.dashboard {
+    display: flex;
+    justify-content: center;
+    height: 85vh;
+    width: 100vw;
+  }
+  
+  .dashboard-background {
     background-image: url('../assets/dashboard-background.jpg');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
+    display: flex;
     justify-content: center;
     align-items: center;
     height: 85vh;
@@ -54,10 +62,4 @@
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
-  }
-
-  .signing {
-    display: flex;
-    justify-content: space-around;
-    margin: 10px;
   }
