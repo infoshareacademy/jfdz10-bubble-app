@@ -51,19 +51,17 @@ class Profile extends Component {
 
     getPlayers = () => {
         const playersRef = firebase.database().ref('players');
-
-        playersRef.on('value',
-            snapshot => {
-                this.setState({
-                    players: snapshot.val()
-                })
-            });
-
-        const newRefs = [playersRef, ...this.state.refs];
-        this.setState({
-            refs: newRefs
-        })
-    }
+        playersRef.on('value', (snapshot) => {
+            const players = snapshot.val();
+            const playersArray = Object.keys(players).map(key => ({
+                id: key,
+                ...players[key]
+            }));
+      
+            this.setState({
+                players: playersArray
+            })
+        })};
 
     handleSignOut() {
         firebase.auth().signOut()
