@@ -65,16 +65,12 @@ class Players extends Component {
                 user: user,
                 favoritePlayers: favPlayers,
             })
-            )
-            
-            
+            )                   
     }
     
     componentWillUnmount() {
         this.state.refs.forEach(ref => ref.off());
     }   
-
-    
 
     getSports = () => {
         const sportsRef = firebase.database().ref('sports');
@@ -107,8 +103,6 @@ class Players extends Component {
             })
         })};
 
-   
-
     compareFavPlayers = () => {
         let favoritePlayersAsIs = this.state.user.favouritePlayersIDs;
         let usersFromLocStorage = JSON.parse(localStorage.getItem('favPlayersNoDups'));
@@ -127,6 +121,14 @@ class Players extends Component {
 
         this.setState({ favoritePlayers: favPlayersNoDups })
         return favPlayersNoDups;
+    }
+
+    addFavoritePlayer = (playerID) => {
+        console.log('add fav')
+        firebase.database().ref('players/' + this.state.user.id).set({
+            ...this.state.user,
+            favouritePlayersIDs: this.state.userfavouritePlayersIDs.push(playerID)
+            });
     }
 
     setNewFilter = (playerReceived, locationReceived, sportReceived) => {
@@ -209,14 +211,15 @@ class Players extends Component {
                             })
                         )}
                     />
-                    <Table basic='very' celled>
 
+                    <Table basic='very' celled>
                         <PlayerTable
                             filterPlayers={this.filterPlayers}
                             compareFavPlayers={this.compareFavPlayers}
                             saveUserFavPlayersInLocStorage={this.saveUserFavPlayersInLocStorage}
                             sports={this.state.sports}
                             players={this.state.players}
+                            addFavoritePlayer={this.addFavoritePlayer}
                         />
 
                     </Table>

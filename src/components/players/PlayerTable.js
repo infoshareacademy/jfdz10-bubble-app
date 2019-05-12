@@ -3,9 +3,7 @@ import EmptyFilter from '../assets/EmptyFilter/EmptyFilter'
 import { Header, Table, Button, Icon } from 'semantic-ui-react'
 
 
-const PlayerTable = (props) => {
-
-    
+const PlayerTable = (props) => {    
 
     return (
         
@@ -38,7 +36,9 @@ const PlayerTable = (props) => {
 
                             <Table.Cell>
                                 <Button icon
-                                    onClick={() => props.saveUserFavPlayersInLocStorage(this, player.id)}>
+                                    // onClick={() => props.saveUserFavPlayersInLocStorage(this, player.id)}
+                                    onClick={() => props.addFavoritePlayer(this, player.id)}
+                                    >
                                     <Icon name='favorite' color={props.compareFavPlayers().includes(player.id) ? "yellow" : "grey"} />  {props.compareFavPlayers().includes(player.id) ? "Remove From" : "Add To"} Favorites
                                     </Button>
                             </Table.Cell>
