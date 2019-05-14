@@ -40,7 +40,11 @@ class Dashboard extends Component {
         if(this.state.isSigningUp) {
             firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password)
                 .then(() => {
-                    alert('Registration has succeded. Welcome to the game!')
+                    alert('Registration has succeded. Welcome to the game!');
+                    this.setState({
+                        isSigningIn: false,
+                        isSigningUp: false
+                    })
                 })
                 .then(
                     setTimeout(this.addNewUserToDatabase, 3000)
@@ -51,6 +55,10 @@ class Dashboard extends Component {
             firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
                 .then(() => {
                     alert('You have succesfully logged in. Welcome back!')
+                    this.setState({
+                        isSigningIn: false,
+                        isSigningUp: false
+                    })
                 })
                 .catch((error) => {alert(error.message)})
         }
@@ -67,6 +75,31 @@ class Dashboard extends Component {
             name: this.state.name
             } 
         )
+    }
+
+    addUserWithGoogle = () => {
+
+    }
+
+    signInWithGoogle = () => {
+        var provider = new firebase.auth.GoogleAuthProvider();
+        firebase.auth().signInWithPopup(provider).then(function(result) {
+            var user = result.user;
+            if(!firebase.database().ref('players/' + user.uid)) {
+            firebase.database().ref('players/' + user.uid).set(
+                {
+                avatar: user.photoURL,
+                dateOfJoining: user.metadata.creationTime,
+                eMail: user.email,
+                id: user.uid,
+                localization: "Unknown",
+                name: user.displayName
+                } 
+            )
+          }}).catch(function(error) {
+            var errorMessage = error.message;
+            alert(errorMessage)
+          });
     }
 
     componentDidMount() {
@@ -92,10 +125,13 @@ class Dashboard extends Component {
                 style={{display: this.state.user ? 'none' : 'flex'}}
                 >
                     <button class="ui primary button" onClick={this.handleSignIn}>
-                    Sign In
+                        Sign In
                     </button>
                     <button class="ui button" onClick={this.handleSignUp}>
                         Sign Up
+                    </button>
+                    <button class="ui button" onClick={this.signInWithGoogle}>
+                        Sign In With Google
                     </button>
                 </div>
                 <div className="signing-in">

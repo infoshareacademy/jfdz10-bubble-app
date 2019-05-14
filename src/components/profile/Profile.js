@@ -80,7 +80,7 @@ class Profile extends Component {
                     <header>
                         <ul className="ProfileHeader">
                             <li>Profile Details</li>
-                            <li><button class="ui button" onClick={this.handleSignOut}>Sign Out</button></li>
+                            <li><button class="ui button" style={{display: this.state.user ? 'block' : 'none'}} onClick={this.handleSignOut}>Sign Out</button></li>
                             <li><button class="ui button">
                         Edit
                     </button></li>
