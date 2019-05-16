@@ -11,24 +11,41 @@ const fetchUser = async () => {
 class Profile extends Component {
     state = {
         user : {},
+        loggedInUserID: '',
         sports: [],
         players: [],
-        refs: []
+        refs: [],
+        ref: ''
     }
 
     componentDidMount() {
         this.getSports()
         this.getPlayers()
 
-        Promise.all([fetchUser()])
-        .then(([user]) => this.setState({
-            user: user,            
+        const ref = firebase.auth().onAuthStateChanged(user =>
+            user ? this.setState({
+                loggedInUserID: user.uid
+            }, this.state.loggedInUserID ? () => firebase.database().ref('players/' + this.state.loggedInUserID).once('value')
+            .then(snapshot => this.setState({
+                ...this.state,
+                user: snapshot.val()
+            })) : () => (console.log('hello')))
+            : this.setState({
+                loggedInUserID: null
             })
         )
+        
+        this.setState({
+            ref
+        })
+
     }
+    
+    
 
      
     componentWillUnmount() {
+        this.state.ref && this.state.ref();
         this.state.refs.forEach(ref => ref.off());
     }
 
@@ -76,6 +93,9 @@ class Profile extends Component {
 
         return (
             <div className='Profile'>
+                {
+                    this.state.loggedInUserID ? (
+                <div>
                 <div className='ProfileDetails'>
                     <header>
                         <ul className="ProfileHeader">
@@ -147,7 +167,10 @@ class Profile extends Component {
                                 <li className="FavouriteSportsListItem" key={player.id}>{player.name}</li>
                             ))}
                     </ol>
-                </div>
+                    </div>
+                </div> )
+                     : (<h1>Please Sign In to see Your profile details.</h1>)
+                }
             </div>
         )
     }
