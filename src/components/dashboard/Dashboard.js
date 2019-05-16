@@ -40,7 +40,7 @@ class Dashboard extends Component {
         if(this.state.isSigningUp) {
             firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password)
                 .then(() => {
-                    alert('Registration has succeded. Welcome to the game!');
+                    alert('Registration has succeeded. Welcome to the game!');
                     this.setState({
                         isSigningIn: false,
                         isSigningUp: false
@@ -54,7 +54,7 @@ class Dashboard extends Component {
         } else {
             firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
                 .then(() => {
-                    alert('You have succesfully logged in. Welcome back!')
+                    alert('You have successfully logged in. Welcome back!')
                     this.setState({
                         isSigningIn: false,
                         isSigningUp: false
