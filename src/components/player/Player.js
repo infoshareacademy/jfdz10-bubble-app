@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import './Player.css'
-
+import { Button } from 'semantic-ui-react'
 
 class Player extends Component {
     
@@ -13,7 +13,7 @@ class Player extends Component {
                     <header>
                         <ul className="ProfileHeader">
                             <li>Profile Details</li>
-                            <button className='toggle-view-button' onClick={() => {this.props.togglePlayerView()}}>X</button>
+                            <Button className='toggle-view-button' onClick={() => {this.props.togglePlayerView()}}>X</Button>
                         </ul>    
                     </header>
                     <div>

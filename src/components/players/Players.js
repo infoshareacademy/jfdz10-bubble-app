@@ -217,6 +217,7 @@ class Players extends Component {
                             saveUserFavPlayersInLocStorage={this.saveUserFavPlayersInLocStorage}
                             sports={this.state.sports}
                             players={this.state.players}
+                            handlePlayerClick={this.handlePlayerClick}
                         />
 
                     </Table>
