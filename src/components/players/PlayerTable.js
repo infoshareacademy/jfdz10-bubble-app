@@ -14,7 +14,7 @@ const PlayerTable = (props) => {
 
                             <Table.Cell>
                                 <Header as='h4' image>
-                                    <Header.Content className='player-name' onClick={() => props.handlePlayerClick(player)} >
+                                    <Header.Content className='player-name'>
                                         {player.name.toUpperCase()}
                                         <Header.Subheader>{player.eMail}</Header.Subheader>
                                         <Header.Subheader><Button style={{margin: "5px"}} onClick={() => props.handlePlayerClick(player)}>More</Button></Header.Subheader>
