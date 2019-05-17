@@ -10,54 +10,21 @@
   }
   
   .general-container {
-    width: 70%;
-    height: 46%;
+    width: 100%;
+    height: 100%;
+    padding: 1rem;
     display: flex;
     flex-wrap: wrap;
   }
   
-  .left-top-container {
-    width: 40%;
-    height: 40%;
-    margin: 5%;
-    background-image: url('../assets/symbolImages/messagesSymbol.png');
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-  }
-  
-  .right-top-container {
-    width: 40%;
-    height: 40%;
-    margin: 5%;
-    background-image: url('../assets/symbolImages/nextMatchSymbol.png');
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-  }
-  
-  .left-bottom-container {
-    width: 40%;
-    height: 40%;
-    margin: 5%;
-    background-image: url('../assets/symbolImages/friendsSymbol.png');
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-  }
-  
-  .right-bottom-container {
-    width: 40%;
-    height: 40%;
-    margin: 5%;
-    background-image: url('../assets/symbolImages/rankSymbol.png');
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-  }
 
   .signing {
     display: flex;
     justify-content: space-around;
     margin: 10px;
+  }
+
+  .chart-container {
+    width: 100%;
+    height: 45%;
   }
