@@ -4,20 +4,20 @@ import { Header, Table, Button, Icon } from 'semantic-ui-react'
 
 
 const PlayerTable = (props) => {
-
     return (
         
         <Table.Body>
             { (props.filterPlayers(props.players).length > 0) ? (props.filterPlayers(props.players)
                 .map(
                     player => (
-                        <Table.Row key={player.id} className={props.favPlayers().includes(player.id) ? "favorite-player player-row" : "player-row"}>
+                        <Table.Row key={player.id} className={props.favPlayers.includes(player.id) ? "favorite-player player-row" : "player-row"}>
 
                             <Table.Cell>
                                 <Header as='h4' image>
-                                    <Header.Content className='player-name' onClick={() => props.favPlayers(player)} >
+                                    <Header.Content className='player-name' onClick={() => props.handlePlayerClick(player)} >
                                         {player.name.toUpperCase()}
                                         <Header.Subheader>{player.eMail}</Header.Subheader>
+                                        <Header.Subheader><Button style={{margin: "5px"}} onClick={() => props.handlePlayerClick(player)}>More</Button></Header.Subheader>
                                     </Header.Content>
                                 </Header>
                             </Table.Cell>
@@ -36,8 +36,8 @@ const PlayerTable = (props) => {
 
                             <Table.Cell>
                                 <Button icon
-                                    onClick={() => props.saveUserFavPlayersInLocStorage(this, player.id)}>
-                                    <Icon name='favorite' color={props.favPlayers().includes(player.id) ? "yellow" : "grey"} />  {props.favPlayers().includes(player.id) ? "Remove From" : "Add To"} Favorites
+                                    onClick={() => props.addFavoritePlayer(player.id)}>
+                                    <Icon name='favorite' color={props.favPlayers.includes(player.id) ? "yellow" : "grey"} />  {props.favPlayers.includes(player.id) ? "Remove From" : "Add To"} Favorites
                                     </Button>
                             </Table.Cell>
 
