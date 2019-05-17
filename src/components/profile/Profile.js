@@ -171,8 +171,6 @@ class Profile extends Component {
 
     render() {
 
-console.log(this.state.user)
-
         let favSports = this.state.user.favouriteSportsIDs || []
         let favPlayers = this.state.user.favouritePlayersIDs || []
 
