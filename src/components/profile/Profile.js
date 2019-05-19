@@ -4,11 +4,7 @@ import { Button, Form, Input } from 'semantic-ui-react'
 
 import './Profile.css'
 
-const fetchUser = async () => {
-    const response = await fetch(process.env.PUBLIC_URL + '/user.json')
-    const user = await response.json()
-    return user
-}
+
 
 class Profile extends Component {
     state = {
@@ -52,9 +48,6 @@ class Profile extends Component {
         })
 
     }
-    
-    
-
      
     componentWillUnmount() {
         this.state.ref && this.state.ref();
