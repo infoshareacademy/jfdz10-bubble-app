@@ -84,6 +84,10 @@ class Players extends Component {
                 players: playersArray
             })
         })
+        const newRefs = [playersRef, ...this.state.refs];
+        this.setState({
+            refs: newRefs
+        })
     };
 
 
