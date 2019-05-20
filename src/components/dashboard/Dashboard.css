@@ -1,16 +1,8 @@
-.dashboard {
-    display: flex;
-    justify-content: center;
-    height: 85vh;
-    width: 100vw;
-  }
-  
-  .dashboard-background {
+ .dashboard-background {
     background-image: url('../assets/dashboard-background.jpg');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
-    display: flex;
     justify-content: center;
     align-items: center;
     height: 85vh;
@@ -29,8 +21,9 @@
     height: 40%;
     margin: 5%;
     background-image: url('../assets/symbolImages/messagesSymbol.png');
-    background-size: cover;
+    background-size: contain;
     background-repeat: no-repeat;
+    background-position: center;
   }
   
   .right-top-container {
@@ -38,8 +31,9 @@
     height: 40%;
     margin: 5%;
     background-image: url('../assets/symbolImages/nextMatchSymbol.png');
-    background-size: cover;
+    background-size: contain;
     background-repeat: no-repeat;
+    background-position: center;
   }
   
   .left-bottom-container {
@@ -47,8 +41,9 @@
     height: 40%;
     margin: 5%;
     background-image: url('../assets/symbolImages/friendsSymbol.png');
-    background-size: cover;
+    background-size: contain;
     background-repeat: no-repeat;
+    background-position: center;
   }
   
   .right-bottom-container {
@@ -56,6 +51,13 @@
     height: 40%;
     margin: 5%;
     background-image: url('../assets/symbolImages/rankSymbol.png');
-    background-size: cover;
+    background-size: contain;
     background-repeat: no-repeat;
+    background-position: center;
+  }
+
+  .signing {
+    display: flex;
+    justify-content: space-around;
+    margin: 10px;
   }

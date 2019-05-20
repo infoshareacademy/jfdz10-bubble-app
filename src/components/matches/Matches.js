@@ -1,90 +1,136 @@
 import React, { Component } from "react";
-import { Table, Icon } from "semantic-ui-react";
+import { Table } from 'semantic-ui-react'
 
-import MatchesForm from "./MatchesForm";
+import MatchesForm from './MatchesForm'
+import MatchesTable from './MatchesTable'
 
-import "./Matches.css";
+import './Matches.css'
 import SportDetails from "../Sport-details/Sport-details";
+import firebase from 'firebase'
 
-const fetchMatches = async () => {
-  const response = await fetch(process.env.PUBLIC_URL + "/matches.json");
-  const matches = await response.json();
-  return matches;
-};
-
-const fetchSports = async () => {
-  const response = await fetch(process.env.PUBLIC_URL + "/sports.json");
-  const sports = await response.json();
-  return sports;
-};
-
-const fetchPlayers = async () => {
-  const response = await fetch(process.env.PUBLIC_URL + "/players.json");
-  const players = await response.json();
-  return players;
-};
-
-const fetchUser = async () => {
-  const response = await fetch(process.env.PUBLIC_URL + "/user.json");
-  const user = await response.json();
-  return user;
-};
 
 class Matches extends Component {
+
   state = {
     matches: [],
     sports: [],
     players: [],
     user: [],
     filter: {
-      location: "",
-      sport: ""
+      location: '',
+      sports: [],
     },
     filterVisible: false,
-    clickedMatch: {}
+    clickedMatch: {},
+    refs: []
   };
 
   componentDidMount() {
-    Promise.all([
-      fetchMatches(),
-      fetchSports(),
-      fetchPlayers(),
-      fetchUser()
-    ]).then(([matches, sports, players, user]) =>
-      this.setState({
-        matches: matches,
-        sports: sports,
-        players: players,
-        user: user
-      })
-    );
+    this.getMatches()
+    this.getSports()
+    this.getPlayers()
+    this.getUser()
   }
 
-  setNewFilter = () => {
-    const sport =
-      document.querySelector("#matches-sports-select").childNodes[1]
-        .innerText !== "Sport"
-        ? document.querySelector("#matches-sports-select").childNodes[1]
-            .innerText
-        : "";
-    const location = document.querySelector(
-      "#form-input-control-location-matches"
-    ).value;
+  componentWillUnmount() {
+    this.state.refs.forEach(ref => ref.off());
+  }
+
+  getMatches = () => {
+    const matchesRef = firebase.database().ref('matches');
+
+    matchesRef.on('value',
+      snapshot => {
+        this.setState({
+          matches: snapshot.val()
+        })
+      });
+
+    const newRefs = [matchesRef, ...this.state.refs];
+
+    this.setState({
+      refs: newRefs
+    })
+  }
+
+  getSports = () => {
+    const sportsRef = firebase.database().ref('sports');
+
+    sportsRef.on('value',
+      snapshot => {
+        this.setState({
+          sports: snapshot.val()
+        })
+      });
+
+    const newRefs = [sportsRef, ...this.state.refs];
+
+    this.setState({
+      refs: newRefs
+    })
+  }
+
+  getPlayers = () => {
+    const playersRef = firebase.database().ref('players');
+
+    playersRef.on('value',
+      snapshot => {
+        this.setState({
+          players: snapshot.val()
+        })
+      });
+
+    const newRefs = [playersRef, ...this.state.refs];
+
+    this.setState({
+      refs: newRefs
+    })
+  }
+
+  getUser = () => {
+    const userRef = firebase.database().ref('user');
+
+    userRef.on('value',
+      snapshot => {
+        this.setState({
+          user: snapshot.val()
+        })
+      });
+
+    const newRefs = [userRef, ...this.state.refs];
+
+    this.setState({
+      refs: newRefs
+    })
+  }
+
+  setNewFilter = (locationReceived, sportReceived) => {
 
     this.setState({
       filter: {
-        location: location,
-        sport: sport
+        location: locationReceived,
+        sports: sportReceived,
       }
-    });
-    this.toggleFilter();
-  };
+    })
+    this.toggleFilter()
+  }
 
   toggleFilter = () => {
-    this.state.filterVisible
-      ? this.setState({ filterVisible: false })
-      : this.setState({ filterVisible: true });
-  };
+    this.state.filterVisible ? this.setState({ filterVisible: false }) : this.setState({ filterVisible: true })
+  }
+
+  filterMatches = (matches) => {
+
+    return matches.filter(
+      match => (
+        match.localization.city.toLowerCase().includes(this.state.filter.location.toLowerCase())
+      ))
+      .filter(
+        match => (
+          this.state.sports
+            .filter(sport => match.sportID === sport.id)
+        ).some(sport => (this.state.filter.sports).includes(sport.id)) || this.state.filter.sports[0] === undefined)
+  }
 
   saveClickedMatchInfo = match => {
     this.setState({
@@ -105,11 +151,13 @@ class Matches extends Component {
       match.style.display = "none";
       matchList.style.display = "block";
     }
-  };
+  }
 
   render() {
+
     return (
-      <div className="componentWrapper">
+      <div>
+
         <SportDetails
           toggleMatchView={this.handleMatchClick}
           matches={this.state.matches}
@@ -119,76 +167,33 @@ class Matches extends Component {
           match={this.state.clickedMatch}
         />
 
-        <div className="matches">
-          <MatchesForm
-            toggleFilter={this.toggleFilter}
-            filterStatus={this.state.filterVisible}
-            searchForMatch={this.setNewFilter}
-            sports={this.state.sports.map(sport => ({
+        <MatchesForm
+          toggleFilter={this.toggleFilter}
+          filterStatus={this.state.filterVisible}
+          searchForMatch={this.setNewFilter}
+          sports={this.state.sports.map(
+            sport => ({
               key: sport.id,
               text: sport.name,
-              value: sport.name
-            }))}
+              value: sport.id,
+            })
+          )}
+        />
+        <Table celled striped>
+
+
+
+          <MatchesTable
+            matches={this.state.matches}
+            sports={this.state.sports}
+            filterMatches={this.filterMatches}
           />
-          <Table celled striped>
-            <Table.Body className="matches">
-              <Table.Header>
-                <Table.Row key="matches-header">
-                  <Table.HeaderCell>
-                    <Table.Cell>LOCATION</Table.Cell>
-                    <Table.Cell>SPORT</Table.Cell>
-                    <Table.Cell>DATE</Table.Cell>
-                    <Table.Cell>PLAYERS</Table.Cell>
-                  </Table.HeaderCell>
-                </Table.Row>
-              </Table.Header>
-              {this.state.matches
-                .filter(match =>
-                  match.localization.city
-                    .toLowerCase()
-                    .includes(this.state.filter.location.toLowerCase())
-                )
-                .filter(match =>
-                  this.state.sports
-                    .filter(sport => match.sportID === sport.id)
-                    .map(sport => sport.name)
-                    .concat("")
-                    .includes(this.state.filter.sport)
-                )
-                .map(match => (
-                  <Table.Row
-                    onClick={() => this.handleMatchClick(match)}
-                    key={match.id}
-                  >
-                    <Table.Cell>
-                      <Table.Cell>{match.localization.city}</Table.Cell>
 
-                      <Table.Cell>
-                        {this.state.sports
-                          .filter(sport => match.sportID === sport.id)
-                          .map(
-                            sport =>
-                              `${sport.name.charAt(0).toUpperCase() +
-                                sport.name.slice(1)}`
-                          )}
-                      </Table.Cell>
 
-                      <Table.Cell>{match.date.day}</Table.Cell>
-
-                      <Table.Cell>
-                        {match.playerIDs.map(player => (
-                          <Icon name="user" size="small" />
-                        ))}
-                      </Table.Cell>
-                    </Table.Cell>
-                  </Table.Row>
-                ))}
-            </Table.Body>
-          </Table>
-        </div>
+        </Table>
       </div>
-    );
+    )
   }
-}
+};
 
 export default Matches;

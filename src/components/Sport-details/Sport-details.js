@@ -5,10 +5,10 @@ import "./Sport-details.css";
 
 class SportDetails extends Component {
 
-  AddPlayerToEvent = (e) => {
-    const userName = this.props.user.name;
+  // AddPlayerToEvent = (e) => {
+  //   const userName = this.props.user.name;
 
-  }
+  // }
 
   render() {
 
