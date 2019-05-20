@@ -10,6 +10,7 @@ import {
 } from 'semantic-ui-calendar-react';
 
 import './AddMatch.css'
+import firebase from 'firebase'
 
 
 
@@ -28,6 +29,7 @@ class AddMatch extends Component {
         sport: '',
         date: '',
         time: '',
+        comment: '',
         cityError: false,
         streetError: false,
         sportError: false,
@@ -35,6 +37,7 @@ class AddMatch extends Component {
         timeError: false,
         formError: false,
         formSuccess: false,
+        user: {},
     }
 
 
@@ -86,6 +89,31 @@ class AddMatch extends Component {
 
     }
 
+    addMatch = () => {
+        const matchID = firebase.database().ref().child('matches').push().key;
+ 
+        
+            firebase.database().ref('matches/'+ matchID).set(
+            {
+                localization: {
+                    city: this.state.city,
+                    street: this.state.street,
+                },
+                sportID: this.state.sports                  
+                    .filter(sport => sport.name === this.state.sport)
+                    .map(sport => sport.id)[0],
+                playerIDs: [this.state.user.id],
+                hostID: this.state.user.id,
+                date: {
+                    day: moment(this.state.date, 'DD-MM-YYYY').format("MMM DD YYYY"),
+                    hour: this.state.time
+                },
+                comment: this.state.comment,
+                id: matchID,
+            }
+            )
+
+    }
 
     componentDidMount() {
         fetchSports()
@@ -93,11 +121,24 @@ class AddMatch extends Component {
                 sports: sports,
             }))
 
+        const ref = firebase.auth().onAuthStateChanged(user =>
+            user
+                ? firebase.database().ref('players/' + user.uid).on('value',
+                    snapshot => this.setState({
+                        user: snapshot.val()
+                    }))
+
+                : ''
+        )
+
+        this.setState({
+            ref
+        })
+
     }
 
 
     render() {
-        console.log(this.state.formSuccess)
         return (
             <Fragment >
                 <div>
@@ -120,7 +161,7 @@ class AddMatch extends Component {
                         null
                     }
 
-                    
+
 
 
                     <Form.Group widths='equal'>
@@ -167,9 +208,17 @@ class AddMatch extends Component {
                     />
 
 
-                    <Form.Field control={TextArea} label='Comments' placeholder='Any comments...?' />
+                    <Form.Field
+                        name="comment"
+                        value={this.state.comment}
+                        control={TextArea}
+                        label='Comments'
+                        placeholder='Any comments...?'
+                        onChange={this.handleChange}
+                    />
 
                     <Form.Field
+                        // onClick={this.addMatch}
                         disabled={
                             !this.state.city
                             || !this.state.street
@@ -181,11 +230,19 @@ class AddMatch extends Component {
                         control={Button}>Add!</Form.Field>
 
 
-                        {
-                            this.state.formSuccess
-                            &&
-                            <div class="success-message"><p>The match has been registered!</p></div>
-                        }
+                    {
+                        this.state.formSuccess
+                        &&
+                        <div class="success-message"><p>The match has been registered!</p></div>
+                    }
+
+                    {
+                        this.state.formSuccess
+                            ?
+                            this.addMatch()
+                            :
+                            ''
+                    }
 
                 </Form>
 
