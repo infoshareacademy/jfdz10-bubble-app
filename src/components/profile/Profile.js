@@ -48,9 +48,6 @@ class Profile extends Component {
         })
 
     }
-    
-    
-
      
     componentWillUnmount() {
         this.state.ref && this.state.ref();
