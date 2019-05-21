@@ -50,6 +50,8 @@ class Dashboard extends Component {
         city: '',
         players: [],
         matches: [],
+        chartData: [],
+        chartDataKeys: [],
     }
 
     getPlayers = () => {
@@ -197,9 +199,13 @@ class Dashboard extends Component {
         daysAgo6 = Object.assign({name: substractDays(6)}, this.parsePlayersByLocalization(daysAgo6))
         daysAgo7 = Object.assign({name: substractDays(7)}, this.parsePlayersByLocalization(daysAgo7))
 
-        const data = [today, daysAgo1, daysAgo2, daysAgo3, daysAgo4, daysAgo5, daysAgo6, daysAgo7]
+        const data = [today, daysAgo1, daysAgo2, daysAgo3, daysAgo4, daysAgo5, daysAgo6, daysAgo7].reverse()
         
-        console.log(data)
+        // console.log(data)
+
+        // this.setState({
+        //     chartData: data,
+        // })
 
         return data;
     }
@@ -210,17 +216,22 @@ class Dashboard extends Component {
             player.localization
         ))
         dataKeys = new Set(dataKeys)
+        dataKeys = Array.from(dataKeys)
+        
         console.log(dataKeys)
 
+        // this.setState({
+        //     chartDataKeys: dataKeys,
+        // })
+
+
+        return dataKeys
     }
-
-
-
-
 
 
     componentDidMount() {
         this.getPlayers()
+        
 
         const ref = firebase.auth().onAuthStateChanged(user =>
             this.setState({
@@ -236,8 +247,10 @@ class Dashboard extends Component {
         this.state.ref && this.state.ref();
     }
 
+
+    
     render() {
-        this.prepareDataForWeeklyChart()
+        
 
         return (
             <div class="dashboard">
@@ -316,9 +329,12 @@ class Dashboard extends Component {
                                     <XAxis dataKey="name" />
                                     <YAxis />
                                     <Tooltip />
-                                    <Area type="monotone" dataKey="uv" stackId="1" stroke="#8884d8" fill="#8884d8" />
+                                    {this.prepareDataKeysForWeeklyChart().map(dataKey => (
+                                        <Area type="monotone" dataKey={dataKey} stackId="1" stroke="#8884d8" fill={"#"+((1<<24)*Math.random()|0).toString(16)} />
+                                    ))}
+                                    {/* <Area type="monotone" dataKey="uv" stackId="1" stroke="#8884d8" fill="#8884d8" />
                                     <Area type="monotone" dataKey="pv" stackId="1" stroke="#82ca9d" fill="#82ca9d" />
-                                    <Area type="monotone" dataKey="amt" stackId="1" stroke="#ffc658" fill="#ffc658" />
+                                    <Area type="monotone" dataKey="amt" stackId="1" stroke="#ffc658" fill="#ffc658" /> */}
                                 </AreaChart>
                             </ResponsiveContainer>
                         </div>
