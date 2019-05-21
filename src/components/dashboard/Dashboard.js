@@ -7,6 +7,13 @@ import {
 } from 'recharts';
 import moment from 'moment'
 
+const substractDays = (daysBefore) => {
+    let startdate = moment();
+    startdate = startdate.subtract(daysBefore, "days");
+    startdate = startdate.format("MMM DD YYYY");
+    return startdate
+}
+
 const data = [
     {
         name: 'Page A', uv: 4000, pv: 2400, amt: 2400,
@@ -149,27 +156,70 @@ class Dashboard extends Component {
         });
     }
 
-    parsePlayersByDate = () => {
+    parsePlayersByDate = (daysAgo) => {
+        return this.state.players
+            .filter(player => (
+                moment(player.dateOfJoining).format("MMM DD YYYY") === substractDays(daysAgo)
+            ))
+            .map(player => (
+                player.localization
+            ))
+    }
 
-        let startdate = moment();
-        startdate = startdate.subtract(7, "days");
-        startdate = startdate.format("MMM DD YYYY");
-        console.log(startdate)
-        console.log('pl', this.state.players)
-        console.log(
-            this.state.players
-                .filter(player => (
-                    player.dateOfJoining >= startdate
-                ))
-                .reduce((day, next) => {
-                    // let firstDay = next.dateOfJoining === 
-                })
+    parsePlayersByLocalization = (joinedByDay) => {
+
+        const cityCount = joinedByDay.reduce((total, city) => {
+            total[city] = (total[city] || 0) + 1;
+            return total;
+        }, {})
+        return cityCount
+
+
+
+    }
+
+    prepareDataForWeeklyChart = () => {
+        let today = this.parsePlayersByDate(0)
+        let daysAgo7 = this.parsePlayersByDate(7)
+        let daysAgo6 = this.parsePlayersByDate(6)
+        let daysAgo5 = this.parsePlayersByDate(5)
+        let daysAgo4 = this.parsePlayersByDate(4)
+        let daysAgo3 = this.parsePlayersByDate(3)
+        let daysAgo2 = this.parsePlayersByDate(2)
+        let daysAgo1 = this.parsePlayersByDate(1)
+
+        today = Object.assign({name: substractDays(0)}, this.parsePlayersByLocalization(today))
+        daysAgo1 = Object.assign({name: substractDays(1)}, this.parsePlayersByLocalization(daysAgo1))
+        daysAgo2 = Object.assign({name: substractDays(2)}, this.parsePlayersByLocalization(daysAgo2))
+        daysAgo3 = Object.assign({name: substractDays(3)}, this.parsePlayersByLocalization(daysAgo3))
+        daysAgo4 = Object.assign({name: substractDays(4)}, this.parsePlayersByLocalization(daysAgo4))
+        daysAgo5 = Object.assign({name: substractDays(5)}, this.parsePlayersByLocalization(daysAgo5))
+        daysAgo6 = Object.assign({name: substractDays(6)}, this.parsePlayersByLocalization(daysAgo6))
+        daysAgo7 = Object.assign({name: substractDays(7)}, this.parsePlayersByLocalization(daysAgo7))
+
+        const data = [today, daysAgo1, daysAgo2, daysAgo3, daysAgo4, daysAgo5, daysAgo6, daysAgo7]
+        
+        console.log(data)
+
+        return data;
+    }
+
+    prepareDataKeysForWeeklyChart = () => {
+
+        let dataKeys = this.state.players.map(player => (
+            player.localization
+        ))
+        dataKeys = new Set(dataKeys)
+        console.log(dataKeys)
+
     }
 
 
 
+
+
+
     componentDidMount() {
-        // this.getMatches()
         this.getPlayers()
 
         const ref = firebase.auth().onAuthStateChanged(user =>
@@ -187,9 +237,7 @@ class Dashboard extends Component {
     }
 
     render() {
-        this.parsePlayersByDate()
-
-        // console.log(this.state)
+        this.prepareDataForWeeklyChart()
 
         return (
             <div class="dashboard">
@@ -259,7 +307,7 @@ class Dashboard extends Component {
                         <div className="chart-container">
                             <ResponsiveContainer>
                                 <AreaChart
-                                    data={data}
+                                    data={this.prepareDataForWeeklyChart()}
                                     margin={{
                                         top: 10, right: 30, left: 0, bottom: 0,
                                     }}
