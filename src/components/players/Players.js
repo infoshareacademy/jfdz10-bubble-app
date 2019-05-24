@@ -9,32 +9,6 @@ import firebase from 'firebase'
 import './Players.css'
 
 
-// const fetchPlayers = async () => {
-//     const response = await fetch(process.env.PUBLIC_URL + "/players.json");
-//     const players = await response.json();
-//     return players;
-// }
-
-// const fetchSports = async () => {
-//     const response = await fetch(process.env.PUBLIC_URL + "/sports.json");
-//     const sports = await response.json();
-//     return sports;
-// }
-
-
-const fetchUser = async () => {
-    const response = await fetch(process.env.PUBLIC_URL + "/user.json");
-    const user = await response.json();
-    return user;
-}
-
-
-const fetchUsersFavorites = async () => {
-    const response = await fetch(process.env.PUBLIC_URL + "/user.json");
-    const user = await response.json();
-    return user.favouritePlayersIDs;
-}
-
 
 
 class Players extends Component {
@@ -43,7 +17,6 @@ class Players extends Component {
         players: [],
         sports: [],
         user: {},
-        favoritePlayers: [],
         filter: {
             player: '',
             location: '',
@@ -59,28 +32,33 @@ class Players extends Component {
         this.getSports()
         this.getPlayers()
 
-        Promise.all([ fetchUser(), fetchUsersFavorites()])
-            .then(([ user, favPlayers]) => this.setState({
-       
-                user: user,
-                favoritePlayers: favPlayers,
-            })
-            )
-            
-            
-    }
-    
-    componentWillUnmount() {
-        this.state.refs.forEach(ref => ref.off());
-    }   
+        const ref = firebase.auth().onAuthStateChanged(user =>
+            user
+                ? firebase.database().ref('players/' + user.uid).on('value',
+                    snapshot => this.setState({
+                        user: snapshot.val()
+                    }))
 
-    
+                : ''
+        )
+
+        this.setState({
+            ref
+        })
+    }
+
+    componentWillUnmount() {
+
+        this.state.ref && this.state.ref();
+        this.state.refs.forEach(ref => ref.off());
+    }
+
 
     getSports = () => {
         const sportsRef = firebase.database().ref('sports');
 
         sportsRef.on('value',
-        
+
             snapshot => {
                 this.setState({
                     sports: snapshot.val()
@@ -101,33 +79,39 @@ class Players extends Component {
                 id: key,
                 ...players[key]
             }));
-      
+
             this.setState({
                 players: playersArray
             })
-        })};
+        })
+        const newRefs = [playersRef, ...this.state.refs];
+        this.setState({
+            refs: newRefs
+        })
+    };
 
-   
 
-    compareFavPlayers = () => {
-        let favoritePlayersAsIs = this.state.user.favouritePlayersIDs;
-        let usersFromLocStorage = JSON.parse(localStorage.getItem('favPlayersNoDups'));
+    addFavoritePlayer = (playerID) => {
+        let favPlayers = []
+        if (this.state.user.favouritePlayersIDs) {
+            !this.state.user.favouritePlayersIDs.includes(playerID)
+                ?
+                favPlayers = [...this.state.user.favouritePlayersIDs, playerID]
+                :
+                favPlayers = this.state.user.favouritePlayersIDs.filter(favPlayer => (
+                    favPlayer !== playerID
+                ))
 
-        return usersFromLocStorage || favoritePlayersAsIs;
+        } else {
+            favPlayers = [playerID]
+        }
+
+        firebase.database().ref('players/' + this.state.user.id).set({
+            ...this.state.user,
+            favouritePlayersIDs: favPlayers
+        });
     }
 
-    saveUserFavPlayersInLocStorage = (component, addedPlayer) => {
-        let favouritePlayers = this.compareFavPlayers();
-        let favPlayersNoDups = [];
-
-        favouritePlayers.includes(addedPlayer) ? favouritePlayers.splice((favouritePlayers.indexOf(addedPlayer)), 1) : favouritePlayers.push(addedPlayer);
-        favPlayersNoDups = favouritePlayers.filter((item, pos, self) => self.indexOf(item) === pos)
-
-        localStorage.setItem('favPlayersNoDups', JSON.stringify(favPlayersNoDups));
-
-        this.setState({ favoritePlayers: favPlayersNoDups })
-        return favPlayersNoDups;
-    }
 
     setNewFilter = (playerReceived, locationReceived, sportReceived) => {
 
@@ -141,7 +125,7 @@ class Players extends Component {
         this.toggleFilter();
     }
 
-      
+
 
     toggleFilter = () => {
         this.state.filterVisible ? this.setState({ filterVisible: false }) : this.setState({ filterVisible: true })
@@ -180,7 +164,7 @@ class Players extends Component {
             .filter(
                 player => (
                     this.state.sports
-                        .filter(sport => (player.favouriteSportsIDs || []).includes(sport.id))
+                        .filter(sport => (player.favouriteSportsIDs || []).includes(sport.id) || [])
                 ).some(sport => (this.state.filter.sports).includes(sport.id)) || this.state.filter.sports[0] === undefined)
     }
 
@@ -213,11 +197,12 @@ class Players extends Component {
 
                         <PlayerTable
                             filterPlayers={this.filterPlayers}
-                            compareFavPlayers={this.compareFavPlayers}
+                            favPlayers={this.state.user.favouritePlayersIDs || []}
                             saveUserFavPlayersInLocStorage={this.saveUserFavPlayersInLocStorage}
                             sports={this.state.sports}
                             players={this.state.players}
                             handlePlayerClick={this.handlePlayerClick}
+                            addFavoritePlayer={this.addFavoritePlayer}
                         />
 
                     </Table>

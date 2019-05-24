@@ -32,16 +32,18 @@ class Matches extends Component {
 
     getMatches = () => {
         const matchesRef = firebase.database().ref('matches');
+        matchesRef.on('value', (snapshot) => {
+            const matches = snapshot.val();
+            const matchesArray = Object.keys(matches).map(key => ({
+                id: key,
+                ...matches[key]
+            }));
 
-        matchesRef.on('value',
-            snapshot => {
-                this.setState({
-                    matches: snapshot.val()
-                })
-            });
-
+            this.setState({
+                matches: matchesArray
+            })
+        })
         const newRefs = [matchesRef, ...this.state.refs];
-
         this.setState({
             refs: newRefs
         })
