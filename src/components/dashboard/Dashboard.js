@@ -3,7 +3,7 @@ import './Dashboard.css'
 import { Button, Form, Input } from 'semantic-ui-react'
 import firebase from 'firebase'
 import {
-    AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer
+    AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie
 } from 'recharts';
 import moment from 'moment'
 
@@ -13,31 +13,6 @@ const substractDays = (daysBefore) => {
     startdate = startdate.format("MMM DD YYYY");
     return startdate
 }
-
-const data = [
-    {
-        name: 'Page A', uv: 4000, pv: 2400, amt: 2400,
-    },
-    {
-        name: 'Page B', uv: 3000, pv: 1398, amt: 2210,
-    },
-    {
-        name: 'Page C', uv: 2000, pv: 9800, amt: 2290,
-    },
-    {
-        name: 'Page D', uv: 2780, pv: 3908, amt: 2000,
-    },
-    {
-        name: 'Page E', uv: 1890, pv: 4800, amt: 2181,
-    },
-    {
-        name: 'Page F', uv: 2390, pv: 3800, amt: 2500,
-    },
-    {
-        name: 'Page G', uv: 3490, pv: 4300, amt: 2100,
-    },
-];
-
 
 class Dashboard extends Component {
 
@@ -50,8 +25,8 @@ class Dashboard extends Component {
         city: '',
         players: [],
         matches: [],
-        chartData: [],
-        chartDataKeys: [],
+        sports: [],
+        refs: [],
     }
 
     getPlayers = () => {
@@ -69,7 +44,41 @@ class Dashboard extends Component {
         })
     };
 
+    getMatches = () => {
+        const matchesRef = firebase.database().ref('matches');
+        matchesRef.on('value', (snapshot) => {
+            const matches = snapshot.val();
+            const matchesArray = Object.keys(matches).map(key => ({
+                id: key,
+                ...matches[key]
+            }));
 
+            this.setState({
+                matches: matchesArray
+            })
+        })
+        const newRefs = [matchesRef, ...this.state.refs];
+        this.setState({
+            refs: newRefs
+        })
+    }
+
+    getSports = () => {
+        const sportsRef = firebase.database().ref('sports');
+
+        sportsRef.on('value',
+            snapshot => {
+                this.setState({
+                    sports: snapshot.val()
+                })
+            });
+
+        const newRefs = [sportsRef, ...this.state.refs];
+
+        this.setState({
+            refs: newRefs
+        })
+    }
 
 
     handleSignIn = () => {
@@ -175,9 +184,6 @@ class Dashboard extends Component {
             return total;
         }, {})
         return cityCount
-
-
-
     }
 
     prepareDataForWeeklyChart = () => {
@@ -190,22 +196,16 @@ class Dashboard extends Component {
         let daysAgo2 = this.parsePlayersByDate(2)
         let daysAgo1 = this.parsePlayersByDate(1)
 
-        today = Object.assign({name: substractDays(0)}, this.parsePlayersByLocalization(today))
-        daysAgo1 = Object.assign({name: substractDays(1)}, this.parsePlayersByLocalization(daysAgo1))
-        daysAgo2 = Object.assign({name: substractDays(2)}, this.parsePlayersByLocalization(daysAgo2))
-        daysAgo3 = Object.assign({name: substractDays(3)}, this.parsePlayersByLocalization(daysAgo3))
-        daysAgo4 = Object.assign({name: substractDays(4)}, this.parsePlayersByLocalization(daysAgo4))
-        daysAgo5 = Object.assign({name: substractDays(5)}, this.parsePlayersByLocalization(daysAgo5))
-        daysAgo6 = Object.assign({name: substractDays(6)}, this.parsePlayersByLocalization(daysAgo6))
-        daysAgo7 = Object.assign({name: substractDays(7)}, this.parsePlayersByLocalization(daysAgo7))
+        today = Object.assign({ name: substractDays(0) }, this.parsePlayersByLocalization(today))
+        daysAgo1 = Object.assign({ name: substractDays(1) }, this.parsePlayersByLocalization(daysAgo1))
+        daysAgo2 = Object.assign({ name: substractDays(2) }, this.parsePlayersByLocalization(daysAgo2))
+        daysAgo3 = Object.assign({ name: substractDays(3) }, this.parsePlayersByLocalization(daysAgo3))
+        daysAgo4 = Object.assign({ name: substractDays(4) }, this.parsePlayersByLocalization(daysAgo4))
+        daysAgo5 = Object.assign({ name: substractDays(5) }, this.parsePlayersByLocalization(daysAgo5))
+        daysAgo6 = Object.assign({ name: substractDays(6) }, this.parsePlayersByLocalization(daysAgo6))
+        daysAgo7 = Object.assign({ name: substractDays(7) }, this.parsePlayersByLocalization(daysAgo7))
 
         const data = [today, daysAgo1, daysAgo2, daysAgo3, daysAgo4, daysAgo5, daysAgo6, daysAgo7].reverse()
-        
-        // console.log(data)
-
-        // this.setState({
-        //     chartData: data,
-        // })
 
         return data;
     }
@@ -217,21 +217,45 @@ class Dashboard extends Component {
         ))
         dataKeys = new Set(dataKeys)
         dataKeys = Array.from(dataKeys)
-        
-        console.log(dataKeys)
-
-        // this.setState({
-        //     chartDataKeys: dataKeys,
-        // })
-
 
         return dataKeys
+    }
+
+    prepareDataForPieChart = () => {
+        let data = this.state.matches
+        .map(match => (
+            match.sportID
+        ))    
+        .reduce((total, match) => {
+            total[match] = (total[match] || 0) + 1;
+            return total;
+        }, {})
+
+        data = Object.keys(data).map((key, index) => ({
+            name: key,
+            value: Object.values(data)[index],
+        }))
+      
+        let newData = data.map(data => (
+            {
+                name: this.state.sports
+                    .filter(sport => (
+                        sport.id === parseInt(data.name)
+                    ))
+                    .map(sport => (
+                        sport.name
+                    ))[0],
+                value: data.value,
+            }
+        ))
+        return newData;
     }
 
 
     componentDidMount() {
         this.getPlayers()
-        
+        this.getMatches()
+        this.getSports()
 
         const ref = firebase.auth().onAuthStateChanged(user =>
             this.setState({
@@ -248,10 +272,8 @@ class Dashboard extends Component {
     }
 
 
-    
-    render() {
-        
 
+    render() {
         return (
             <div class="dashboard">
                 <div
@@ -317,6 +339,7 @@ class Dashboard extends Component {
                 </div>
                 <div class="dashboard-background" style={{ display: this.state.isSigningIn || this.state.isSigningUp ? 'none' : 'flex' }}>
                     <div class="general-container">
+                    <h3 className="chart-header">JOINED THIS WEEK</h3>
                         <div className="chart-container">
                             <ResponsiveContainer>
                                 <AreaChart
@@ -330,31 +353,19 @@ class Dashboard extends Component {
                                     <YAxis />
                                     <Tooltip />
                                     {this.prepareDataKeysForWeeklyChart().map(dataKey => (
-                                        <Area type="monotone" dataKey={dataKey} stackId="1" stroke="#8884d8" fill={"#"+((1<<24)*Math.random()|0).toString(16)} />
+                                        <Area type="monotone" dataKey={dataKey} stackId="1" stroke="#8884d8" fill={"#" + ((1 << 24) * Math.random() | 0).toString(16)} />
                                     ))}
-                                    {/* <Area type="monotone" dataKey="uv" stackId="1" stroke="#8884d8" fill="#8884d8" />
-                                    <Area type="monotone" dataKey="pv" stackId="1" stroke="#82ca9d" fill="#82ca9d" />
-                                    <Area type="monotone" dataKey="amt" stackId="1" stroke="#ffc658" fill="#ffc658" /> */}
+
                                 </AreaChart>
                             </ResponsiveContainer>
                         </div>
-
+                        <h3 className="chart-header">TOTAL MATCHES</h3>
                         <div className="chart-container">
                             <ResponsiveContainer>
-                                <AreaChart
-                                    data={data}
-                                    margin={{
-                                        top: 10, right: 30, left: 0, bottom: 0,
-                                    }}
-                                >
-                                    <CartesianGrid strokeDasharray="3 3" />
-                                    <XAxis dataKey="name" />
-                                    <YAxis />
-                                    <Tooltip />
-                                    <Area type="monotone" dataKey="uv" stackId="1" stroke="#8884d8" fill="#8884d8" />
-                                    <Area type="monotone" dataKey="pv" stackId="1" stroke="#82ca9d" fill="#82ca9d" />
-                                    <Area type="monotone" dataKey="amt" stackId="1" stroke="#ffc658" fill="#ffc658" />
-                                </AreaChart>
+                            <PieChart>
+                                <Pie dataKey="value" isAnimationActive={false} data={this.prepareDataForPieChart()}  outerRadius={80} fill="#00ADE6" label />
+                                <Tooltip />
+                            </PieChart>
                             </ResponsiveContainer>
                         </div>
                     </div>
