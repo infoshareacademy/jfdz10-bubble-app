@@ -71,7 +71,8 @@ class AddMatch extends Component {
             this.setState({ sportError: false });
         }
 
-        if (this.state.date < moment((new Date()).toString()).format("DD-MM-YYYY")) {
+        
+        if (moment(this.state.date, 'DD-MM-YYYY').isBefore(moment())) {
             this.setState({ dateError: true });
             error = true;
         } else {
@@ -140,10 +141,7 @@ class AddMatch extends Component {
 
     render() {
         return (
-
             <Fragment >
-
-
                 {
                     Object.getOwnPropertyNames(this.state.user).length > 0
                         ?
