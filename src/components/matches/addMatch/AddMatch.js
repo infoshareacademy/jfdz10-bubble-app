@@ -91,15 +91,15 @@ class AddMatch extends Component {
 
     addMatch = () => {
         const matchID = firebase.database().ref().child('matches').push().key;
- 
-        
-            firebase.database().ref('matches/'+ matchID).set(
+
+
+        firebase.database().ref('matches/' + matchID).set(
             {
                 localization: {
                     city: this.state.city,
                     street: this.state.street,
                 },
-                sportID: this.state.sports                  
+                sportID: this.state.sports
                     .filter(sport => sport.name === this.state.sport)
                     .map(sport => sport.id)[0],
                 playerIDs: [this.state.user.id],
@@ -111,7 +111,7 @@ class AddMatch extends Component {
                 comment: this.state.comment,
                 id: matchID,
             }
-            )
+        )
 
     }
 
@@ -140,113 +140,124 @@ class AddMatch extends Component {
 
     render() {
         return (
+
             <Fragment >
-                <div>
-                    <h3 className="add-a-match-header">If you would like to set up a match just fill out the below form!</h3>
-                </div>
 
-                <Form
-                    className="add-a-match-form"
-                    onSubmit={(event) => { this.handleSubmit(event) }}
-                    error={this.state.formError}
-                >
-                    {this.state.formError
+
+                {
+                    Object.getOwnPropertyNames(this.state.user).length > 0
                         ?
-                        <Message
-                            error
-                            header="You cannot select a past date!"
-                            content="Select a date in the future - remember that players will need some time to join your match"
-                        />
+                        <Fragment>
+                            <div>
+                                <h3 className="add-a-match-header">If you would like to set up a match just fill out the below form!</h3>
+                            </div>
+                            <Form
+                                className="add-a-match-form"
+                                onSubmit={(event) => { this.handleSubmit(event) }}
+                                error={this.state.formError}
+                            >
+                                {this.state.formError
+                                    ?
+                                    <Message
+                                        error
+                                        header="You cannot select a past date!"
+                                        content="Select a date in the future - remember that players will need some time to join your match"
+                                    />
+                                    :
+                                    null
+                                }
+
+
+
+
+                                <Form.Group widths='equal'>
+                                    <Form.Field
+                                        name='city'
+                                        control={Input}
+                                        label='City'
+                                        placeholder='City'
+                                        error={this.state.cityError}
+                                        onChange={this.handleChange} />
+                                    <Form.Field
+                                        name='street'
+                                        control={Input}
+                                        label='Street'
+                                        placeholder='Street'
+                                        error={this.state.streetError}
+                                        onChange={this.handleChange} />
+                                    <Form.Field
+                                        name='sport'
+                                        control={Select}
+                                        label='Sport'
+                                        options={this.state.sports.map(sport => ({ key: sport.id, text: sport.name, value: sport.name, }))}
+                                        placeholder='Sport'
+                                        error={this.state.sportError}
+                                        onChange={this.handleChange} />
+                                </Form.Group>
+
+                                <DateInput
+                                    label='Date'
+                                    name="date"
+                                    placeholder="Date"
+                                    value={this.state.date}
+                                    iconPosition="left"
+                                    error={this.state.dateError}
+                                    onChange={this.handleChange}
+                                />
+                                <TimeInput
+                                    name="time"
+                                    placeholder="Time"
+                                    value={this.state.time}
+                                    iconPosition="left"
+                                    error={this.state.timeError}
+                                    onChange={this.handleChange}
+                                />
+
+
+                                <Form.Field
+                                    name="comment"
+                                    value={this.state.comment}
+                                    control={TextArea}
+                                    label='Comments'
+                                    placeholder='Any comments...?'
+                                    onChange={this.handleChange}
+                                />
+
+                                <Form.Field
+                                    // onClick={this.addMatch}
+                                    disabled={
+                                        !this.state.city
+                                        || !this.state.street
+                                        || !this.state.sport
+                                        || !this.state.date
+                                        || !this.state.time
+                                        || this.state.formSuccess
+
+                                    }
+                                    control={Button}>Add!</Form.Field>
+
+
+                                {
+                                    this.state.formSuccess
+                                    &&
+                                    <div class="success-message"><p>The match has been registered!</p></div>
+                                }
+
+                                {
+                                    this.state.formSuccess
+                                        ?
+                                        this.addMatch()
+                                        :
+                                        ''
+                                }
+
+                            </Form>
+                        </Fragment>
                         :
-                        null
-                    }
-
-
-
-
-                    <Form.Group widths='equal'>
-                        <Form.Field
-                            name='city'
-                            control={Input}
-                            label='City'
-                            placeholder='City'
-                            error={this.state.cityError}
-                            onChange={this.handleChange} />
-                        <Form.Field
-                            name='street'
-                            control={Input}
-                            label='Street'
-                            placeholder='Street'
-                            error={this.state.streetError}
-                            onChange={this.handleChange} />
-                        <Form.Field
-                            name='sport'
-                            control={Select}
-                            label='Sport'
-                            options={this.state.sports.map(sport => ({ key: sport.id, text: sport.name, value: sport.name, }))}
-                            placeholder='Sport'
-                            error={this.state.sportError}
-                            onChange={this.handleChange} />
-                    </Form.Group>
-
-                    <DateInput
-                        label='Date'
-                        name="date"
-                        placeholder="Date"
-                        value={this.state.date}
-                        iconPosition="left"
-                        error={this.state.dateError}
-                        onChange={this.handleChange}
-                    />
-                    <TimeInput
-                        name="time"
-                        placeholder="Time"
-                        value={this.state.time}
-                        iconPosition="left"
-                        error={this.state.timeError}
-                        onChange={this.handleChange}
-                    />
-
-
-                    <Form.Field
-                        name="comment"
-                        value={this.state.comment}
-                        control={TextArea}
-                        label='Comments'
-                        placeholder='Any comments...?'
-                        onChange={this.handleChange}
-                    />
-
-                    <Form.Field
-                        // onClick={this.addMatch}
-                        disabled={
-                            !this.state.city
-                            || !this.state.street
-                            || !this.state.sport
-                            || !this.state.date
-                            || !this.state.time
-                            || this.state.formSuccess
-                        }
-                        control={Button}>Add!</Form.Field>
-
-
-                    {
-                        this.state.formSuccess
-                        &&
-                        <div class="success-message"><p>The match has been registered!</p></div>
-                    }
-
-                    {
-                        this.state.formSuccess
-                            ?
-                            this.addMatch()
-                            :
-                            ''
-                    }
-
-                </Form>
-
+                        <div><h3 className="add-a-match-header">Log in to register a match</h3></div>
+                }
             </Fragment>
+
         )
 
     }

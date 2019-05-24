@@ -269,6 +269,7 @@ class Dashboard extends Component {
 
     componentWillUnmount() {
         this.state.ref && this.state.ref();
+        this.state.refs.forEach(ref => ref.off());
     }
 
 
