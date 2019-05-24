@@ -201,6 +201,7 @@ class AddMatch extends Component {
                                     iconPosition="left"
                                     error={this.state.dateError}
                                     onChange={this.handleChange}
+                                    closable={true}
                                 />
                                 <TimeInput
                                     name="time"
@@ -209,6 +210,7 @@ class AddMatch extends Component {
                                     iconPosition="left"
                                     error={this.state.timeError}
                                     onChange={this.handleChange}
+                                    closable={true}
                                 />
 
 
