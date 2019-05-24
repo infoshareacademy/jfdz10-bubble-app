@@ -203,6 +203,7 @@ class Players extends Component {
                             players={this.state.players}
                             handlePlayerClick={this.handlePlayerClick}
                             addFavoritePlayer={this.addFavoritePlayer}
+                            user={this.state.user}
                         />
 
                     </Table>
