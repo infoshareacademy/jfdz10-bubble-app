@@ -4,7 +4,7 @@ import { Header, Table, Button, Icon } from 'semantic-ui-react'
 
 
 const PlayerTable = (props) => {
-    console.log(props.user)
+    console.log('aaa', Object.getOwnPropertyNames(props.user).length)
     return (
         
         <Table.Body>
@@ -35,14 +35,18 @@ const PlayerTable = (props) => {
                             }</Table.Cell>
 
                             
-                            
-                            <Table.Cell>
-                                <Button icon
-                                    onClick={() => props.addFavoritePlayer(player.id)}>
-                                    <Icon name='favorite' color={props.favPlayers.includes(player.id) ? "yellow" : "grey"} />  {props.favPlayers.includes(player.id) ? "Remove From" : "Add To"} Favorites
-                                    </Button>
-                            </Table.Cell>
-
+                            {
+                                Object.getOwnPropertyNames(props.user).length > 0
+                                ?
+                                <Table.Cell>
+                                    <Button icon
+                                        onClick={() => props.addFavoritePlayer(player.id)}>
+                                        <Icon name='favorite' color={props.favPlayers.includes(player.id) ? "yellow" : "grey"} />  {props.favPlayers.includes(player.id) ? "Remove From" : "Add To"} Favorites
+                                        </Button>
+                                </Table.Cell>
+                                :
+                                ''
+                            }
 
                         </Table.Row>
                     )
