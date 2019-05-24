@@ -339,7 +339,7 @@ class Dashboard extends Component {
                 </div>
                 <div class="dashboard-background" style={{ display: this.state.isSigningIn || this.state.isSigningUp ? 'none' : 'flex' }}>
                     <div class="general-container">
-                    <h3 className="chart-header">JOINED THIS WEEK</h3>
+                    <h3 className="chart-header">NEW PLAYERS THIS WEEK</h3>
                         <div className="chart-container">
                             <ResponsiveContainer>
                                 <AreaChart
@@ -359,7 +359,7 @@ class Dashboard extends Component {
                                 </AreaChart>
                             </ResponsiveContainer>
                         </div>
-                        <h3 className="chart-header">TOTAL MATCHES</h3>
+                        <h3 className="chart-header">MATCHES BY SPORT</h3>
                         <div className="chart-container">
                             <ResponsiveContainer>
                             <PieChart>

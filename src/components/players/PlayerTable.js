@@ -4,6 +4,7 @@ import { Header, Table, Button, Icon } from 'semantic-ui-react'
 
 
 const PlayerTable = (props) => {
+    console.log(props.user)
     return (
         
         <Table.Body>
