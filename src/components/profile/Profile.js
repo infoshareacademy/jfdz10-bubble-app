@@ -34,7 +34,8 @@ class Profile extends Component {
             user 
             ? this.setState({
                 ...this.state,
-                loggedInUserID: user.uid
+                loggedInUserID: user.uid,
+                user
                 }, () => firebase.database().ref('players/' + this.state.loggedInUserID).once('value')
                     .then(snapshot => this.setState({
                         ...this.state,
@@ -116,6 +117,21 @@ class Profile extends Component {
         if (this.state.hasOwnProperty(name)) {
             this.setState({ [name]: value });
         }
+    }
+
+    addNewUserToDatabase = () => {
+        firebase.database().ref('players/' + this.state.user.uid).set(
+            {
+            avatar: '',
+            dateOfJoining: this.state.user.metadata.creationTime,
+            eMail: this.state.email,
+            id: this.state.user.uid,
+            localization: this.state.city,
+            name: this.state.name,
+            favouritePlayersIDs: [],
+            favouriteSportsIDs: []
+            } 
+        )
     }
 
     handleSubmit = (event) => {
