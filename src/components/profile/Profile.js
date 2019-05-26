@@ -322,20 +322,7 @@ class Profile extends Component {
                     </div>
                 </div> )
                      : (<div>
-                            <div 
-                            className="signing"
-                            style={{display: this.state.loggedInUserID ? 'none' : 'flex'}}
-                            >
-                                <button class="ui primary button" onClick={this.handleSignIn}>
-                                    Sign In
-                                </button>
-                                <button class="ui button" onClick={this.handleSignUp}>
-                                    Sign Up
-                                </button>
-                                <button class="ui button" onClick={this.signInWithGoogle}>
-                                    Sign In With Google
-                                </button>
-                            </div>
+                            
                             <div className="signing-in">
                             <Form
                                 className="add-a-match-form"
