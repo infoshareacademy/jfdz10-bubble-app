@@ -321,9 +321,7 @@ class Profile extends Component {
                     <header>
                         <ul className="ProfileHeader">
                             <li>Favorite Players</li>
-                            <li><button class="ui button"> //asdaaaaaaaaaaaaaaa
-                        Edit
-                    </button></li>
+                            
                         </ul>
                     </header>
                     <ol className="FavouriteSportsList">
@@ -331,9 +329,9 @@ class Profile extends Component {
                             // .filter(player => player.id === this.state.user.favouritePlayersIDs.find(id => id === player.id) || [])
                             .filter(player => (favPlayers || []).includes(player.id))
                             .map(player => (
-                                <div>
+                                <div className="player-with-button">
                                     <li className="FavouriteSportsListItem" key={player.id}>{player.name}</li>
-                                    <button class="ui-button" onClick={this.removePlayer}>X</button>
+                                    <button className="ui button" onClick={this.removePlayer}>X</button>
                                 </div>
                             ))}
                     </ol>
