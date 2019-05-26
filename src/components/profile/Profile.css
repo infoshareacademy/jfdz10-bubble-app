@@ -46,14 +46,3 @@
 .FavouriteSports {
     border-bottom: 1px solid rgb(0, 192, 255);
 }
-
-.signing {
-    display: flex;
-    justify-content: space-around;
-    margin: 10px;
-  }
-
-.player-with-button {
-    display: flex;
-    justify-content: space-between
-}
