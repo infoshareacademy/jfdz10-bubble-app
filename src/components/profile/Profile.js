@@ -16,9 +16,6 @@ class Profile extends Component {
         ref: '',
         isSigningIn: false,
         isSigningUp: false,
-        isEditingProfile: false,
-        isEditingPlayers: false,
-        isEditingSports: false,
         email: '',
         password: '',
         name: '',
@@ -33,8 +30,7 @@ class Profile extends Component {
             user 
             ? this.setState({
                 ...this.state,
-                loggedInUserID: user.uid,
-                user
+                loggedInUserID: user.uid
                 }, () => firebase.database().ref('players/' + this.state.loggedInUserID).once('value')
                     .then(snapshot => this.setState({
                         ...this.state,
@@ -102,12 +98,6 @@ class Profile extends Component {
         })
     }
 
-    handleEditProfile = () => {
-        this.setState({
-            isEditingProfile: true
-        })
-    }
-
     handleSignUp = () => {
         this.setState({
             isSigningUp: true,
@@ -119,29 +109,6 @@ class Profile extends Component {
         if (this.state.hasOwnProperty(name)) {
             this.setState({ [name]: value });
         }
-    }
-
-    cancelEdit = () => {
-        this.setState({
-            isEditingProfile: false,
-            isEditingPlayers: false,
-            isEditingSports: false
-        })
-    }
-
-    addNewUserToDatabase = () => {
-        firebase.database().ref('players/' + this.state.user.uid).set(
-            {
-            avatar: '',
-            dateOfJoining: this.state.user.metadata.creationTime,
-            eMail: this.state.email,
-            id: this.state.user.uid,
-            localization: this.state.city,
-            name: this.state.name,
-            favouritePlayersIDs: [],
-            favouriteSportsIDs: []
-            } 
-        )
     }
 
     handleSubmit = (event) => {
@@ -195,16 +162,6 @@ class Profile extends Component {
           });
     }
 
-    // saveProfileChanges = () => {
-    //     firebase.database().ref('players/' + this.state.user.id).set({
-    //         ...this.state.user,
-    //         avatar: this.state.avatar || '',
-    //         localization: this.state.city || this.state.user.city,
-    //         name: this.state.name || this.state.user.name
-    //     })
-
-    // } Do poprawy
-
     render() {
 
         let favSports = this.state.user.favouriteSportsIDs || []
@@ -212,63 +169,15 @@ class Profile extends Component {
 
         return (
             <div className='Profile'>
-            <Form
-            className="add-a-match-form"
-            style={{display: this.state.isEditingProfile ? 'block' : 'none'}}
-        >
-
-            <Form.Group widths='equal'>
-                <Form.Field
-                    name='name'
-                    control={Input}
-                    label='Name'
-                    placeholder='Name'
-                    onChange={this.handleChange} />
-                <Form.Field
-                    name='city'
-                    control={Input}
-                    label='City'
-                    placeholder='City'
-                    onChange={this.handleChange} />
-                <Form.Field
-                    name='avatar'
-                    control={Input}
-                    label='Avatar'
-                    placeholder='Paste your avatar URL here'
-                    onChange={this.handleChange}
-                />
-            </Form.Group>
-
-            <Form.Field>
-                <button class="ui button">Save</button> 
-                
-                <button class="ui button" onClick={this.cancelEdit}>Cancel</button>
-            </Form.Field>
-        </Form>
-        <Form
-            className="add-a-match-form"
-            style={{display: this.state.isEditingSports ? 'block' : 'none'}}
-        >
-
-            <Form.Group widths='equal'>
-                //sdfsdfsdfsdf
-            </Form.Group>
-
-            <Form.Field>
-                <button class="ui button">Save</button> 
-                
-                <button class="ui button" onClick={this.cancelEdit}>Cancel</button>
-            </Form.Field>
-        </Form>
                 {
-                    this.state.loggedInUserID && !this.state.isEditingProfile ? (
+                    this.state.loggedInUserID ? (
                 <div>
                 <div className='ProfileDetails'>
                     <header>
                         <ul className="ProfileHeader">
                             <li>Profile Details</li>
                             <li><button class="ui button" style={{display: this.state.user ? 'block' : 'none'}} onClick={this.handleSignOut}>Sign Out</button></li>
-                            <li><button class="ui button" onClick={this.handleEditProfile}>
+                            <li><button class="ui button">
                         Edit
                     </button></li>
                         </ul>    
@@ -321,7 +230,9 @@ class Profile extends Component {
                     <header>
                         <ul className="ProfileHeader">
                             <li>Favorite Players</li>
-                            
+                            <li><button class="ui button">
+                        Edit
+                    </button></li>
                         </ul>
                     </header>
                     <ol className="FavouriteSportsList">
@@ -329,16 +240,26 @@ class Profile extends Component {
                             // .filter(player => player.id === this.state.user.favouritePlayersIDs.find(id => id === player.id) || [])
                             .filter(player => (favPlayers || []).includes(player.id))
                             .map(player => (
-                                <div className="player-with-button">
-                                    <li className="FavouriteSportsListItem" key={player.id}>{player.name}</li>
-                                    <button className="ui button" onClick={this.removePlayer}>X</button>
-                                </div>
+                                <li className="FavouriteSportsListItem" key={player.id}>{player.name}</li>
                             ))}
                     </ol>
                     </div>
                 </div> )
                      : (<div>
-                            
+                            <div 
+                            className="signing"
+                            style={{display: this.state.loggedInUserID ? 'none' : 'flex'}}
+                            >
+                                <button class="ui primary button" onClick={this.handleSignIn}>
+                                    Sign In
+                                </button>
+                                <button class="ui button" onClick={this.handleSignUp}>
+                                    Sign Up
+                                </button>
+                                <button class="ui button" onClick={this.signInWithGoogle}>
+                                    Sign In With Google
+                                </button>
+                            </div>
                             <div className="signing-in">
                             <Form
                                 className="add-a-match-form"
