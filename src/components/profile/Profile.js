@@ -245,6 +245,21 @@ class Profile extends Component {
                 <button class="ui button" onClick={this.cancelEdit}>Cancel</button>
             </Form.Field>
         </Form>
+        <Form
+            className="add-a-match-form"
+            style={{display: this.state.isEditingSports ? 'block' : 'none'}}
+        >
+
+            <Form.Group widths='equal'>
+                //sdfsdfsdfsdf
+            </Form.Group>
+
+            <Form.Field>
+                <button class="ui button">Save</button> 
+                
+                <button class="ui button" onClick={this.cancelEdit}>Cancel</button>
+            </Form.Field>
+        </Form>
                 {
                     this.state.loggedInUserID && !this.state.isEditingProfile ? (
                 <div>
@@ -306,7 +321,7 @@ class Profile extends Component {
                     <header>
                         <ul className="ProfileHeader">
                             <li>Favorite Players</li>
-                            <li><button class="ui button">
+                            <li><button class="ui button"> //asdaaaaaaaaaaaaaaa
                         Edit
                     </button></li>
                         </ul>
@@ -316,7 +331,10 @@ class Profile extends Component {
                             // .filter(player => player.id === this.state.user.favouritePlayersIDs.find(id => id === player.id) || [])
                             .filter(player => (favPlayers || []).includes(player.id))
                             .map(player => (
-                                <li className="FavouriteSportsListItem" key={player.id}>{player.name}</li>
+                                <div>
+                                    <li className="FavouriteSportsListItem" key={player.id}>{player.name}</li>
+                                    <button class="ui-button" onClick={this.removePlayer}>X</button>
+                                </div>
                             ))}
                     </ol>
                     </div>
