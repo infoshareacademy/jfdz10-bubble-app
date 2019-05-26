@@ -16,6 +16,9 @@ class Profile extends Component {
         ref: '',
         isSigningIn: false,
         isSigningUp: false,
+        isEditingProfile: false,
+        isEditingPlayers: false,
+        isEditingSports: false,
         email: '',
         password: '',
         name: '',
@@ -99,6 +102,12 @@ class Profile extends Component {
         })
     }
 
+    handleEditProfile = () => {
+        this.setState({
+            isEditingProfile: true
+        })
+    }
+
     handleSignUp = () => {
         this.setState({
             isSigningUp: true,
@@ -110,6 +119,14 @@ class Profile extends Component {
         if (this.state.hasOwnProperty(name)) {
             this.setState({ [name]: value });
         }
+    }
+
+    cancelEdit = () => {
+        this.setState({
+            isEditingProfile: false,
+            isEditingPlayers: false,
+            isEditingSports: false
+        })
     }
 
     addNewUserToDatabase = () => {
@@ -178,6 +195,16 @@ class Profile extends Component {
           });
     }
 
+    // saveProfileChanges = () => {
+    //     firebase.database().ref('players/' + this.state.user.id).set({
+    //         ...this.state.user,
+    //         avatar: this.state.avatar || '',
+    //         localization: this.state.city || this.state.user.city,
+    //         name: this.state.name || this.state.user.name
+    //     })
+
+    // } Do poprawy
+
     render() {
 
         let favSports = this.state.user.favouriteSportsIDs || []
@@ -185,15 +212,48 @@ class Profile extends Component {
 
         return (
             <div className='Profile'>
+            <Form
+            className="add-a-match-form"
+            style={{display: this.state.isEditingProfile ? 'block' : 'none'}}
+        >
+
+            <Form.Group widths='equal'>
+                <Form.Field
+                    name='name'
+                    control={Input}
+                    label='Name'
+                    placeholder='Name'
+                    onChange={this.handleChange} />
+                <Form.Field
+                    name='city'
+                    control={Input}
+                    label='City'
+                    placeholder='City'
+                    onChange={this.handleChange} />
+                <Form.Field
+                    name='avatar'
+                    control={Input}
+                    label='Avatar'
+                    placeholder='Paste your avatar URL here'
+                    onChange={this.handleChange}
+                />
+            </Form.Group>
+
+            <Form.Field>
+                <button class="ui button">Save</button> 
+                //dodać onclicka
+                <button class="ui button" onClick={this.cancelEdit}>Cancel</button>
+            </Form.Field>
+        </Form>
                 {
-                    this.state.loggedInUserID ? (
+                    this.state.loggedInUserID && !this.state.isEditingProfile ? (
                 <div>
                 <div className='ProfileDetails'>
                     <header>
                         <ul className="ProfileHeader">
                             <li>Profile Details</li>
                             <li><button class="ui button" style={{display: this.state.user ? 'block' : 'none'}} onClick={this.handleSignOut}>Sign Out</button></li>
-                            <li><button class="ui button">
+                            <li><button class="ui button" onClick={this.handleEditProfile}>
                         Edit
                     </button></li>
                         </ul>    
