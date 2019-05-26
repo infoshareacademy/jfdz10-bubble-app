@@ -241,7 +241,7 @@ class Profile extends Component {
 
             <Form.Field>
                 <button class="ui button">Save</button> 
-                //dodać onclicka
+                
                 <button class="ui button" onClick={this.cancelEdit}>Cancel</button>
             </Form.Field>
         </Form>
