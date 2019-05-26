@@ -1,0 +1,725 @@
+diff--git a / package - lock.json b / package - lock.json
+index 2ce728f..16f6b52 100644
+--- a / package - lock.json
++++ b / package - lock.json
+@@ -3723, 19 + 3723, 11 @@
+"simple-swizzle": "^0.2.2"
+       }
+     },
+-<<<<<< < HEAD
+-=======
+    -    "colors": {
+    -      "version": "1.3.3",
+        -      "resolved": "https://registry.npmjs.org/colors/-/colors-1.3.3.tgz",
+            -      "integrity": "sha512-mmGt/1pZqYRjMxB1axhTo16/snVZ5krrKkcmMeVKxzECMMXoCgnvTPp10QgHfcbQZw8Dq2jMNG6je4JlWU0gWg=="
+                -    },
+"colour": {
+    "version": "0.7.1",
+        "resolved": "https://registry.npmjs.org/colour/-/colour-0.7.1.tgz",
+            "integrity": "sha1-nLFpkX7F0SwHNtPoaFdG3xyt93g="
+},
+->>>>>>> 8aa312144eb6cab4666eabc84fb794877e030777
+"combined-stream": {
+    "version": "1.0.7",
+        "resolved": "https://registry.npmjs.org/combined-stream/-/combined-stream-1.0.7.tgz",
+@@ -4501, 6 + 4493, 11 @@
+    "signal-exit": "^3.0.0",
+        "strip-eof": "^1.0.0"
+}
++        },
++        "get-stream": {
+    +          "version": "3.0.0",
+        +          "resolved": "https://registry.npmjs.org/get-stream/-/get-stream-3.0.0.tgz",
+            +          "integrity": "sha1-jpQ9E1jcN1VQVOy+LtsFqhdO3hQ="
+}
+       }
+     },
+@@ -5375, 6 + 5372, 11 @@
+"shebang-command": "^1.2.0",
+    "which": "^1.2.9"
+           }
++        },
++        "get-stream": {
+    +          "version": "3.0.0",
+        +          "resolved": "https://registry.npmjs.org/get-stream/-/get-stream-3.0.0.tgz",
+            +          "integrity": "sha1-jpQ9E1jcN1VQVOy+LtsFqhdO3hQ="
+}
+       }
+     },
+@@ -6442, 7 + 6444, 8 @@
+         },
+"ansi-regex": {
+    "version": "2.1.1",
+        -          "bundled": true
+            + "bundled": true,
+                +          "optional": true
+},
+"aproba": {
+    "version": "1.2.0",
+@@ -6807, 7 + 6810, 8 @@
+         },
+"safe-buffer": {
+    "version": "5.1.1",
+        -          "bundled": true
+            + "bundled": true,
+                +          "optional": true
+},
+"safer-buffer": {
+    "version": "2.1.2",
+@@ -6855, 6 + 6859, 7 @@
+    "strip-ansi": {
+        "version": "3.0.1",
+            "bundled": true,
+                +          "optional": true,
+                    "requires": {
+            "ansi-regex": "^2.0.0"
+        }
+        @@ -6893, 11 + 6898, 13 @@
+         },
+    "wrappy": {
+        "version": "1.0.2",
+            -          "bundled": true
+                + "bundled": true,
+                    +          "optional": true
+    },
+    "yallist": {
+        "version": "3.0.2",
+            -          "bundled": true
+                + "bundled": true,
+                    +          "optional": true
+    }
+}
+     },
+@@ -6921, 14 + 6928, 6 @@
+"resolved": "https://registry.npmjs.org/get-own-enumerable-property-symbols/-/get-own-enumerable-property-symbols-3.0.0.tgz",
+    "integrity": "sha512-CIJYJC4GGF06TakLg8z4GQKvDsx9EMspVxOYih7LerEL/WosUnFIww45CGfxfeKHqlg3twgUrYRT1O3WQqjGCg=="
+     },
+-    "get-stream": {
+    -      "version": "4.1.0",
+        -      "resolved": "https://registry.npmjs.org/get-stream/-/get-stream-4.1.0.tgz",
+            -      "integrity": "sha512-GMat4EJ5161kIy2HevLlr4luNjBgvmj413KaQA7jt4V8B4RDsfpHk7WQ9GVqfYyyx8OS/L66Kox+rJRNklLK7w==",
+                -      "requires": {
+        -        "pump": "^3.0.0"
+            -      }
+    -    },
+"get-value": {
+    "version": "2.0.6",
+        "resolved": "https://registry.npmjs.org/get-value/-/get-value-2.0.6.tgz",
+@@ -6977, 59 + 6976, 11 @@
+    "resolved": "https://registry.npmjs.org/glob-to-regexp/-/glob-to-regexp-0.3.0.tgz",
+        "integrity": "sha1-jFoUlNIGbFcMw7/kSWF1rMTVAqs="
+},
+-    "global-modules": {
+    -      "version": "1.0.0",
+        -      "resolved": "https://registry.npmjs.org/global-modules/-/global-modules-1.0.0.tgz",
+            -      "integrity": "sha512-sKzpEkf11GpOFuw0Zzjzmt4B4UZwjOcG757PPvrfhxcLFbq0wpsgpOqxpxtxFiCG4DtG93M6XRVbF2oGdev7bg==",
+                -      "requires": {
+        -        "global-prefix": "^1.0.1",
+            -        "is-windows": "^1.0.1",
+                -        "resolve-dir": "^1.0.0"
+                    -      }
+    -    },
+-    "global-prefix": {
+    -      "version": "1.0.2",
+        -      "resolved": "https://registry.npmjs.org/global-prefix/-/global-prefix-1.0.2.tgz",
+            -      "integrity": "sha1-2/dDxsFJklk8ZVVoy2btMsASLr4=",
+                -      "requires": {
+        -        "expand-tilde": "^2.0.2",
+            -        "homedir-polyfill": "^1.0.1",
+                -        "ini": "^1.3.4",
+                    -        "is-windows": "^1.0.1",
+                        -        "which": "^1.2.14"
+                            -      }
+    -    },
+"globals": {
+    "version": "11.10.0",
+        "resolved": "https://registry.npmjs.org/globals/-/globals-11.10.0.tgz",
+            "integrity": "sha512-0GZF1RiPKU97IHUO5TORo9w1PwrH/NBPl+fS7oMLdaTRiYmYbwK4NWoZWrAdd0/abG9R2BU+OiwyQpTpE6pdfQ=="
+},
+-    "globby": {
+    -      "version": "8.0.1",
+        -      "resolved": "https://registry.npmjs.org/globby/-/globby-8.0.1.tgz",
+            -      "integrity": "sha512-oMrYrJERnKBLXNLVTqhm3vPEdJ/b2ZE28xN4YARiix1NOIOBPEpOUnm844K1iu/BkphCaf2WNFwMszv8Soi1pw==",
+                -      "requires": {
+        -        "array-union": "^1.0.1",
+            -        "dir-glob": "^2.0.0",
+                -        "fast-glob": "^2.0.2",
+                    -        "glob": "^7.1.2",
+                        -        "ignore": "^3.3.5",
+                            -        "pify": "^3.0.0",
+                                -        "slash": "^1.0.0"
+                                    -      },
+    -      "dependencies": {
+        -        "ignore": {
+            -          "version": "3.3.10",
+                -          "resolved": "https://registry.npmjs.org/ignore/-/ignore-3.3.10.tgz",
+                    -          "integrity": "sha512-Pgs951kaMm5GXP7MOvxERINe3gsaVjUWFm+UZPSq9xYriQAksyhg0csnS0KXSNRD5NmNdapXEpjxG49+AKh/ug=="
+                        -        },
+        -        "pify": {
+            -          "version": "3.0.0",
+                -          "resolved": "https://registry.npmjs.org/pify/-/pify-3.0.0.tgz",
+                    -          "integrity": "sha1-5aSs0sEB/fPZpNB/DbxNtJ3SgXY="
+                        -        }
+        -      }
+    -    },
+"graceful-fs": {
+    "version": "4.1.15",
+        "resolved": "https://registry.npmjs.org/graceful-fs/-/graceful-fs-4.1.15.tgz",
+@@ -7452, 143 + 7403, 8 @@
+    "bundled": true
+},
+"yallist": {
+    -<<<<<< < HEAD
+- "version": "3.0.2",
+        -          "bundled": true,
+            -          "optional": true
+                -        }
+-      }
+-    },
+-    "function-bind": {
+    -      "version": "1.1.1",
+        -      "resolved": "https://registry.npmjs.org/function-bind/-/function-bind-1.1.1.tgz",
+            -      "integrity": "sha512-yIovAzMX49sF8Yl58fSCWJ5svSLuaibPxXQJFLmBObTuCr0Mf1KiPopGM9NiFjiYBCbfaa2Fh6breQ6ANVTI0A=="
+                -    },
+-    "functional-red-black-tree": {
+    -      "version": "1.0.1",
+        -      "resolved": "https://registry.npmjs.org/functional-red-black-tree/-/functional-red-black-tree-1.0.1.tgz",
+            -      "integrity": "sha1-GwqzvVU7Kg1jmdKcDj6gslIHgyc="
+                -    },
+-    "get-caller-file": {
+    -      "version": "1.0.3",
+        -      "resolved": "https://registry.npmjs.org/get-caller-file/-/get-caller-file-1.0.3.tgz",
+            -      "integrity": "sha512-3t6rVToeoZfYSGd8YoLFR2DJkiQrIiUrGcjvFX2mDw3bn6k2OtwHN0TNCLbBO+w8qTvimhDkv+LSscbJY1vE6w=="
+                -    },
+-    "get-own-enumerable-property-symbols": {
+    -      "version": "3.0.0",
+        -      "resolved": "https://registry.npmjs.org/get-own-enumerable-property-symbols/-/get-own-enumerable-property-symbols-3.0.0.tgz",
+            -      "integrity": "sha512-CIJYJC4GGF06TakLg8z4GQKvDsx9EMspVxOYih7LerEL/WosUnFIww45CGfxfeKHqlg3twgUrYRT1O3WQqjGCg=="
+                -    },
+-    "get-stream": {
+    -      "version": "3.0.0",
+        -      "resolved": "https://registry.npmjs.org/get-stream/-/get-stream-3.0.0.tgz",
+            -      "integrity": "sha1-jpQ9E1jcN1VQVOy+LtsFqhdO3hQ="
+                -    },
+-    "get-value": {
+    -      "version": "2.0.6",
+        -      "resolved": "https://registry.npmjs.org/get-value/-/get-value-2.0.6.tgz",
+            -      "integrity": "sha1-3BXKHGcjh8p2vTesCjlbogQqLCg="
+                -    },
+-    "getpass": {
+    -      "version": "0.1.7",
+        -      "resolved": "https://registry.npmjs.org/getpass/-/getpass-0.1.7.tgz",
+            -      "integrity": "sha1-Xv+OPmhNVprkyysSgmBOi6YhSfo=",
+                -      "requires": {
+        -        "assert-plus": "^1.0.0"
+            -      }
+    -    },
+-    "glob": {
+    -      "version": "7.1.3",
+        -      "resolved": "https://registry.npmjs.org/glob/-/glob-7.1.3.tgz",
+            -      "integrity": "sha512-vcfuiIxogLV4DlGBHIUOwI0IbrJ8HWPc4MU7HzviGeNho/UJDfi6B5p3sHeWIQ0KGIU0Jpxi5ZHxemQfLkkAwQ==",
+                -      "requires": {
+        -        "fs.realpath": "^1.0.0",
+            -        "inflight": "^1.0.4",
+                -        "inherits": "2",
+                    -        "minimatch": "^3.0.4",
+                        -        "once": "^1.3.0",
+                            -        "path-is-absolute": "^1.0.0"
+                                -      }
+    -    },
+-    "glob-base": {
+    -      "version": "0.3.0",
+        -      "resolved": "https://registry.npmjs.org/glob-base/-/glob-base-0.3.0.tgz",
+            -      "integrity": "sha1-27Fk9iIbHAscz4Kuoyi0l98Oo8Q=",
+                -      "requires": {
+        -        "glob-parent": "^2.0.0",
+            -        "is-glob": "^2.0.0"
+                -      }
+    -    },
+-    "glob-parent": {
+    -      "version": "2.0.0",
+        -      "resolved": "https://registry.npmjs.org/glob-parent/-/glob-parent-2.0.0.tgz",
+            -      "integrity": "sha1-gTg9ctsFT8zPUzbaqQLxgvbtuyg=",
+                -      "requires": {
+        -        "is-glob": "^2.0.0"
+            -      }
+    -    },
+-    "glob-to-regexp": {
+    -      "version": "0.3.0",
+        -      "resolved": "https://registry.npmjs.org/glob-to-regexp/-/glob-to-regexp-0.3.0.tgz",
+            -      "integrity": "sha1-jFoUlNIGbFcMw7/kSWF1rMTVAqs="
+                -    },
+-    "global-modules": {
+    -      "version": "2.0.0",
+        -      "resolved": "https://registry.npmjs.org/global-modules/-/global-modules-2.0.0.tgz",
+            -      "integrity": "sha512-NGbfmJBp9x8IxyJSd1P+otYK8vonoJactOogrVfFRIAEY1ukil8RSKDz2Yo7wh1oihl51l/r6W4epkeKJHqL8A==",
+                -      "requires": {
+        -        "global-prefix": "^3.0.0"
+            -      }
+    -    },
+-    "global-prefix": {
+    -      "version": "3.0.0",
+        -      "resolved": "https://registry.npmjs.org/global-prefix/-/global-prefix-3.0.0.tgz",
+            -      "integrity": "sha512-awConJSVCHVGND6x3tmMaKcQvwXLhjdkmomy2W+Goaui8YPgYgXJZewhg3fWC+DlfqqQuWg8AwqjGTD2nAPVWg==",
+                -      "requires": {
+        -        "ini": "^1.3.5",
+            -        "kind-of": "^6.0.2",
+                -        "which": "^1.3.1"
+                    -      },
+    -      "dependencies": {
+        -        "kind-of": {
+            -          "version": "6.0.2",
+                -          "resolved": "https://registry.npmjs.org/kind-of/-/kind-of-6.0.2.tgz",
+                    -          "integrity": "sha512-s5kLOcnH0XqDO+FvuaLX8DDjZ18CGFk7VygH40QoKPUQhW4e2rvM0rwUq0t8IQDOwYSeLK01U90OjzBTme2QqA=="
+                        -        }
+        -      }
+    -    },
+-    "globals": {
+    -      "version": "11.11.0",
+        -      "resolved": "https://registry.npmjs.org/globals/-/globals-11.11.0.tgz",
+            -      "integrity": "sha512-WHq43gS+6ufNOEqlrDBxVEbb8ntfXrfAUU2ZOpCxrBdGKW3gyv8mCxAfIBD0DroPKGrJ2eSsXsLtY9MPntsyTw=="
+                -    },
+-    "globby": {
+    -      "version": "8.0.2",
+        -      "resolved": "https://registry.npmjs.org/globby/-/globby-8.0.2.tgz",
+            -      "integrity": "sha512-yTzMmKygLp8RUpG1Ymu2VXPSJQZjNAZPD4ywgYEaG7e4tBJeUQBO8OpXrf1RCNcEs5alsoJYPAMiIHP0cmeC7w==",
+                -      "requires": {
+        -        "array-union": "^1.0.1",
+            -        "dir-glob": "2.0.0",
+                -        "fast-glob": "^2.0.2",
+                    -        "glob": "^7.1.2",
+                        -        "ignore": "^3.3.5",
+                            -        "pify": "^3.0.0",
+                                -        "slash": "^1.0.0"
+                                    -      },
+    -      "dependencies": {
+        -        "ignore": {
+            -          "version": "3.3.10",
+                -          "resolved": "https://registry.npmjs.org/ignore/-/ignore-3.3.10.tgz",
+                    -          "integrity": "sha512-Pgs951kaMm5GXP7MOvxERINe3gsaVjUWFm+UZPSq9xYriQAksyhg0csnS0KXSNRD5NmNdapXEpjxG49+AKh/ug=="
+                        -        },
+        -        "pify": {
+            -          "version": "3.0.0",
+                -          "resolved": "https://registry.npmjs.org/pify/-/pify-3.0.0.tgz",
+                    -          "integrity": "sha1-5aSs0sEB/fPZpNB/DbxNtJ3SgXY="
+                        -=======
+                        "version": "3.0.3",
+                            "bundled": true
+                                ->>>>>>> 8aa312144eb6cab4666eabc84fb794877e030777
+        }
+    }
+},
+@@ -9759, 17 + 9575, 15 @@
+"resolved": "https://registry.npmjs.org/lodash.camelcase/-/lodash.camelcase-4.3.0.tgz",
+    "integrity": "sha1-soqmKIorn8ZRA1x3EfZathkDMaY="
+     },
+-<<<<<< < HEAD
+- "lodash.get": {
+    -      "version": "4.4.2",
+        -      "resolved": "https://registry.npmjs.org/lodash.get/-/lodash.get-4.4.2.tgz",
+            -      "integrity": "sha1-LRd/ZS+jHpObRDjVNBSZ36OCXpk="
+                -=======
+                "lodash.clone": {
+        "version": "4.5.0",
+            "resolved": "https://registry.npmjs.org/lodash.clone/-/lodash.clone-4.5.0.tgz",
+                "integrity": "sha1-GVhwRQ9aExkkeN9Lw9I9LeoZB7Y="
+                    ->>>>>>> 8aa312144eb6cab4666eabc84fb794877e030777
+                        +    },
+    +    "lodash.get": {
+        +      "version": "4.4.2",
+            +      "resolved": "https://registry.npmjs.org/lodash.get/-/lodash.get-4.4.2.tgz",
+                +      "integrity": "sha1-LRd/ZS+jHpObRDjVNBSZ36OCXpk="
+    },
+    "lodash.memoize": {
+        "version": "4.1.2",
+@@ -10164, 16 + 9978, 9 @@
+        "integrity": "sha1-MHXOk7whuPq0PhvE2n6BFe0ee6s="
+    },
+    "nan": {
+        -<<<<<< < HEAD
+- "version": "2.13.1",
+            -      "resolved": "https://registry.npmjs.org/nan/-/nan-2.13.1.tgz",
+                -      "integrity": "sha512-I6YB/YEuDeUZMmhscXKxGgZlFnhsn5y0hgOZBadkzfTRrZBtJDZeg6eQf7PYMIEclwmorTKK8GztsyOUSVBREA==",
+                    -      "optional": true
+                        -=======
+                        "version": "2.12.1",
+                            "resolved": "https://registry.npmjs.org/nan/-/nan-2.12.1.tgz",
+                                "integrity": "sha512-JY7V6lRkStKcKTvHO5NVSQRv+RV+FIL5pvDoLiAtSL9pKlC5x9PKQcZDsq7m4FO4d57mkhC6Z+QhAh3Jdk5JFw=="
+                                    ->>>>>>> 8aa312144eb6cab4666eabc84fb794877e030777
+    },
+    "nanomatch": {
+        "version": "1.2.13",
+@@ -14752, 6 + 14559, 43 @@
+        "locate-path": "^3.0.0"
+    }
+},
++        "global-modules": {
+    +          "version": "2.0.0",
+        +          "resolved": "https://registry.npmjs.org/global-modules/-/global-modules-2.0.0.tgz",
+            +          "integrity": "sha512-NGbfmJBp9x8IxyJSd1P+otYK8vonoJactOogrVfFRIAEY1ukil8RSKDz2Yo7wh1oihl51l/r6W4epkeKJHqL8A==",
+                +          "requires": {
+        +            "global-prefix": "^3.0.0"
+            +          }
+    +        },
++        "global-prefix": {
+    +          "version": "3.0.0",
+        +          "resolved": "https://registry.npmjs.org/global-prefix/-/global-prefix-3.0.0.tgz",
+            +          "integrity": "sha512-awConJSVCHVGND6x3tmMaKcQvwXLhjdkmomy2W+Goaui8YPgYgXJZewhg3fWC+DlfqqQuWg8AwqjGTD2nAPVWg==",
+                +          "requires": {
+        +            "ini": "^1.3.5",
+            +            "kind-of": "^6.0.2",
+                +            "which": "^1.3.1"
+                    +          }
+    +        },
++        "globby": {
+    +          "version": "8.0.2",
+        +          "resolved": "https://registry.npmjs.org/globby/-/globby-8.0.2.tgz",
+            +          "integrity": "sha512-yTzMmKygLp8RUpG1Ymu2VXPSJQZjNAZPD4ywgYEaG7e4tBJeUQBO8OpXrf1RCNcEs5alsoJYPAMiIHP0cmeC7w==",
+                +          "requires": {
+        +            "array-union": "^1.0.1",
+            +            "dir-glob": "2.0.0",
+                +            "fast-glob": "^2.0.2",
+                    +            "glob": "^7.1.2",
+                        +            "ignore": "^3.3.5",
+                            +            "pify": "^3.0.0",
+                                +            "slash": "^1.0.0"
+                                    +          }
+    +        },
++        "ignore": {
+    +          "version": "3.3.10",
+        +          "resolved": "https://registry.npmjs.org/ignore/-/ignore-3.3.10.tgz",
+            +          "integrity": "sha512-Pgs951kaMm5GXP7MOvxERINe3gsaVjUWFm+UZPSq9xYriQAksyhg0csnS0KXSNRD5NmNdapXEpjxG49+AKh/ug=="
+                +        },
+"inquirer": {
+    "version": "6.2.1",
+        "resolved": "https://registry.npmjs.org/inquirer/-/inquirer-6.2.1.tgz",
+@@ -14772, 6 + 14616, 11 @@
+    "through": "^2.3.6"
+}
+         },
++        "kind-of": {
+    +          "version": "6.0.2",
+        +          "resolved": "https://registry.npmjs.org/kind-of/-/kind-of-6.0.2.tgz",
+            +          "integrity": "sha512-s5kLOcnH0XqDO+FvuaLX8DDjZ18CGFk7VygH40QoKPUQhW4e2rvM0rwUq0t8IQDOwYSeLK01U90OjzBTme2QqA=="
+                +        },
+"locate-path": {
+    "version": "3.0.0",
+        "resolved": "https://registry.npmjs.org/locate-path/-/locate-path-3.0.0.tgz",
+@@ -14802, 6 + 14651, 11 @@
+    "resolved": "https://registry.npmjs.org/p-try/-/p-try-2.1.0.tgz",
+        "integrity": "sha512-H2RyIJ7+A3rjkwKC2l5GGtU4H1vkxKCAGsWasNVd0Set+6i4znxbWy6/j16YDPJDWxhsgZiKAstMEP8wCdSpjA=="
+},
++        "pify": {
+    +          "version": "3.0.0",
+        +          "resolved": "https://registry.npmjs.org/pify/-/pify-3.0.0.tgz",
+            +          "integrity": "sha1-5aSs0sEB/fPZpNB/DbxNtJ3SgXY="
+                +        },
+"strip-ansi": {
+    "version": "5.0.0",
+        "resolved": "https://registry.npmjs.org/strip-ansi/-/strip-ansi-5.0.0.tgz",
+@@ -14833, 11 + 14687, 6 @@
+    "resolved": "https://registry.npmjs.org/react-fast-compare/-/react-fast-compare-2.0.4.tgz",
+        "integrity": "sha512-suNP+J1VU1MWFKcyt7RtjiSWUjvidmQSlqu+eHslq+342xCbGTYmC0mEhPCOHxlW0CywylOC1u2DFAT+bv4dBw=="
+},
+-    "react-fast-compare": {
+    -      "version": "2.0.4",
+        -      "resolved": "https://registry.npmjs.org/react-fast-compare/-/react-fast-compare-2.0.4.tgz",
+            -      "integrity": "sha512-suNP+J1VU1MWFKcyt7RtjiSWUjvidmQSlqu+eHslq+342xCbGTYmC0mEhPCOHxlW0CywylOC1u2DFAT+bv4dBw=="
+                -    },
+"react-is": {
+    "version": "16.8.4",
+        "resolved": "https://registry.npmjs.org/react-is/-/react-is-16.8.4.tgz",
+            diff--git a / src / components / dashboard / Dashboard.js b / src / components / dashboard / Dashboard.js
+    index 0d62d7d..3916c28 100644
+    --- a / src / components / dashboard / Dashboard.js
+    +++ b / src / components / dashboard / Dashboard.js
+    @@ -119, 18 + 119, 18 @@class Dashboard extends Component {
+
+        render() {
+            return (
+                -            <div class= "dashboard" >
+                +            <div className="dashboard" >
+                    <div
+                        className="signing"
+                        style={{ display: this.state.user ? 'none' : 'flex' }}
+                    >
+                        -                    <button class="ui primary button" onClick={this.handleSignIn}>
+                            +                    <button className="ui primary button" onClick={this.handleSignIn}>
+                                Sign In
+                     </button>
+                            -                    <button class="ui button" onClick={this.handleSignUp}>
+                                +                    <button className="ui button" onClick={this.handleSignUp}>
+                                    Sign Up
+                     </button>
+                                -                    <button class="ui button" onClick={this.signInWithGoogle}>
+                                    +                    <button className="ui button" onClick={this.signInWithGoogle}>
+                                        Sign In With Google
+                     </button>
+                 </div>
+                                @@ -181,12 +181,12 @@ class Dashboard extends Component {
+                     </Form.Field>
+                 </Form>
+                 </div>
+                        -                <div class="dashboard-background" style={{ display: this.state.isSigningIn || this.state.isSigningUp ? 'none' : 'flex' }}>
+                            -                    <div class="general-container">
+                                -                        <div class="left-top-container"></div>
+                                -                        <div class="right-top-container"></div>
+                                -                        <div class="right-bottom-container"></div>
+                                -                        <div class="left-bottom-container"></div>
+                                +                <div className="dashboard-background" style={{ display: this.state.isSigningIn || this.state.isSigningUp ? 'none' : 'flex' }}>
+                                    +                    <div className="general-container">
+                                        +                        <div className="left-top-container"></div>
+                                        +                        <div className="right-top-container"></div>
+                                        +                        <div className="right-bottom-container"></div>
+                                        +                        <div className="left-bottom-container"></div>
+                                    </div>
+                                </div>
+
+                                diff --git a/src/components/matches/Matches.js b/src/components/matches/Matches.js
+                                index c0a8441..11c26ab 100644
+                                --- a/src/components/matches/Matches.js
+                                +++ b/src/components/matches/Matches.js
+@@ -42,7 +42,7 @@ class Matches extends Component {
+                                    matchesRef.on('value',
+                                        snapshot => {
+                                            this.setState({
+- matches: snapshot.val()
++          matches: Object.entries(snapshot.val() || {}).map(([uid, rest]) => ({uid, ...rest }))
+                                         })
+                                       });
+                                
+@@ -59,7 +59,7 @@ class Matches extends Component {
+                                    sportsRef.on('value',
+                                        snapshot => {
+                                            this.setState({
+- sports: snapshot.val()
++          sports: Object.entries(snapshot.val() || {}).map(([uid, rest]) => ({uid, ...rest }))
+                                         })
+                                       });
+                                
+@@ -76,7 +76,7 @@ class Matches extends Component {
+                                    playersRef.on('value',
+                                        snapshot => {
+                                            this.setState({
+- players: snapshot.val()
++          players: Object.entries(snapshot.val() || {}).map(([uid, rest]) => ({uid, ...rest }))
+                                         })
+                                       });
+                                
+@@ -93,7 +93,7 @@ class Matches extends Component {
+                                    userRef.on('value',
+                                        snapshot => {
+                                            this.setState({
+- user: snapshot.val()
++          user: Object.entries(snapshot.val() || {}).map(([uid, rest]) => ({uid, ...rest }))
+                                         })
+                                       });
+                                
+@@ -184,9 +184,8 @@ class Matches extends Component {
+
+
+                                    <MatchesTable
+- matches={this.state.matches}
+                                +            matches={this.filterMatches(this.state.matches)}
+                                sports={this.state.sports}
+                                -            filterMatches={this.filterMatches}
+                                />
+                     
+                     
+                     diff --git a/src/components/matches/MatchesTable.js b/src/components/matches/MatchesTable.js
+                     index 1076f91..bcaac49 100644
+                     --- a/src/components/matches/MatchesTable.js
+                     +++ b/src/components/matches/MatchesTable.js
+@@ -6,7 +6,7 @@ import {Table, Icon } from 'semantic-ui-react'
+ const MatchesTable = (props) => {
+     return (
+         <Table.Body className="matches">
+                                    -        {props.filterMatches(props.matches).length > 0
+                                        + {
+                                            props.matches.length > 0
+                                                ?
+                                                <Fragment>
+                                                    <Table.Header>
+                                                        @@ -20,7 +20,7 @@ const MatchesTable = (props) => {
+             </Table.Row>
+         </Table.Header>
+                                                    {
+                                                        -        props.filterMatches(props.matches)
+                                                        + props.matches
+                                                            .map(
+                                                                match => (
+                                                                    (<Table.Row key={match.id}>
+                                                                        diff --git a/src/components/navigation/Navigation.js b/src/components/navigation/Navigation.js
+                                                                        index 8f9646f..da2b533 100644
+                                                                        --- a/src/components/navigation/Navigation.js
+                                                                        +++ b/src/components/navigation/Navigation.js
+@@ -10,24 +10,24 @@ class Navigation extends Component {
+         return (
+             <div className="Navigation">
+                                                                            <ul className="ListContainer">
+                                                                                -                    <li class='lol' className="ListItem"><NavLink exact activeClassName='active' to="/">
+                                                                                    -                        <image className='NavImage Home'></image>
+                                                                                    +                    <li className='lol' className="ListItem"><NavLink exact activeClassName='active' to="/">
+                                                                                        +                        <span className='NavImage Home'></span>
+                                                                                        <label className='NavLabel'>Home</label>
+                                                                                    </NavLink></li>
+                                                                                    -                    <li class='lol' className="ListItem"><NavLink activeClassName='active' to="/addMatch">
+                                                                                        -                        <image className='NavImage AddMatch'></image>
+                                                                                        +                    <li className='lol' className="ListItem"><NavLink activeClassName='active' to="/addMatch">
+                                                                                            +                        <span className='NavImage AddMatch'></span>
+                                                                                            <label className='NavLabel'>AddMatch</label>
+                                                                                        </NavLink></li>
+                                                                                        <li className="ListItem"><NavLink activeClassName='active' to="/players">
+                                                                                            -                        <image className='NavImage Players'></image>
+                                                                                            +                        <span className='NavImage Players'></span>
+                                                                                            <label className='NavLabel'>Players</label>
+                                                                                        </NavLink></li>
+                                                                                        <li className="ListItem"><NavLink activeClassName='active' to="/matches">
+                                                                                            -                        <image className='NavImage Matches'></image>
+                                                                                            +                        <span className='NavImage Matches'></span>
+                                                                                            <label className='NavLabel'>Matches</label>
+                                                                                        </NavLink></li>
+                                                                                        <li className="ListItem"><NavLink activeClassName='active' to="/profile">
+                                                                                            -                        <image className='NavImage NavProfile'></image>
+                                                                                            +                        <span className='NavImage NavProfile'></span>
+                                                                                            <label className='NavLabel'>Profile</label>
+                                                                                        </NavLink></li>
+                 </ul>
+                                                                                        diff --git a/src/components/players/PlayerTable.js b/src/components/players/PlayerTable.js
+                                                                                        index 0c51035..47f74ca 100644
+                                                                                        --- a/src/components/players/PlayerTable.js
+                                                                                        +++ b/src/components/players/PlayerTable.js
+@@ -5,48 +5,49 @@ import {Header, Table, Button, Icon } from 'semantic-ui-react'
+                                                                                        
+ const PlayerTable = (props) => {
+     return (
+                                                                                   -
+-        <Table.Body>
+                                                                                            -            {(props.filterPlayers(props.players).length > 0) ? (props.filterPlayers(props.players)
+                                                                                                -                .map(
+                                                                                                    -                    player => (
+-                        <Table.Row key={player.id} className={props.favPlayers.includes(player.id) ? "favorite-player player-row" : "player-row"}>
+                                                                                                -
+-                            <Table.Cell>
+                                                                                                    -                                <Header as='h4' image>
+                                                                                                        -                                    <Header.Content className='player-name'>
+                                                                                                            -                                        {player.name.toUpperCase()}
+                                                                                                            -                                        <Header.Subheader>{player.eMail}</Header.Subheader>
+                                                                                                            -                                        <Header.Subheader><Button style={{ margin: "5px" }} onClick={() => props.handlePlayerClick(player)}>More</Button></Header.Subheader>
+                                                                                                            -                                    </Header.Content>
+                                                                                                        -                                </Header>
+                                                                                                    -                            </Table.Cell>
+                                                                                                -
+-                            <Table.Cell>{player.localization}</Table.Cell>
+                                                                                                -
+-                            <Table.Cell>{
+                                                                                                    -                                props.sports
+                                                                                                    -                                    .filter(sport => (player.favouriteSportsIDs || []).includes(sport.id))
+                                                                                                    -                                    .map(sport => `${sport.name.charAt(0).toUpperCase() + sport.name.slice(1)}`)
+                                                                                                    -                                    .concat('')
+                                                                                                    -                                    .join(' ')
+                                                                                                    -                                    .slice(0, -1)
+                                                                                                    -                            }</Table.Cell>
+                                                                                                -
+                                                                                                -
+-                            <Table.Cell>
+                                                                                                    -                                <Button icon
+-                                    onClick={() => props.addFavoritePlayer(player.id)}>
+-                                    <Icon name='favorite' color={props.favPlayers.includes(player.id) ? "yellow" : "grey"} />  {props.favPlayers.includes(player.id) ? "Remove From" : "Add To"} Favorites
+-                                    </Button>
+                                                                                                -                            </Table.Cell>
+                                                                                            -
+-                        </Table.Row>
+                                                                                        -                    )
+-                )) : (<EmptyFilter />)
+                                                                                        -            } 
+                                                                                        -
+-        </Table.Body>
+                                                                                    +      props.filterPlayers(props.players).length > 0 ?
++      <Table basic='very' celled>
+                                                                                        +      <Table.Body>
+                                                                                            +      {
+                                                                                                +        props.filterPlayers(props.players).map(
+                                                                                                    +          player => (
++              <Table.Row key={player.id} className={props.favPlayers.includes(player.id) ? "favorite-player player-row" : "player-row"}>
+                                                                                                +
++                  <Table.Cell>
+                                                                                                    +                      <Header as='h4' image>
+                                                                                                        +                          <Header.Content className='player-name'>
+                                                                                                            +                              {player.name.toUpperCase()}
+                                                                                                            +                              <Header.Subheader>{player.eMail}</Header.Subheader>
+                                                                                                            +                              <Header.Subheader><Button style={{ margin: "5px" }} onClick={() => props.handlePlayerClick(player)}>More</Button></Header.Subheader>
+                                                                                                            +                          </Header.Content>
+                                                                                                        +                      </Header>
+                                                                                                    +                  </Table.Cell>
+                                                                                                +
++                  <Table.Cell>{player.localization}</Table.Cell>
+                                                                                                +
++                  <Table.Cell>{
+                                                                                                    +                      props.sports
+                                                                                                    +                          .filter(sport => (player.favouriteSportsIDs || []).includes(sport.id))
+                                                                                                    +                          .map(sport => `${sport.name.charAt(0).toUpperCase() + sport.name.slice(1)}`)
+                                                                                                    +                          .concat('')
+                                                                                                    +                          .join(' ')
+                                                                                                    +                          .slice(0, -1)
+                                                                                                    +                  }</Table.Cell>
+                                                                                                +
+                                                                                                +
++                  <Table.Cell>
+                                                                                                    +                      <Button icon
++                          onClick={() => props.addFavoritePlayer(player.id)}>
++                          <Icon name='favorite' color={props.favPlayers.includes(player.id) ? "yellow" : "grey"} />  {props.favPlayers.includes(player.id) ? "Remove From" : "Add To"} Favorites
++                          </Button>
+                                                                                                +                  </Table.Cell>
+                                                                                            +
++              </Table.Row>
+                                                                                        +          )
+                                                                                        +        )
+                                                                                        +      }
++      </Table.Body></Table> :
++      <EmptyFilter />
+                                                                                    )
+                                                                                }
+                                                                               
+                                                                               diff --git a/src/components/players/Players.js b/src/components/players/Players.js
+                                                                               index 339790d..872afa6 100644
+                                                                               --- a/src/components/players/Players.js
+                                                                               +++ b/src/components/players/Players.js
+                                                                               @@ -1,5 +1,5 @@
+ import React, {Component} from "react";
+-import {Table} from 'semantic-ui-react'
+                                                                                    +
+                                                                                     import PlayersForm from './PlayersForm'
+                                                                                     import Player from '../player/Player'
+                                                                                     import PlayerTable from './PlayerTable'
+@@ -193,19 +193,17 @@ class Players extends Component {
+                                                                                    })
+                                                                                )}
+                                                                            />
+-                    <Table basic='very' celled>
+                                                                                        -
+-                        <PlayerTable
+-                            filterPlayers={this.filterPlayers}
+                                                                                        -                            favPlayers={this.state.user.favouritePlayersIDs || []}
+                                                                                        -                            saveUserFavPlayersInLocStorage={this.saveUserFavPlayersInLocStorage}
+                                                                                        -                            sports={this.state.sports}
+                                                                                        -                            players={this.state.players}
+                                                                                        -                            handlePlayerClick={this.handlePlayerClick}
+                                                                                        -                            addFavoritePlayer={this.addFavoritePlayer}
+                                                                                        -                        />
+                                                                                        -
+-                    </Table>
+                                                                                    +
+                                                                                    +
++                    <PlayerTable
++                        filterPlayers={this.filterPlayers}
+                                                                                    +                        favPlayers={this.state.user.favouritePlayersIDs || []}
+                                                                                    +                        saveUserFavPlayersInLocStorage={this.saveUserFavPlayersInLocStorage}
+                                                                                    +                        sports={this.state.sports}
+                                                                                    +                        players={this.state.players}
+                                                                                    +                        handlePlayerClick={this.handlePlayerClick}
+                                                                                    +                        addFavoritePlayer={this.addFavoritePlayer}
+                                                                                    +                    />
+                 </div>
+             </div>
+                                                                            )
